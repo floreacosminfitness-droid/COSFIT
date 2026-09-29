@@ -1137,6 +1137,27 @@
   .footer-legal { flex-direction: column; justify-content: center; align-items: center; }
   .footer-firm { flex: 0 0 auto; }
   .footer-links, .anpc-badges { justify-content: center; }
+  /* ---------- desktop polish ---------- */
+  @media (min-width: 861px) {
+    h2.display { max-width: 26ch; }
+    .hero h1.display { font-size: clamp(34px, 3.5vw, 52px); max-width: 20ch; }
+    .hero-grid { align-items: start; }
+    .hero-panel { margin-top: 24px; }
+    .story-quote, .story-body, .story-note, .story-disclaimer { margin-left: auto; margin-right: auto; }
+    .story-quote, .story-body { max-width: 760px; }
+    .story-note, .story-disclaimer { max-width: 760px; text-align: center; }
+    #beneficii .story-note, #beneficii .story-disclaimer { text-align: center; margin-left: auto; margin-right: auto; }
+    .faq-list { margin-left: auto; margin-right: auto; }
+    .transform-grid { display: flex; flex-wrap: wrap; justify-content: center; }
+    .transform-grid > .transform-card { flex: 0 0 calc((100% - 54px) / 4); }
+    .week-head { align-items: center; }
+  }
+  @media (max-width: 520px) {
+    .sticky-cta { padding: 10px 14px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
+    .sticky-cta-inner { justify-content: space-between !important; gap: 12px; }
+    .sticky-cta-text { display: block !important; font-size: 12px; line-height: 1.35; }
+    .sticky-cta .btn-primary { padding: 11px 16px; font-size: 14px; white-space: nowrap; }
+  }
 </style>
 </head>
 <body>
