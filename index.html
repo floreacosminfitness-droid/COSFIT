@@ -1158,6 +1158,44 @@
     .sticky-cta-text { display: block !important; font-size: 12px; line-height: 1.35; }
     .sticky-cta .btn-primary { padding: 11px 16px; font-size: 14px; white-space: nowrap; }
   }
+  /* ---------- application form (opens WhatsApp) ---------- */
+  .af-overlay { position: fixed; inset: 0; z-index: 90; background: rgba(5,7,9,0.86); overflow-y: auto; padding: 32px 16px; display: flex; align-items: flex-start; justify-content: center; }
+  .af-overlay[hidden] { display: none; }
+  .af-box { position: relative; width: 100%; max-width: 560px; margin: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 34px 34px 30px; }
+  .af-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: none; color: var(--ink); font-size: 14px; cursor: pointer; }
+  .af-close:hover { border-color: var(--teal); color: var(--teal); }
+  .af-progress { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; margin: 6px 52px 14px 0; }
+  .af-progress span { display: block; height: 100%; width: 14%; background: var(--teal); transition: width 0.3s ease; }
+  .af-step-label { margin: 0 0 18px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-deep); }
+  .af-step { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .af-step legend, .af-done h3 { padding: 0; margin: 0 0 20px; font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 24px; line-height: 1.25; color: var(--ink); }
+  .af-step > label:not(.af-consent) { display: block; margin-bottom: 10px; cursor: pointer; }
+  .af-step > label:not(.af-consent) input { position: absolute; opacity: 0; pointer-events: none; }
+  .af-step > label:not(.af-consent) span { display: block; padding: 15px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-alt); color: var(--ink-soft); font-size: 16px; font-weight: 600; transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease; }
+  .af-step > label:not(.af-consent):hover span { border-color: var(--teal-deep); }
+  .af-step > label:not(.af-consent) input:checked + span { border-color: var(--teal); background: rgba(110,200,216,0.12); color: var(--ink); }
+  .af-step > label:not(.af-consent) input:focus-visible + span { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .af-hint { margin: -8px 0 16px; font-size: 13.5px; color: var(--slate); }
+  .af-input { display: block; width: 100%; margin-bottom: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-alt); color: var(--ink); font: inherit; font-size: 16px; resize: vertical; }
+  .af-input:focus { outline: none; border-color: var(--teal); }
+  .af-input::placeholder { color: var(--slate); }
+  .af-consent { display: flex; gap: 10px; align-items: flex-start; margin: 6px 0 20px; font-size: 13.5px; line-height: 1.5; color: var(--slate); cursor: pointer; }
+  .af-consent input { margin-top: 3px; width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--teal); }
+  .af-consent a { color: var(--teal); }
+  .af-send { display: block; width: 100%; }
+  .af-send.is-disabled { opacity: 0.45; pointer-events: none; }
+  .af-send-hint { margin: 14px 0 0; text-align: center; }
+  .af-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 22px; }
+  .af-back { background: none; border: 0; color: var(--slate); font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer; padding: 10px 4px; }
+  .af-back:hover { color: var(--ink); }
+  .af-next { margin-left: auto; padding: 13px 26px; }
+  .af-done { text-align: center; padding: 10px 0 4px; }
+  .af-done-mark { width: 56px; height: 56px; margin: 0 auto 18px; border-radius: 50%; background: var(--teal); color: var(--bg); font-size: 26px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .af-done p { color: var(--ink-soft); font-size: 16px; line-height: 1.6; margin: 0 0 22px; }
+  .af-again { display: inline-block; text-decoration: none; font-size: 14.5px; padding: 12px 20px; border-radius: 12px; }
+  .af-box [hidden] { display: none !important; }
+  body.af-open { overflow: hidden; }
+  @media (max-width: 520px) { .af-overlay { padding: 12px; } .af-box { padding: 28px 20px 22px; } .af-step legend, .af-done h3 { font-size: 21px; } }
 </style>
 </head>
 <body>
@@ -1191,7 +1229,7 @@
         <span>Fitness</span><span>Energie</span><span>Focus</span><span>Disciplină</span>
       </div>
       <div class="cta-row">
-        <a class="btn-primary" href="https://form.typeform.com/to/rNZbRwmF" target="_blank" rel="noopener" role="button">Aplică acum</a>
+        <a class="btn-primary" href="#aplicare" data-apply role="button">Aplică acum</a>
         <span class="cta-note">Peste 500 de transformări reușite până acum</span>
       </div>
       <div class="hero-tips">
@@ -1836,7 +1874,7 @@
       </ul>
     </div>
     <div class="cta-row" style="margin-top:44px;">
-      <a class="btn-primary" href="https://form.typeform.com/to/rNZbRwmF" target="_blank" rel="noopener" role="button">Aplică acum</a>
+      <a class="btn-primary" href="#aplicare" data-apply role="button">Aplică acum</a>
       <span class="cta-note">Durează aproximativ 2 minute</span>
     </div>
   </div>
@@ -1885,7 +1923,7 @@
       </details>
     </div>
     <div class="cta-row" style="margin-top:44px;">
-      <a class="btn-primary" href="https://form.typeform.com/to/rNZbRwmF" target="_blank" rel="noopener" role="button">Aplică acum</a>
+      <a class="btn-primary" href="#aplicare" data-apply role="button">Aplică acum</a>
       <span class="cta-note">Completarea formularului nu presupune o plată</span>
     </div>
   </div>
@@ -1894,7 +1932,7 @@
 <div class="sticky-cta" id="stickyCta">
   <div class="sticky-cta-inner">
     <span class="sticky-cta-text">Coaching 1:1. <b>Locuri limitate</b>, pentru că lucrez direct cu fiecare client.</span>
-    <a class="btn-primary" href="https://form.typeform.com/to/rNZbRwmF" target="_blank" rel="noopener" role="button">Aplică acum</a>
+    <a class="btn-primary" href="#aplicare" data-apply role="button">Aplică acum</a>
   </div>
 </div>
 
@@ -1936,7 +1974,7 @@
 
     <h3>2. Ce date colectăm</h3>
     <ul>
-      <li><b>Datele din formularul de aplicare</b> (Typeform): nume, date de contact (e-mail, telefon), obiectivele tale, programul și timpul disponibil, experiența de antrenament și alte informații pe care alegi să ni le transmiți.</li>
+      <li><b>Datele din formularul de aplicare</b>: numele tău, obiectivele, cât de des te antrenezi, timpul disponibil, ocupația și alte informații pe care alegi să ni le transmiți. Răspunsurile nu sunt salvate pe site: ele sunt puse într-un mesaj WhatsApp pe care îl trimiți tu, de pe numărul tău.</li>
       <li><b>Date despre sănătate și forma fizică</b>, doar dacă ni le comunici tu (de exemplu greutate, accidentări, afecțiuni relevante pentru antrenament). Acestea sunt date cu caracter special și le prelucrăm numai cu consimțământul tău explicit.</li>
       <li><b>Datele din comunicarea cu noi</b> (mesaje, apeluri, fotografii sau clipuri de progres trimise în timpul colaborării).</li>
       <li><b>Date tehnice minime</b> generate de afișarea paginii (de exemplu adresa IP, necesară încărcării fonturilor și a formularului).</li>
@@ -1952,7 +1990,7 @@
     <p>Nu vindem datele tale și nu le folosim pentru decizii automate sau profilare.</p>
 
     <h3>4. Cui transmitem datele</h3>
-    <p>Folosim furnizori care ne ajută să funcționăm și care prelucrează datele doar conform instrucțiunilor noastre: platforma de formulare Typeform, aplicația de antrenament folosită în program, serviciile de mesagerie prin care comunicăm (de exemplu WhatsApp sau Instagram) și serviciul de găzduire al site-ului. Unii dintre acești furnizori pot prelucra date în afara Spațiului Economic European, cu garanțiile prevăzute de GDPR (de exemplu clauze contractuale standard). Datele pot fi transmise și autorităților, atunci când legea o cere.</p>
+    <p>Folosim furnizori care ne ajută să funcționăm și care prelucrează datele doar conform instrucțiunilor noastre: WhatsApp (prin care primim aplicările), aplicația de antrenament folosită în program, serviciile de mesagerie prin care comunicăm (de exemplu WhatsApp sau Instagram) și serviciul de găzduire al site-ului. Unii dintre acești furnizori pot prelucra date în afara Spațiului Economic European, cu garanțiile prevăzute de GDPR (de exemplu clauze contractuale standard). Datele pot fi transmise și autorităților, atunci când legea o cere.</p>
 
     <h3>5. Cât timp păstrăm datele</h3>
     <ul>
@@ -1965,7 +2003,7 @@
     <p>Ai dreptul de acces, rectificare, ștergere, restricționare a prelucrării, portabilitate, opoziție și dreptul de a-ți retrage oricând consimțământul, fără a afecta prelucrarea făcută până atunci. Pentru a-ți exercita drepturile, scrie-ne la <a href="https://www.instagram.com/cosminflorea.ro/" target="_blank" rel="noopener">@cosminflorea.ro</a>; îți răspundem în cel mult o lună. Ai și dreptul de a depune plângere la Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal (<a href="https://www.dataprotection.ro/" target="_blank" rel="noopener">www.dataprotection.ro</a>).</p>
 
     <h3>7. Cookie-uri</h3>
-    <p>Această pagină nu folosește cookie-uri de marketing sau de analiză. La afișare se încarcă fonturi de la Google Fonts, iar formularul de aplicare se deschide pe platforma Typeform, care are propria politică de confidențialitate. Dacă vom adăuga instrumente de analiză sau reclame, vom actualiza această politică și îți vom cere acordul înainte.</p>
+    <p>Această pagină nu folosește cookie-uri de marketing sau de analiză. La afișare se încarcă fonturi de la Google Fonts, iar aplicarea se trimite prin WhatsApp, care are propria politică de confidențialitate. Dacă vom adăuga instrumente de analiză sau reclame, vom actualiza această politică și îți vom cere acordul înainte.</p>
 
     <h3>8. Protecția consumatorilor</h3>
     <p>Pentru informații și reclamații privind protecția consumatorilor te poți adresa Autorității Naționale pentru Protecția Consumatorilor (<a href="https://anpc.ro/" target="_blank" rel="noopener">anpc.ro</a>), inclusiv prin procedura de <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener">soluționare alternativă a litigiilor (SAL)</a>.</p>
@@ -2179,6 +2217,163 @@ try {
 } catch (err) {
   document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });
 }
+})();
+</script>
+
+<div class="af-overlay" id="afOverlay" hidden>
+  <div class="af-box" role="dialog" aria-modal="true" aria-labelledby="afTitle">
+    <button class="af-close" type="button" id="afClose" aria-label="Închide">✕</button>
+    <div class="af-progress"><span id="afBar"></span></div>
+    <p class="af-step-label" id="afStepLabel">Pasul 1 din 7</p>
+
+    <form id="afForm" novalidate>
+      <fieldset class="af-step" data-q="Obiectiv" data-type="single">
+        <legend id="afTitle">Ce vrei să schimbi la forma ta fizică?</legend>
+        <label><input type="radio" name="q1" value="Să slăbesc"><span>Să slăbesc</span></label>
+        <label><input type="radio" name="q1" value="Să pun masă musculară"><span>Să pun masă musculară</span></label>
+        <label><input type="radio" name="q1" value="Să slăbesc și să mă tonifiez"><span>Să slăbesc și să mă tonifiez</span></label>
+        <label><input type="radio" name="q1" value="Mai multă energie și condiție fizică"><span>Mai multă energie și condiție fizică</span></label>
+      </fieldset>
+
+      <fieldset class="af-step" data-q="Antrenamente acum" data-type="single" hidden>
+        <legend>Cât de des te antrenezi acum?</legend>
+        <label><input type="radio" name="q2" value="Deloc"><span>Deloc</span></label>
+        <label><input type="radio" name="q2" value="1–2 ori pe săptămână"><span>1–2 ori pe săptămână</span></label>
+        <label><input type="radio" name="q2" value="3 sau mai multe ori pe săptămână"><span>3 sau mai multe ori pe săptămână</span></label>
+      </fieldset>
+
+      <fieldset class="af-step" data-q="Ce m-a oprit" data-type="multi" hidden>
+        <legend>Ce te-a oprit până acum?</legend>
+        <p class="af-hint">Poți alege mai multe variante.</p>
+        <label><input type="checkbox" name="q3" value="Programul aglomerat"><span>Programul aglomerat</span></label>
+        <label><input type="checkbox" name="q3" value="Oboseala după muncă"><span>Oboseala după muncă</span></label>
+        <label><input type="checkbox" name="q3" value="Alimentația"><span>Alimentația</span></label>
+        <label><input type="checkbox" name="q3" value="Deplasările"><span>Deplasările</span></label>
+        <label><input type="checkbox" name="q3" value="Nu am avut un plan clar"><span>Nu am avut un plan clar</span></label>
+      </fieldset>
+
+      <fieldset class="af-step" data-q="Timp disponibil" data-type="single" hidden>
+        <legend>Câte antrenamente poți face realist pe săptămână?</legend>
+        <label><input type="radio" name="q4" value="2 antrenamente"><span>2 antrenamente</span></label>
+        <label><input type="radio" name="q4" value="3 antrenamente"><span>3 antrenamente</span></label>
+        <label><input type="radio" name="q4" value="4 sau mai multe"><span>4 sau mai multe</span></label>
+      </fieldset>
+
+      <fieldset class="af-step" data-q="Ocupație" data-type="single" hidden>
+        <legend>Cu ce te ocupi?</legend>
+        <label><input type="radio" name="q5" value="Antreprenor"><span>Antreprenor</span></label>
+        <label><input type="radio" name="q5" value="Manager"><span>Manager</span></label>
+        <label><input type="radio" name="q5" value="Altceva"><span>Altceva</span></label>
+      </fieldset>
+
+      <fieldset class="af-step" data-q="Când vreau să încep" data-type="single" hidden>
+        <legend>Când ai vrea să începi?</legend>
+        <label><input type="radio" name="q6" value="Cât mai repede"><span>Cât mai repede</span></label>
+        <label><input type="radio" name="q6" value="În 2–4 săptămâni"><span>În 2–4 săptămâni</span></label>
+        <label><input type="radio" name="q6" value="Deocamdată mă informez"><span>Deocamdată mă informez</span></label>
+      </fieldset>
+
+      <fieldset class="af-step" data-type="final" hidden>
+        <legend>Ultimul pas: cum te cheamă?</legend>
+        <input class="af-input" type="text" id="afName" name="name" autocomplete="name" placeholder="Numele și prenumele" maxlength="80">
+        <textarea class="af-input" id="afNote" name="note" rows="3" placeholder="Vrei să-mi mai spui ceva? (opțional)" maxlength="400"></textarea>
+        <label class="af-consent"><input type="checkbox" id="afConsent"><span>Sunt de acord ca datele din acest formular să fie folosite pentru a fi contactat(ă), conform <a href="#confidentialitate" id="afPolicyLink">Politicii de confidențialitate</a>.</span></label>
+        <a class="btn-primary af-send is-disabled" id="afSend" href="#" target="_blank" rel="noopener" aria-disabled="true">Trimite pe WhatsApp</a>
+        <p class="af-hint af-send-hint">Se deschide WhatsApp cu răspunsurile tale deja scrise. Apasă „Trimite” acolo și revin eu către tine.</p>
+      </fieldset>
+
+      <div class="af-step af-done" data-type="done" hidden>
+        <p class="af-done-mark">✓</p>
+        <h3>Aproape gata!</h3>
+        <p>Apasă <b>„Trimite”</b> în WhatsApp, ca să primesc aplicarea ta. Revin către tine cât pot de repede, pentru apelul de 15–20 de minute.</p>
+        <a class="btn-outline af-again" id="afAgain" href="#" target="_blank" rel="noopener">Nu s-a deschis WhatsApp? Încearcă din nou</a>
+      </div>
+
+      <div class="af-nav" id="afNav">
+        <button type="button" class="af-back" id="afBack" hidden>← Înapoi</button>
+        <button type="button" class="btn-primary af-next" id="afNext" hidden>Continuă</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function () {
+  // WhatsApp number that receives the applications, in international format without "+" (e.g. 407XXXXXXXX)
+  var WA_NUMBER = '40758951104';
+
+  var overlay = document.getElementById('afOverlay');
+  if (!overlay) return;
+  var steps = Array.prototype.slice.call(overlay.querySelectorAll('.af-step'));
+  var bar = document.getElementById('afBar'), label = document.getElementById('afStepLabel');
+  var back = document.getElementById('afBack'), next = document.getElementById('afNext');
+  var send = document.getElementById('afSend'), again = document.getElementById('afAgain');
+  var nameEl = document.getElementById('afName'), noteEl = document.getElementById('afNote'), consent = document.getElementById('afConsent');
+  var total = steps.length - 1, i = 0;
+
+  function show(n) {
+    i = Math.max(0, Math.min(steps.length - 1, n));
+    steps.forEach(function (s, k) { s.hidden = k !== i; });
+    var type = steps[i].getAttribute('data-type');
+    var done = type === 'done';
+    bar.style.width = (done ? 100 : Math.round(((i + 1) / total) * 100)) + '%';
+    label.textContent = done ? 'Aplicare pregătită' : 'Pasul ' + (i + 1) + ' din ' + total;
+    back.hidden = i === 0 || done;
+    next.hidden = type !== 'multi';
+    if (type === 'final') { updateSend(); }
+    overlay.scrollTop = 0;
+  }
+  function open() { overlay.hidden = false; document.body.classList.add('af-open'); show(i); }
+  function close() { overlay.hidden = true; document.body.classList.remove('af-open'); }
+
+  function answers() {
+    var lines = [];
+    steps.forEach(function (s) {
+      var q = s.getAttribute('data-q'); if (!q) return;
+      var vals = Array.prototype.slice.call(s.querySelectorAll('input:checked')).map(function (x) { return x.value; });
+      if (vals.length) lines.push('• ' + q + ': ' + vals.join(', '));
+    });
+    return lines;
+  }
+  function message() {
+    var out = ['Bună, Cosmin! Aplic pentru coaching COS FIT.', '', 'Nume: ' + nameEl.value.trim()];
+    out = out.concat(answers());
+    var note = noteEl.value.trim();
+    if (note) { out.push('• Mesaj: ' + note); }
+    return out.join('\n');
+  }
+  function updateSend() {
+    var ok = nameEl.value.trim().length > 1 && consent.checked;
+    send.classList.toggle('is-disabled', !ok);
+    send.setAttribute('aria-disabled', ok ? 'false' : 'true');
+    var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message());
+    send.href = ok ? url : '#';
+    again.href = url;
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest ? e.target.closest('[data-apply]') : null;
+    if (t) { e.preventDefault(); open(); }
+  });
+  document.getElementById('afClose').addEventListener('click', close);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !overlay.hidden) close(); });
+  back.addEventListener('click', function () { show(i - 1); });
+  next.addEventListener('click', function () { show(i + 1); });
+  overlay.addEventListener('change', function (e) {
+    var step = steps[i];
+    if (step.getAttribute('data-type') === 'single' && e.target.type === 'radio') {
+      setTimeout(function () { show(i + 1); }, 180);
+    }
+    if (step.getAttribute('data-type') === 'final') updateSend();
+  });
+  nameEl.addEventListener('input', updateSend);
+  noteEl.addEventListener('input', updateSend);
+  send.addEventListener('click', function (e) {
+    if (send.classList.contains('is-disabled')) { e.preventDefault(); return; }
+    setTimeout(function () { show(steps.length - 1); }, 400);
+  });
+  document.getElementById('afPolicyLink').addEventListener('click', function () { close(); });
 })();
 </script>
 </body>
