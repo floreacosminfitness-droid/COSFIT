@@ -1270,6 +1270,11 @@
   .site-menu a:not(.btn-primary):hover { background: rgba(79,209,139,0.1); color: var(--teal-ink); }
   .site-menu .menu-apply { margin-top: 8px; padding: 14px 20px; font-size: 15px; }
   @media (max-width: 520px) { .menu-btn { right: 16px; } .site-menu { left: 16px; right: 16px; width: auto; } }
+  /* ---------- sticky header ---------- */
+  header { position: sticky; top: 0; z-index: 60; transition: padding .2s ease, box-shadow .25s ease; }
+  header.scrolled { padding: 10px 0; box-shadow: 0 2px 16px rgba(0,0,0,0.45); border-bottom: 1px solid var(--line); }
+  html { scroll-padding-top: 84px; }
+  .site-menu { max-height: calc(100vh - 110px); overflow-y: auto; }
 </style>
 </head>
 <body>
