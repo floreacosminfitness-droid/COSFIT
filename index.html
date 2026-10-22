@@ -1227,6 +1227,9 @@
   .af-box [hidden] { display: none !important; }
   body.af-open { overflow: hidden; }
   @media (max-width: 520px) { .af-overlay { padding: 10px; } .af-box { padding: 30px 18px 24px; border-radius: 18px; } .af-eyebrow { margin-top: 6px; } .af-title { padding: 0 30px; font-size: 25px; } }
+  .mf-calc { margin: -8px 0 22px; padding: 14px 16px; border: 1px solid rgba(79,209,139,0.35); border-radius: 14px; background: rgba(79,209,139,0.08); text-align: center; }
+  .mf-calc p { margin: 0; color: var(--ink); font-weight: 700; font-size: 15.5px; }
+  .mf-calc .mf-calc-t { margin-bottom: 4px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-ink); }
   /* ---------- calorie calculator ---------- */
   .calc { display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; margin-top: 44px; align-items: stretch; }
   .calc-form, .calc-result { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 30px; }
@@ -1477,7 +1480,7 @@
           <div class="calc-macro"><b id="cFat">–</b><span>Grăsimi</span></div>
         </div>
         <p class="calc-note" id="cNote"></p>
-        <a class="btn-primary calc-cta" href="#aplicare" data-apply role="button">Vreau un plan pe cifrele mele</a>
+        <a class="btn-primary calc-cta" href="#plan-alimentar" data-meal role="button">Vreau un plan alimentar pe cifrele mele</a>
         <p class="calc-disclaimer">Rezultatul e o estimare (formula Mifflin-St Jeor) și nu înlocuiește un sfat medical. În coaching ajustăm cifrele săptămânal, după progresul tău real.</p>
       </div>
     </div>
@@ -2236,6 +2239,186 @@ try {
 })();
 </script>
 
+<div class="af-overlay" id="mfOverlay" hidden>
+  <div class="af-box" role="dialog" aria-modal="true" aria-labelledby="mfTitle">
+    <button class="af-close" type="button" id="mfClose" aria-label="Închide">✕</button>
+    <p class="af-eyebrow">Plan alimentar</p>
+    <h2 class="af-title" id="mfTitle">Spune-mi cum mănânci și îți scriu pe <span>WhatsApp</span>.</h2>
+    <p class="af-sub">Pornim de la cifrele din calculator și construiesc planul pe gusturile și programul tău.</p>
+    <div class="mf-calc" id="mfCalc" hidden></div>
+    <div class="af-progress"><span class="is-on"></span><span></span></div>
+    <p class="af-step-label" id="mfStepLabel">Pasul 1 din 2 · Ce plan vrei</p>
+    <form id="mfForm" novalidate>
+      <div class="af-step" data-mstep="1">
+        <div class="af-field">
+          <label class="af-label" for="mfTip">Ce te interesează?</label>
+          <div class="af-select"><select id="mfTip" required><option value="" selected disabled>Alege răspunsul…</option><option value="Doar plan alimentar">Doar plan alimentar</option><option value="Plan alimentar + antrenament (coaching complet)">Plan alimentar + antrenament (coaching complet)</option><option value="Nu știu încă">Nu știu încă</option></select></div>
+          <p class="af-err">Alege o variantă.</p>
+        </div>
+        <div class="af-field">
+          <label class="af-label" for="mfMese">Câte mese pe zi preferi?</label>
+          <div class="af-select"><select id="mfMese" required><option value="" selected disabled>Alege răspunsul…</option><option value="2 mese">2 mese</option><option value="3 mese">3 mese</option><option value="4 mese">4 mese</option><option value="5 sau mai multe">5 sau mai multe</option></select></div>
+          <p class="af-err">Alege o variantă.</p>
+        </div>
+        <div class="af-field">
+          <p class="af-label">Unde mănânci de obicei?</p>
+          <p class="af-hint">Poți alege mai multe variante.</p>
+          <div class="af-chips"><label class="af-chip"><input type="checkbox" name="mfUnde" value="Acasă"><span>Acasă</span></label><label class="af-chip"><input type="checkbox" name="mfUnde" value="La birou, cu mâncare de acasă"><span>La birou, cu mâncare de acasă</span></label><label class="af-chip"><input type="checkbox" name="mfUnde" value="În oraș"><span>În oraș</span></label><label class="af-chip"><input type="checkbox" name="mfUnde" value="Comand mâncare"><span>Comand mâncare</span></label></div>
+        </div>
+        <div class="af-field">
+          <label class="af-label" for="mfGatit">Cât timp ai pentru gătit?</label>
+          <div class="af-select"><select id="mfGatit" required><option value="" selected disabled>Alege răspunsul…</option><option value="Aproape deloc">Aproape deloc</option><option value="15–30 de minute pe zi">15–30 de minute pe zi</option><option value="Peste 30 de minute pe zi">Peste 30 de minute pe zi</option><option value="Gătesc pentru toată familia">Gătesc pentru toată familia</option></select></div>
+          <p class="af-err">Alege o variantă.</p>
+        </div>
+        <div class="af-field">
+          <p class="af-label">Ce ai mai încercat până acum?</p>
+          <p class="af-hint">Poți alege mai multe variante.</p>
+          <div class="af-chips"><label class="af-chip"><input type="checkbox" name="mfIncercat" value="Numărat calorii"><span>Numărat calorii</span></label><label class="af-chip"><input type="checkbox" name="mfIncercat" value="Diete (keto, post intermitent etc.)"><span>Diete (keto, post intermitent etc.)</span></label><label class="af-chip"><input type="checkbox" name="mfIncercat" value="Plan de la nutriționist"><span>Plan de la nutriționist</span></label><label class="af-chip"><input type="checkbox" name="mfIncercat" value="Nimic încă"><span>Nimic încă</span></label></div>
+        </div>
+        <button type="button" class="btn-primary af-next" id="mfNext">Continuă →</button>
+      </div>
+      <div class="af-step" data-mstep="2" hidden>
+        <div class="af-field">
+          <label class="af-label" for="mfAlergii">Ai alergii sau intoleranțe alimentare?</label>
+          <div class="af-select"><select id="mfAlergii" required><option value="" selected disabled>Alege…</option><option value="Nu">Nu</option><option value="Da">Da</option></select></div>
+          <p class="af-err">Alege o variantă.</p>
+        </div>
+        <div class="af-field" data-det="mfAlergiiDet" hidden>
+          <label class="af-label" for="mfAlergiiDet">Ce alergii sau intoleranțe ai?</label>
+          <textarea class="af-input" id="mfAlergiiDet" rows="2" maxlength="300" placeholder="ex. lactoză, nuci, gluten…"></textarea>
+          <p class="af-err">Spune-mi pe scurt ce alergii ai.</p>
+        </div>
+        <div class="af-field">
+          <p class="af-label">Ai alimente pe care nu le mănânci?</p>
+          <p class="af-hint">Opțional. Poți alege mai multe variante.</p>
+          <div class="af-chips"><label class="af-chip"><input type="checkbox" name="mfEvit" value="Fără lactate"><span>Fără lactate</span></label><label class="af-chip"><input type="checkbox" name="mfEvit" value="Fără gluten"><span>Fără gluten</span></label><label class="af-chip"><input type="checkbox" name="mfEvit" value="Vegetarian"><span>Vegetarian</span></label><label class="af-chip"><input type="checkbox" name="mfEvit" value="Vegan"><span>Vegan</span></label><label class="af-chip"><input type="checkbox" name="mfEvit" value="Fără carne de porc"><span>Fără carne de porc</span></label><label class="af-chip"><input type="checkbox" name="mfEvit" value="Altele"><span>Altele</span></label></div>
+        </div>
+        <div class="af-field" data-det="mfEvitDet" hidden>
+          <label class="af-label" for="mfEvitDet">Ce alte alimente nu mănânci?</label>
+          <textarea class="af-input" id="mfEvitDet" rows="2" maxlength="300" placeholder="ex. pește, ciuperci, ouă…"></textarea>
+          <p class="af-err">Spune-mi pe scurt ce nu mănânci.</p>
+        </div>
+        <div class="af-field">
+          <label class="af-label" for="mfMedical">Ai probleme medicale? (ex. diabet, tiroidă, tensiune)</label>
+          <div class="af-select"><select id="mfMedical" required><option value="" selected disabled>Alege…</option><option value="Nu">Nu</option><option value="Da">Da</option></select></div>
+          <p class="af-err">Alege o variantă.</p>
+        </div>
+        <div class="af-field" data-det="mfMedicalDet" hidden>
+          <label class="af-label" for="mfMedicalDet">Detaliază, te rog</label>
+          <textarea class="af-input" id="mfMedicalDet" rows="2" maxlength="300" placeholder="ex. diabet tip 2, hipotiroidism, medicamente…"></textarea>
+          <p class="af-err">Spune-mi pe scurt ce probleme ai, ca să țin cont de ele.</p>
+        </div>
+        <div class="af-field">
+          <label class="af-label" for="mfName">Numele și prenumele</label>
+          <input class="af-input" type="text" id="mfName" autocomplete="name" placeholder="ex. Andrei Popescu" maxlength="80">
+          <p class="af-err">Scrie-ți numele.</p>
+        </div>
+        <div class="af-field">
+          <label class="af-label" for="mfNote">Vrei să-mi mai spui ceva? <em>(opțional)</em></label>
+          <textarea class="af-input" id="mfNote" rows="2" maxlength="400" placeholder="ex. ce îți place să mănânci, programul tău de masă…"></textarea>
+        </div>
+        <label class="af-consent"><input type="checkbox" id="mfConsent"><span>Sunt de acord ca datele din acest formular, inclusiv informațiile despre sănătate, dacă le-am oferit, să fie folosite pentru a fi contactat(ă) și pentru a-mi face planul alimentar, conform <a href="#confidentialitate" class="mf-policy">Politicii de confidențialitate</a>.</span></label>
+        <p class="af-err mf-err-consent">Bifează acordul ca să poți trimite.</p>
+        <a class="btn-primary af-send" id="mfSend" href="#" target="_blank" rel="noopener">Trimite pe WhatsApp →</a>
+        <p class="af-hint af-send-hint">Se deschide WhatsApp cu răspunsurile și cifrele tale deja scrise. Apasă „Trimite” acolo și revin eu către tine.</p>
+        <button type="button" class="af-back" id="mfBack">← Înapoi</button>
+      </div>
+      <div class="af-step af-done" data-mstep="done" hidden>
+        <p class="af-done-mark">✓</p>
+        <h3>Aproape gata!</h3>
+        <p>Apasă <b>„Trimite”</b> în WhatsApp, ca să primesc cererea ta pentru planul alimentar. Revin către tine cât pot de repede.</p>
+        <a class="btn-outline af-again" id="mfAgain" href="#" target="_blank" rel="noopener">Nu s-a deschis WhatsApp? Încearcă din nou</a>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+(function () {
+  var WA_NUMBER = '40758951104';
+  var ov = document.getElementById('mfOverlay'); if (!ov) return;
+  var $ = function (id) { return document.getElementById(id); };
+  var steps = { 1: ov.querySelector('[data-mstep="1"]'), 2: ov.querySelector('[data-mstep="2"]'), done: ov.querySelector('[data-mstep="done"]') };
+  var bars = ov.querySelectorAll('.af-progress span'), label = $('mfStepLabel'), send = $('mfSend'), again = $('mfAgain');
+  var cur = 1, calcLines = [];
+  var goalNames = { cut: 'Slăbire', maintain: 'Menținere', bulk: 'Masă musculară' };
+  function txt(id) { var e = $(id); return e ? e.textContent.trim() : ''; }
+  function readCalc() {
+    calcLines = [];
+    var sex = document.querySelector('input[name="sex"]:checked'), goal = document.querySelector('input[name="goal"]:checked'), act = $('cActivity');
+    if (!$('cAge') || txt('cKcal') === '–' || !txt('cKcal')) return;
+    calcLines.push('• Sex: ' + (sex && sex.value === 'f' ? 'Femeie' : 'Bărbat'));
+    calcLines.push('• Vârstă: ' + $('cAge').value + ' ani · Înălțime: ' + $('cHeight').value + ' cm · Greutate: ' + $('cWeight').value + ' kg');
+    if (act) calcLines.push('• Activitate: ' + act.options[act.selectedIndex].text);
+    if (goal) calcLines.push('• Obiectiv: ' + goalNames[goal.value]);
+    calcLines.push('• Calorii recomandate: ' + txt('cKcal') + ' kcal/zi (menținere: ' + txt('cMaint') + ' kcal)');
+    calcLines.push('• Macro: proteine ' + txt('cProt') + ', carbohidrați ' + txt('cCarb') + ', grăsimi ' + txt('cFat'));
+  }
+  function renderCalc() {
+    var box = $('mfCalc');
+    if (!calcLines.length) { box.hidden = true; return; }
+    box.innerHTML = '<p class="mf-calc-t">Cifrele tale din calculator</p><p>' + txt('cKcal') + ' kcal/zi · P ' + txt('cProt') + ' · C ' + txt('cCarb') + ' · G ' + txt('cFat') + '</p>';
+    box.hidden = false;
+  }
+  function show(s) {
+    cur = s;
+    Object.keys(steps).forEach(function (k) { steps[k].hidden = String(k) !== String(s); });
+    bars[1].classList.toggle('is-on', s !== 1);
+    label.textContent = s === 1 ? 'Pasul 1 din 2 · Ce plan vrei' : s === 2 ? 'Pasul 2 din 2 · Preferințe și sănătate' : 'Cerere pregătită';
+    ov.scrollTop = 0;
+  }
+  function open() { readCalc(); renderCalc(); ov.hidden = false; document.body.classList.add('af-open'); show(cur === 'done' ? 1 : cur); }
+  function close() { ov.hidden = true; document.body.classList.remove('af-open'); }
+  function field(el) { return el.closest('.af-field'); }
+  function mark(el, bad) { var f = field(el); if (f) f.classList.toggle('is-bad', bad); return !bad; }
+  function picked(n) { return Array.prototype.slice.call(ov.querySelectorAll('input[name="' + n + '"]:checked')).map(function (x) { return x.value; }); }
+  function needDet(id) { var d = ov.querySelector('[data-det="' + id + '"]'); return d && !d.hidden; }
+  function validate(s) {
+    var ok = true, first = null;
+    steps[s].querySelectorAll('select[required]').forEach(function (x) { var g = mark(x, !x.value); if (!g && !first) first = x; ok = ok && g; });
+    if (s === 2) {
+      ['mfAlergiiDet', 'mfEvitDet', 'mfMedicalDet'].forEach(function (id) { var e = $(id); var g = mark(e, needDet(id) && e.value.trim().length < 2); if (!g && !first) first = e; ok = ok && g; });
+      var n = $('mfName'), g1 = mark(n, n.value.trim().length < 2); if (!g1 && !first) first = n;
+      var g2 = $('mfConsent').checked; ov.querySelector('.mf-err-consent').classList.toggle('is-on', !g2); if (!g2 && !first) first = $('mfConsent');
+      ok = ok && g1 && g2;
+    }
+    if (first) first.focus();
+    return ok;
+  }
+  function message() {
+    var out = ['Bună, Cosmin! Vreau un PLAN ALIMENTAR.', '', 'Nume: ' + $('mfName').value.trim()];
+    var add = function (q, v) { if (v) out.push('• ' + q + ': ' + v); };
+    add('Mă interesează', $('mfTip').value);
+    add('Mese pe zi', $('mfMese').value);
+    add('Unde mănânc', picked('mfUnde').join(', '));
+    add('Timp pentru gătit', $('mfGatit').value);
+    add('Ce am încercat', picked('mfIncercat').join(', '));
+    add('Alergii / intoleranțe', $('mfAlergii').value === 'Da' ? 'Da – ' + $('mfAlergiiDet').value.trim() : $('mfAlergii').value);
+    var ev = picked('mfEvit').map(function (v) { return v === 'Altele' && $('mfEvitDet').value.trim() ? 'Altele: ' + $('mfEvitDet').value.trim() : v; });
+    add('Nu mănânc', ev.join(', '));
+    add('Probleme medicale', $('mfMedical').value === 'Da' ? 'Da – ' + $('mfMedicalDet').value.trim() : $('mfMedical').value);
+    add('Mesaj', $('mfNote').value.trim());
+    if (calcLines.length) { out.push('', 'Cifrele mele din calculator:'); out = out.concat(calcLines); }
+    return out.join('\n');
+  }
+  function url() { return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(message()); }
+  function toggleDet() {
+    ov.querySelector('[data-det="mfAlergiiDet"]').hidden = $('mfAlergii').value !== 'Da';
+    ov.querySelector('[data-det="mfMedicalDet"]').hidden = $('mfMedical').value !== 'Da';
+    ov.querySelector('[data-det="mfEvitDet"]').hidden = picked('mfEvit').indexOf('Altele') < 0;
+  }
+  if (location.hash === '#plan-alimentar') setTimeout(open, 300);
+  document.addEventListener('click', function (e) { var t = e.target.closest ? e.target.closest('[data-meal]') : null; if (t) { e.preventDefault(); open(); } });
+  $('mfClose').addEventListener('click', close);
+  ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !ov.hidden) close(); });
+  $('mfNext').addEventListener('click', function () { if (validate(1)) show(2); });
+  $('mfBack').addEventListener('click', function () { show(1); });
+  ov.addEventListener('change', function (e) { toggleDet(); if (field(e.target) && field(e.target).classList.contains('is-bad')) mark(e.target, false); if (e.target.id === 'mfConsent') ov.querySelector('.mf-err-consent').classList.remove('is-on'); send.href = url(); });
+  ov.addEventListener('input', function (e) { if (field(e.target) && e.target.value && e.target.value.trim().length > 1) mark(e.target, false); send.href = url(); });
+  send.addEventListener('click', function (e) { if (!validate(2)) { e.preventDefault(); return; } send.href = url(); again.href = send.href; setTimeout(function () { show('done'); }, 400); });
+  ov.querySelector('.mf-policy').addEventListener('click', close);
+})();
+</script>
 <div class="af-overlay" id="afOverlay" hidden>
   <div class="af-box" role="dialog" aria-modal="true" aria-labelledby="afTitle">
     <button class="af-close" type="button" id="afClose" aria-label="Închide">✕</button>
