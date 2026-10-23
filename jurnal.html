@@ -1412,6 +1412,20 @@
   .jr-set input::placeholder { color: rgba(150,163,168,0.45); }
   .jr-set input { -moz-appearance: textfield; }
   .jr-set input::-webkit-outer-spin-button, .jr-set input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .jr-linkchk { display: flex; align-items: center; gap: 8px; margin: -2px 0 10px; font-size: 13.5px; color: var(--slate); cursor: pointer; }
+  .jr-linkchk[hidden] { display: none; }
+  .jr-linkchk input { width: 17px; height: 17px; accent-color: var(--teal); flex: none; margin: 0; }
+  .jr-linkchk em { font-style: normal; opacity: .75; }
+  .jr-linkchk input:checked + span { color: var(--teal-ink); font-weight: 700; }
+  .jr-badge { margin: 0 0 10px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-ink); }
+  .jr-exc.in-grp { border-color: rgba(79,209,139,0.55); border-left: 4px solid var(--teal); }
+  .jr-exc.grp-more { margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-style: dashed; }
+  .jr-exc.grp-next { border-top-left-radius: 0; border-top-right-radius: 0; border-top: 0; }
+  .jr-hblk { border-top: 1px solid var(--line); padding: 8px 0 4px 12px !important; position: relative; }
+  .jr-hblk::before { content: ''; position: absolute; left: 0; top: 10px; bottom: 8px; width: 3px; border-radius: 2px; background: var(--teal); }
+  .jr-hblk ul { margin: 0; }
+  .jr-hblk li:first-child { border-top: 0; }
+  .jr-hbadge { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-ink); }
   .jr-addset { background: none; border: 0; color: var(--teal-ink); font: inherit; font-weight: 700; font-size: 14px; padding: 6px 0 0; cursor: pointer; }
   .jr-repeat { display: block; width: 100%; margin: 0 0 14px; padding: 11px; border: 1px solid var(--line); border-radius: 12px; background: none; color: var(--ink-soft); font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer; }
   .jr-repeat:hover { border-color: var(--teal); color: var(--ink); }
@@ -1684,24 +1698,43 @@
   function addRow(v) {
     v = v || {};
     var c = document.createElement('div'); c.className = 'jr-exc';
-    c.innerHTML = '<div class="jr-exc-top"><input class="af-input" list="jrExList" maxlength="60" placeholder="Exercițiu (ex. Îndreptări românești cu bara)" aria-label="Exercițiu" value="' + esc(v.exercise || '') + '">' +
+    c.innerHTML = '<p class="jr-badge" hidden></p><label class="jr-linkchk"><input type="checkbox"' + (v.linked ? ' checked' : '') + '><span>🔗 Leagă de exercițiul de mai sus <em>(superset)</em></span></label><div class="jr-exc-top"><input class="af-input" list="jrExList" maxlength="60" placeholder="Exercițiu (ex. Îndreptări românești cu bara)" aria-label="Exercițiu" value="' + esc(v.exercise || '') + '">' +
       '<button type="button" class="jr-del" aria-label="Șterge exercițiul">✕</button></div>' +
       '<div class="jr-set-head"><span></span><span>Repetări</span><span>Kg</span><span></span></div><div class="jr-sets"></div>' +
       '<button type="button" class="jr-addset">+ Adaugă serie</button>';
-    c.querySelector('.jr-exc-top .jr-del').addEventListener('click', function () { if ($('nwRows').children.length > 1) c.remove(); else { $('nwRows').innerHTML = ''; addRow(); } });
+    c.querySelector('.jr-exc-top .jr-del').addEventListener('click', function () { if ($('nwRows').children.length > 1) c.remove(); else { $('nwRows').innerHTML = ''; addRow(); } refreshLinks(); });
+    c.querySelector('.jr-linkchk input').addEventListener('change', refreshLinks);
     c.querySelector('.jr-addset').addEventListener('click', function () {
       var sets = c.querySelectorAll('.jr-set'), last = sets[sets.length - 1], f = last.querySelectorAll('input');
       addSet(c, { reps: f[0].value, weight: f[1].value === '' ? null : f[1].value }).querySelector('input').focus();
     });
     (v.sets && v.sets.length ? v.sets : [{}]).forEach(function (st) { addSet(c, st); });
-    $('nwRows').appendChild(c);
+    $('nwRows').appendChild(c); refreshLinks();
     return c;
+  }
+  function blockName(n) { return n === 2 ? 'Superset' : n === 3 ? 'Triset' : 'Set gigant'; }
+  function refreshLinks() {
+    var cards = Array.prototype.slice.call($('nwRows').children), blocks = [];
+    cards.forEach(function (c, i) {
+      var chk = c.querySelector('.jr-linkchk input');
+      c.querySelector('.jr-linkchk').hidden = i === 0; if (i === 0) chk.checked = false;
+      if (i > 0 && chk.checked) blocks[blocks.length - 1].push(c); else blocks.push([c]);
+    });
+    blocks.forEach(function (b, bi) {
+      b.forEach(function (c, i) {
+        c.classList.toggle('in-grp', b.length > 1); c.classList.toggle('grp-next', b.length > 1 && i > 0); c.classList.toggle('grp-more', b.length > 1 && i < b.length - 1);
+        c.setAttribute('data-block', bi);
+        var badge = c.querySelector('.jr-badge'); badge.hidden = !(b.length > 1 && i === 0);
+        if (b.length > 1 && i === 0) badge.textContent = blockName(b.length) + ' · ' + b.length + ' exerciții, fără pauză între ele';
+      });
+    });
   }
   function groups(w) {
     var out = [], cur = null;
     (w.workout_entries || []).forEach(function (e) {
       var k = e.exercise + '|' + Math.floor((e.position || 0) / 100);
-      if (!cur || cur.k !== k) { cur = { k: k, exercise: e.exercise, sets: [] }; out.push(cur); }
+      var p = e.position || 0, blk = p >= 1000000 ? 'b' + Math.floor((p - 1000000) / 10000) : 'e' + k;
+      if (!cur || cur.k !== k) { var prev = cur; cur = { k: k, blk: blk, exercise: e.exercise, sets: [], linked: !!(prev && prev.blk === blk) }; out.push(cur); }
       for (var i = 0; i < (e.sets || 1); i++) cur.sets.push({ reps: e.reps, weight: e.weight == null ? null : +e.weight });
     });
     return out;
@@ -1730,7 +1763,7 @@
       if (!ex && !sets.length) return;
       if (!ex) { bad = 'Scrie numele exercițiului.'; return; }
       if (!sets.length) { bad = 'Adaugă cel puțin o serie la „' + ex + '”.'; return; }
-      sets.forEach(function (st, si) { rows.push({ exercise: ex.charAt(0).toUpperCase() + ex.slice(1), sets: 1, reps: st.reps, weight: st.weight, position: ci * 100 + si }); });
+      sets.forEach(function (st, si) { rows.push({ exercise: ex.charAt(0).toUpperCase() + ex.slice(1), sets: 1, reps: st.reps, weight: st.weight, position: 1000000 + (+c.getAttribute('data-block')) * 10000 + ci * 100 + si }); });
     });
     if (bad) return msg(m, bad);
     if (!rows.length) return msg(m, 'Adaugă cel puțin un exercițiu.');
@@ -1763,12 +1796,21 @@
     return sets.map(one).join(' · ');
   }
 
+  function histItem(g) { return '<li><b>' + esc(g.exercise) + '</b><div class="jr-chips">' + g.sets.map(function (x, i) { return '<span><i>' + (i + 1) + '</i>' + x.reps + (x.weight ? ' × ' + kg(x.weight) + ' kg' : ' rep.') + '</span>'; }).join('') + '</div></li>'; }
+  function histItems(gs) {
+    var blocks = [];
+    gs.forEach(function (g) { if (g.linked && blocks.length) blocks[blocks.length - 1].push(g); else blocks.push([g]); });
+    return blocks.map(function (b) {
+      if (b.length < 2) return histItem(b[0]);
+      return '<li class="jr-hblk"><span class="jr-hbadge">' + blockName(b.length) + '</span><ul>' + b.map(histItem).join('') + '</ul></li>';
+    }).join('');
+  }
   function renderHistory() {
     var box = $('jrHistory');
     if (!workouts.length) { box.innerHTML = '<div class="jr-card jr-empty">Încă nu ai niciun antrenament notat.<br>Adaugă primul la „+ Antrenament”.</div>'; return; }
     box.innerHTML = workouts.map(function (w) {
       return '<div class="jr-card jr-w"><div class="jr-w-head"><h3>' + esc(w.title || 'Antrenament') + '</h3><span>' + fmtDate(w.workout_date) + '</span></div><ul>' +
-        groups(w).map(function (g) { return '<li><b>' + esc(g.exercise) + '</b><div class="jr-chips">' + g.sets.map(function (x, i) { return '<span><i>' + (i + 1) + '</i>' + x.reps + (x.weight ? ' × ' + kg(x.weight) + ' kg' : ' rep.') + '</span>'; }).join('') + '</div></li>'; }).join('') + '</ul>' +
+        histItems(groups(w)) + '</ul>' +
         (w.notes ? '<p class="jr-w-notes">' + esc(w.notes) + '</p>' : '') +
         '<div class="jr-w-actions"><button type="button" data-del="' + w.id + '">Șterge</button></div></div>';
     }).join('');
