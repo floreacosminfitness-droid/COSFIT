@@ -9,7 +9,13 @@
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0A0D10">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
-<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon-jurnal.png">
+<link rel="manifest" href="/jurnal.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Jurnal">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="application-name" content="Jurnal">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ro_RO">
 <meta property="og:site_name" content="COS FIT">
@@ -1457,6 +1463,15 @@
   .jr-editbar[hidden] { display: none; }
   .jr-editbar button { background: none; border: 0; color: var(--ink-soft); font: inherit; font-weight: 700; text-decoration: underline; cursor: pointer; white-space: nowrap; }
   .jr-w-actions { display: flex; justify-content: flex-end; gap: 18px; }
+  .jr-install-wrap { padding-top: 0; padding-bottom: 6px; }
+  .jr-install { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; background: var(--surface); border: 1px solid rgba(79,209,139,0.4); }
+  .jr-install img { width: 48px; height: 48px; border-radius: 11px; flex: none; }
+  .jr-install-txt { flex: 1; min-width: 0; font-size: 13.5px; line-height: 1.4; color: var(--slate); }
+  .jr-install-txt b { display: block; font-size: 15px; color: var(--ink); }
+  .jr-install-btn { flex: none; padding: 10px 14px; border-radius: 999px; border: 0; background: var(--teal); color: var(--bg); font: inherit; font-weight: 800; font-size: 14px; cursor: pointer; }
+  .jr-install-btn[hidden] { display: none; }
+  .jr-install-x { flex: none; width: 30px; height: 30px; border: 0; background: none; color: var(--slate); font-size: 14px; cursor: pointer; }
+  @media (display-mode: standalone) { .jr-hero { padding: 22px 0 14px; } .jr-hero p, .jr-hero .eyebrow-num { display: none; } }
   .jr-addset { background: none; border: 0; color: var(--teal-ink); font: inherit; font-weight: 700; font-size: 14px; padding: 6px 0 0; cursor: pointer; }
   .jr-repeat { display: block; width: 100%; margin: 0 0 14px; padding: 11px; border: 1px solid var(--line); border-radius: 12px; background: none; color: var(--ink-soft); font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer; }
   .jr-repeat:hover { border-color: var(--teal); color: var(--ink); }
@@ -1528,6 +1543,15 @@
       <p>Notează exercițiile, seriile, repetările și greutățile. Vezi cum progresezi de la o lună la alta.</p>
     </div>
   </section>
+
+  <div class="jr-wrap jr-install-wrap" id="jrInstall" hidden>
+    <div class="jr-install">
+      <img src="/jurnal-icon-192.png" alt="" width="48" height="48">
+      <div class="jr-install-txt"><b>Pune Jurnalul pe telefon</b><span id="jrInstallHint">Se deschide ca o aplicație, direct de pe ecranul principal.</span></div>
+      <button type="button" class="jr-install-btn" id="jrInstallBtn">Instalează</button>
+      <button type="button" class="jr-install-x" id="jrInstallX" aria-label="Închide">✕</button>
+    </div>
+  </div>
 
   <section class="jr-wrap" id="jrGuest" hidden>
     <div class="jr-guest">
@@ -2042,6 +2066,32 @@
     $('bwKg').value = ''; msg(m, 'Greutate salvată!', true, 3000);
     renderWeight();
   });
+
+  // ---------- app install (PWA) ----------
+  (function () {
+    var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) { navigator.serviceWorker.register('/sw-jurnal.js', { scope: '/jurnal' }).catch(function () {}); }
+    if (standalone) return;
+    var dismissed = false; try { dismissed = localStorage.getItem('jrInstallDismissed') === '1'; } catch (e) {}
+    if (dismissed) return;
+    var box = $('jrInstall'), btn = $('jrInstallBtn'), deferred = null;
+    var ua = navigator.userAgent || '', ios = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var mobile = ios || /android/i.test(ua);
+    window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; btn.hidden = false; box.hidden = false; $('jrInstallHint').textContent = 'Se deschide ca o aplicație, direct de pe ecranul principal.'; });
+    if (ios) {
+      btn.hidden = true; box.hidden = false;
+      $('jrInstallHint').innerHTML = 'În Safari apasă <b style="display:inline;font-size:inherit">Distribuie</b> <span aria-hidden="true">⬆︎</span>, apoi „Adaugă pe ecranul principal”.';
+    } else if (mobile) {
+      btn.hidden = true; box.hidden = false;
+      $('jrInstallHint').textContent = 'Din meniul browserului (⋮) alege „Adaugă pe ecranul de pornire” sau „Instalează aplicația”.';
+    }
+    btn.addEventListener('click', async function () {
+      if (!deferred) return; deferred.prompt(); var r = await deferred.userChoice; deferred = null;
+      if (r && r.outcome === 'accepted') box.hidden = true;
+    });
+    window.addEventListener('appinstalled', function () { box.hidden = true; });
+    $('jrInstallX').addEventListener('click', function () { box.hidden = true; try { localStorage.setItem('jrInstallDismissed', '1'); } catch (e) {} });
+  })();
 
   // ---------- session ----------
   var started = false;
