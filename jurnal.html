@@ -1382,7 +1382,7 @@
   .jr-benefits span { color: var(--ink-soft); font-size: 15px; line-height: 1.55; }
   .jr-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 26px; }
   .jr-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; margin: 0 0 22px; border-radius: 14px; background: var(--surface-alt); border: 1px solid var(--line); }
-  .jr-tabs--app { grid-template-columns: repeat(3, 1fr); }
+  .jr-tabs--app { grid-template-columns: repeat(4, 1fr); }
   .jr-tabs button { padding: 11px 8px; border: 0; border-radius: 10px; background: none; color: var(--slate); font: inherit; font-weight: 700; font-size: 14.5px; cursor: pointer; }
   .jr-tabs button.is-on { background: var(--teal); color: var(--bg); }
   .jr-l { display: block; margin: 0 0 14px; font-weight: 700; font-size: 14.5px; color: var(--ink); }
@@ -1426,6 +1426,29 @@
   .jr-hblk ul { margin: 0; }
   .jr-hblk li:first-child { border-top: 0; }
   .jr-hbadge { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-ink); }
+  .jr-sm { display: none; }
+  .jr-add2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 4px 0 18px; }
+  .jr-add2 .jr-add { margin: 0; }
+  .jr-add--c { color: #7CC4FF; }
+  .jr-add--c:hover { border-color: #7CC4FF; }
+  .jr-cac { border: 1px solid rgba(124,196,255,0.45); border-left: 4px solid #7CC4FF; border-radius: 16px; padding: 14px; margin: 0 0 12px; background: var(--surface-alt); }
+  .jr-cac-tag { margin: 0 0 10px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #7CC4FF; }
+  .jr-cac-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .jr-cac-row label { font-size: 12px; font-weight: 700; color: var(--slate); text-transform: uppercase; letter-spacing: .05em; }
+  .jr-cac-row .af-input { margin-top: 5px; padding: 11px 8px; text-align: center; background: var(--surface); }
+  .jr-cac .jr-exc-top .af-input { background: var(--surface); font-weight: 600; }
+  .jr-row2--eq { grid-template-columns: 1fr 1fr; }
+  .jr-hint { margin: -4px 0 12px; font-size: 13.5px; color: var(--slate); line-height: 1.5; }
+  .jr-mt { margin-top: 14px; }
+  .jr-hcardio span { border-color: rgba(124,196,255,0.4) !important; }
+  .jr-hcardio b::before { content: 'CARDIO'; display: block; font-size: 11px; font-weight: 800; letter-spacing: .06em; color: #7CC4FF; margin-bottom: 2px; }
+  .jr-bwlist { list-style: none; margin: 14px 0 0; padding: 0; }
+  .jr-bwlist li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-soft); }
+  .jr-bwlist li b { color: var(--ink); }
+  .jr-bwlist small { color: var(--slate); margin-left: 8px; }
+  .jr-bwlist button { background: none; border: 0; color: var(--slate); font: inherit; font-size: 13px; text-decoration: underline; cursor: pointer; }
+  .jr-bwlist button.is-armed { color: #FF7A7A; font-weight: 700; }
+  .jr-ptitle { margin: 0 0 12px; font-size: 17px; color: var(--ink); }
   .jr-addset { background: none; border: 0; color: var(--teal-ink); font: inherit; font-weight: 700; font-size: 14px; padding: 6px 0 0; cursor: pointer; }
   .jr-repeat { display: block; width: 100%; margin: 0 0 14px; padding: 11px; border: 1px solid var(--line); border-radius: 12px; background: none; color: var(--ink-soft); font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer; }
   .jr-repeat:hover { border-color: var(--teal); color: var(--ink); }
@@ -1461,7 +1484,7 @@
   .jr-cta p { margin: 0 0 16px; color: var(--ink-soft); }
   .jr-cta .jr-cta-t { font-family: 'Exo 2', sans-serif; font-weight: 800; font-size: 21px; color: var(--ink); margin-bottom: 8px; }
   @media (max-width: 760px) { .jr-guest { grid-template-columns: 1fr; } .jr-guest .jr-auth { order: -1; } .jr-row2 { grid-template-columns: 1fr; } }
-  @media (max-width: 480px) { .jr-card { padding: 20px 16px; } .jr-exc { padding: 12px; } .jr-set-head, .jr-set { grid-template-columns: 52px 1fr 1fr 32px; gap: 6px; } .jr-del { width: 32px; height: 32px; } .jr-tabs button { font-size: 13.5px; padding: 10px 4px; } .jr-stat b { font-size: 17px; } .jr-stat { padding: 12px 6px; } }
+  @media (max-width: 480px) { .jr-card { padding: 20px 16px; } .jr-exc { padding: 12px; } .jr-set-head, .jr-set { grid-template-columns: 52px 1fr 1fr 32px; gap: 6px; } .jr-del { width: 32px; height: 32px; } .jr-tabs button { font-size: 13.5px; padding: 10px 4px; } .jr-tabs--app button { font-size: 13px; padding: 10px 2px; } .jr-lg { display: none; } .jr-sm { display: inline; } .jr-cac-row { gap: 6px; } .jr-stat b { font-size: 17px; } .jr-stat { padding: 12px 6px; } }
 </style>
 </head>
 <body>
@@ -1514,7 +1537,7 @@
           <label class="jr-l">Numele tău<input class="af-input" id="suName" type="text" autocomplete="name" maxlength="60" placeholder="ex. Andrei"></label>
           <label class="jr-l">E-mail<input class="af-input" id="suEmail" type="email" autocomplete="email" placeholder="nume@exemplu.ro"></label>
           <label class="jr-l">Parolă<input class="af-input" id="suPass" type="password" autocomplete="new-password" minlength="8" placeholder="minim 8 caractere"></label>
-          <label class="af-consent"><input type="checkbox" id="suTerms"><span>Sunt de acord ca datele mele (nume, e-mail și antrenamentele notate) să fie stocate pentru a folosi jurnalul, conform <a href="./#confidentialitate">Politicii de confidențialitate</a>.</span></label>
+          <label class="af-consent"><input type="checkbox" id="suTerms"><span>Sunt de acord ca datele mele (nume, e-mail, antrenamentele și greutatea notate) să fie stocate pentru a folosi jurnalul, conform <a href="./#confidentialitate">Politicii de confidențialitate</a>.</span></label>
           <label class="af-consent"><input type="checkbox" id="suMkt"><span>Vreau să primesc pe e-mail sfaturi și oferte de la COS FIT. <em>(opțional)</em></span></label>
           <p class="jr-msg" id="suMsg" role="alert"></p>
           <button class="btn-primary jr-submit" type="submit">Creează cont gratuit</button>
@@ -1536,9 +1559,10 @@
       <button type="button" class="jr-link" id="jrLogout">Ieși din cont</button>
     </div>
     <div class="jr-tabs jr-tabs--app" role="tablist">
-      <button type="button" class="is-on" data-view="new" role="tab">+ Antrenament</button>
+      <button type="button" class="is-on" data-view="new" role="tab"><span class="jr-lg">+ Antrenament</span><span class="jr-sm">+ Nou</span></button>
       <button type="button" data-view="history" role="tab">Istoric</button>
       <button type="button" data-view="progress" role="tab">Progres</button>
+      <button type="button" data-view="weight" role="tab">Greutate</button>
     </div>
 
     <div class="jr-view" data-v="new">
@@ -1549,7 +1573,8 @@
         </div>
         <button type="button" class="jr-repeat" id="nwRepeat" hidden>↻ Pornește de la ultimul antrenament</button>
         <div id="nwRows"></div>
-        <button type="button" class="jr-add" id="nwAdd">+ Adaugă exercițiu</button>
+        <div id="nwCardio"></div>
+        <div class="jr-add2"><button type="button" class="jr-add" id="nwAdd">+ <span class="jr-lg">Adaugă </span>exercițiu</button><button type="button" class="jr-add jr-add--c" id="nwAddC">+ <span class="jr-lg">Adaugă </span>cardio</button></div>
         <label class="jr-l">Observații <em>(opțional)</em><textarea class="af-input" id="nwNotes" rows="2" maxlength="500" placeholder="ex. superset îndreptări + fandări, m-am simțit obosit"></textarea></label>
         <p class="jr-msg" id="nwMsg" role="alert"></p>
         <button class="btn-primary jr-submit" type="submit">Salvează antrenamentul</button>
@@ -1562,9 +1587,22 @@
 
     <div class="jr-view" data-v="progress" hidden>
       <div class="jr-card">
-        <label class="jr-l">Alege exercițiul<div class="af-select"><select id="prEx"></select></div></label>
+        <label class="jr-l">Alege exercițiul sau cardio-ul<div class="af-select"><select id="prEx"></select></div></label>
         <div id="prOut"></div>
       </div>
+    </div>
+
+    <div class="jr-view" data-v="weight" hidden>
+      <form class="jr-card" id="jrBw" novalidate>
+        <div class="jr-row2 jr-row2--eq">
+          <label class="jr-l">Data<input class="af-input" id="bwDate" type="date"></label>
+          <label class="jr-l">Greutatea ta (kg)<input class="af-input" id="bwKg" type="number" inputmode="decimal" min="20" max="400" step="0.1" placeholder="ex. 78,4"></label>
+        </div>
+        <p class="jr-hint">Cântărește-te dimineața, după toaletă și înainte să mănânci, ca să poți compara corect de la o zi la alta.</p>
+        <p class="jr-msg" id="bwMsg" role="alert"></p>
+        <button class="btn-primary jr-submit" type="submit">Salvează greutatea</button>
+      </form>
+      <div class="jr-card jr-mt" id="bwOut"></div>
     </div>
 
     <aside class="jr-cta">
@@ -1575,6 +1613,7 @@
   </section>
 
   <datalist id="jrExList"></datalist>
+  <datalist id="jrCaList"></datalist>
   <p class="jr-loading" id="jrLoading">Se încarcă…</p>
 </main>
 <footer>
@@ -1623,7 +1662,7 @@
   var sb = window.supabase.createClient('https://lbtepbpfhpzdifbxcqmm.supabase.co', 'sb_publishable_mgiV1-BlrsDwU2UEKuRCnQ_rnrlSI-Q', { auth: { persistSession: true, autoRefreshToken: true } });
   var $ = function (id) { return document.getElementById(id); };
   var guest = $('jrGuest'), app = $('jrApp'), loading = $('jrLoading');
-  var workouts = [];
+  var workouts = [], weights = [];
   var COMMON = ['Genuflexiuni', 'Îndreptări', 'Îndreptări românești', 'Împins la piept', 'Împins înclinat cu gantere', 'Împins deasupra capului', 'Tracțiuni', 'Helcometru', 'Ramat cu bara', 'Ramat cu gantera', 'Ramat la cablu', 'Fandări', 'Presă pentru picioare', 'Extensii cvadricepși', 'Flexii femurali', 'Hip thrust', 'Ridicări laterale', 'Flotări', 'Dips', 'Flexii biceps', 'Extensii triceps', 'Abdomen', 'Plank', 'Ridicări pe vârfuri'];
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -1631,7 +1670,7 @@
   function fmtDate(s) { var p = s.split('-'); var m = ['ian.', 'feb.', 'mar.', 'apr.', 'mai', 'iun.', 'iul.', 'aug.', 'sept.', 'oct.', 'nov.', 'dec.']; return parseInt(p[2], 10) + ' ' + m[parseInt(p[1], 10) - 1] + ' ' + p[0]; }
   function num(v) { var n = parseFloat(String(v).replace(',', '.')); return isFinite(n) ? n : null; }
   function kg(n) { return (Math.round(n * 100) / 100).toString().replace('.', ','); }
-  function msg(el, t, ok) { el.textContent = t || ''; el.classList.toggle('ok', !!ok); }
+  function msg(el, t, ok, ms) { clearTimeout(el._t); el.textContent = t || ''; el.classList.toggle('ok', !!ok); if (ms) el._t = setTimeout(function () { el.textContent = ''; }, ms); }
   function errText(e) {
     var m = (e && e.message || '').toLowerCase();
     if (m.indexOf('already registered') > -1 || m.indexOf('already been registered') > -1) return 'Există deja un cont cu acest e-mail. Intră în cont.';
@@ -1680,6 +1719,7 @@
     document.querySelectorAll('.jr-view').forEach(function (s) { s.hidden = s.getAttribute('data-v') !== v; });
     if (v === 'history') renderHistory();
     if (v === 'progress') renderProgressSelect();
+    if (v === 'weight') { if (!$('bwDate').value) $('bwDate').value = today(); renderWeight(); }
   }
   document.querySelectorAll('[data-view]').forEach(function (b) { b.addEventListener('click', function () { setView(b.getAttribute('data-view')); }); });
 
@@ -1712,6 +1752,19 @@
     $('nwRows').appendChild(c); refreshLinks();
     return c;
   }
+  var CARDIO = ['Bandă de alergare', 'Bicicletă staționară', 'Eliptică', 'Stepper / scări', 'Aparat de vâslit', 'Alergare afară', 'Mers rapid', 'Bicicletă afară', 'Înot', 'Coardă', 'HIIT', 'Box / sac'];
+  function addCardio(v) {
+    v = v || {};
+    var c = document.createElement('div'); c.className = 'jr-cac';
+    c.innerHTML = '<p class="jr-cac-tag">Cardio</p><div class="jr-exc-top"><input class="af-input" list="jrCaList" maxlength="60" placeholder="Tip (ex. Bandă de alergare)" aria-label="Tip cardio" value="' + esc(v.activity || '') + '">' +
+      '<button type="button" class="jr-del" aria-label="Șterge cardio">✕</button></div>' +
+      '<div class="jr-cac-row"><label>Minute<input class="af-input" type="number" inputmode="decimal" min="1" max="1440" step="1" placeholder="ex. 20" value="' + esc(v.minutes == null ? '' : v.minutes) + '"></label>' +
+      '<label>Km <em style="font-style:normal;opacity:.7">(opț.)</em><input class="af-input" type="number" inputmode="decimal" min="0" max="500" step="0.01" placeholder="–" value="' + esc(v.distance_km == null ? '' : v.distance_km) + '"></label>' +
+      '<label>Kcal <em style="font-style:normal;opacity:.7">(opț.)</em><input class="af-input" type="number" inputmode="numeric" min="0" max="5000" step="1" placeholder="–" value="' + esc(v.calories == null ? '' : v.calories) + '"></label></div>';
+    c.querySelector('.jr-del').addEventListener('click', function () { c.remove(); });
+    $('nwCardio').appendChild(c); return c;
+  }
+  $('nwAddC').addEventListener('click', function () { addCardio().querySelector('input').focus(); });
   function blockName(n) { return n === 2 ? 'Superset' : n === 3 ? 'Triset' : 'Set gigant'; }
   function refreshLinks() {
     var cards = Array.prototype.slice.call($('nwRows').children), blocks = [];
@@ -1739,12 +1792,15 @@
     });
     return out;
   }
-  function resetNew() { $('nwDate').value = today(); $('nwTitle').value = ''; $('nwNotes').value = ''; $('nwRows').innerHTML = ''; addRow(); $('nwRepeat').hidden = !workouts.length; }
+  function resetNew() { $('nwDate').value = today(); $('nwTitle').value = ''; $('nwNotes').value = ''; $('nwRows').innerHTML = ''; $('nwCardio').innerHTML = ''; addRow(); $('nwRepeat').hidden = !workouts.length; }
   $('nwAdd').addEventListener('click', function () { addRow().querySelector('input').focus(); });
   $('nwRepeat').addEventListener('click', function () {
     var w = workouts[0]; if (!w) return;
     $('nwTitle').value = w.title || ''; $('nwRows').innerHTML = '';
+    $('nwCardio').innerHTML = '';
     groups(w).forEach(function (g) { addRow(g); });
+    if (!$('nwRows').children.length) addRow();
+    (w.cardio_entries || []).forEach(function (c) { addCardio(c); });
     msg($('nwMsg'), 'Am completat cu antrenamentul din ' + fmtDate(w.workout_date) + '. Modifică ce e diferit azi.', true);
   });
   $('jrNew').addEventListener('submit', async function (e) {
@@ -1765,29 +1821,45 @@
       if (!sets.length) { bad = 'Adaugă cel puțin o serie la „' + ex + '”.'; return; }
       sets.forEach(function (st, si) { rows.push({ exercise: ex.charAt(0).toUpperCase() + ex.slice(1), sets: 1, reps: st.reps, weight: st.weight, position: 1000000 + (+c.getAttribute('data-block')) * 10000 + ci * 100 + si }); });
     });
+    var cardio = [];
+    Array.prototype.forEach.call($('nwCardio').children, function (c, i) {
+      var f = c.querySelectorAll('input'), act = f[0].value.trim(), mins = num(f[1].value), km = num(f[2].value), kc = num(f[3].value);
+      if (!act && !f[1].value && !f[2].value && !f[3].value) return;
+      if ([f[1], f[2], f[3]].some(function (x) { return x.validity && x.validity.badInput; })) { bad = 'La cardio scrie doar numere (minute, km, kcal).'; return; }
+      if (!act) { bad = 'Scrie tipul de cardio (ex. Bandă de alergare).'; return; }
+      if (!mins || mins > 1440) { bad = 'Scrie câte minute de cardio ai făcut la „' + act + '”.'; return; }
+      cardio.push({ activity: act.charAt(0).toUpperCase() + act.slice(1), minutes: Math.round(mins * 10) / 10, distance_km: km && km > 0 ? Math.round(km * 100) / 100 : null, calories: kc && kc > 0 ? Math.round(kc) : null, position: i });
+    });
     if (bad) return msg(m, bad);
-    if (!rows.length) return msg(m, 'Adaugă cel puțin un exercițiu.');
+    if (!rows.length && !cardio.length) return msg(m, 'Adaugă cel puțin un exercițiu sau un cardio.');
     if (!$('nwDate').value) return msg(m, 'Alege data antrenamentului.');
     var btn = this.querySelector('button[type=submit]'); btn.disabled = true; msg(m, '');
     var w = await sb.from('workouts').insert({ workout_date: $('nwDate').value, title: $('nwTitle').value.trim() || null, notes: $('nwNotes').value.trim() || null }).select('id').single();
     if (w.error) { btn.disabled = false; return msg(m, errText(w.error)); }
-    var en = await sb.from('workout_entries').insert(rows.map(function (r) { r.workout_id = w.data.id; return r; }));
+    var en = rows.length ? await sb.from('workout_entries').insert(rows.map(function (r) { r.workout_id = w.data.id; return r; })) : {};
+    if (!en.error && cardio.length) en = await sb.from('cardio_entries').insert(cardio.map(function (r) { r.workout_id = w.data.id; return r; }));
     btn.disabled = false;
     if (en.error) { await sb.from('workouts').delete().eq('id', w.data.id); return msg(m, errText(en.error)); }
-    msg(m, 'Antrenament salvat! 💪', true);
+    msg(m, 'Antrenament salvat! 💪', true, 3500);
     await load(); resetNew();
-    setTimeout(function () { msg(m, ''); }, 3500);
   });
 
   // ---------- data ----------
   async function load() {
-    var r = await sb.from('workouts').select('id,workout_date,title,notes,created_at,workout_entries(id,exercise,sets,reps,weight,position)').order('workout_date', { ascending: false }).order('created_at', { ascending: false }).limit(500);
+    var r = await sb.from('workouts').select('id,workout_date,title,notes,created_at,workout_entries(id,exercise,sets,reps,weight,position),cardio_entries(id,activity,minutes,distance_km,calories,position)').order('workout_date', { ascending: false }).order('created_at', { ascending: false }).limit(500);
     if (r.error) { workouts = []; return; }
     workouts = r.data || [];
-    workouts.forEach(function (w) { (w.workout_entries || []).sort(function (a, b) { return a.position - b.position; }); });
+    workouts.forEach(function (w) { (w.workout_entries || []).sort(function (a, b) { return a.position - b.position; }); (w.cardio_entries || []).sort(function (a, b) { return a.position - b.position; }); });
+    var ca = {}; CARDIO.forEach(function (n) { ca[n] = 1; }); cardioTypes().forEach(function (n) { ca[n] = 1; });
+    $('jrCaList').innerHTML = Object.keys(ca).sort(function (a, b) { return a.localeCompare(b, 'ro'); }).map(function (n) { return '<option value="' + esc(n) + '">'; }).join('');
+    var bw = await sb.from('body_weights').select('id,measured_on,weight_kg').order('measured_on', { ascending: true }).limit(2000);
+    weights = bw.error ? [] : (bw.data || []);
     var names = {}; COMMON.forEach(function (n) { names[n] = 1; }); exercises().forEach(function (n) { names[n] = 1; });
     $('jrExList').innerHTML = Object.keys(names).sort(function (a, b) { return a.localeCompare(b, 'ro'); }).map(function (n) { return '<option value="' + esc(n) + '">'; }).join('');
   }
+  function cardioTypes() { var s = {}; workouts.forEach(function (w) { (w.cardio_entries || []).forEach(function (e) { s[e.activity] = (s[e.activity] || 0) + 1; }); }); return Object.keys(s).sort(function (a, b) { return s[b] - s[a] || a.localeCompare(b, 'ro'); }); }
+  function cardioText(c) { return fmtMin(c.minutes) + (c.distance_km ? ' · ' + kg(+c.distance_km) + ' km' : '') + (c.calories ? ' · ' + c.calories + ' kcal' : ''); }
+  function fmtMin(m) { m = +m; if (m < 60) return kg(m) + ' min'; var h = Math.floor(m / 60), r = Math.round(m - h * 60); return h + ' h' + (r ? ' ' + r + ' min' : ''); }
   function exercises() { var s = {}; workouts.forEach(function (w) { (w.workout_entries || []).forEach(function (e) { s[e.exercise] = (s[e.exercise] || 0) + 1; }); }); return Object.keys(s).sort(function (a, b) { return s[b] - s[a] || a.localeCompare(b, 'ro'); }); }
   function setsText(sets) {
     var same = sets.every(function (x) { return x.reps === sets[0].reps && x.weight === sets[0].weight; });
@@ -1807,10 +1879,10 @@
   }
   function renderHistory() {
     var box = $('jrHistory');
-    if (!workouts.length) { box.innerHTML = '<div class="jr-card jr-empty">Încă nu ai niciun antrenament notat.<br>Adaugă primul la „+ Antrenament”.</div>'; return; }
+    if (!workouts.length) { box.innerHTML = '<div class="jr-card jr-empty">Încă nu ai niciun antrenament notat.<br>Adaugă primul la „+ Antrenament” (pe telefon „+ Nou”).</div>'; return; }
     box.innerHTML = workouts.map(function (w) {
       return '<div class="jr-card jr-w"><div class="jr-w-head"><h3>' + esc(w.title || 'Antrenament') + '</h3><span>' + fmtDate(w.workout_date) + '</span></div><ul>' +
-        histItems(groups(w)) + '</ul>' +
+        histItems(groups(w)) + (w.cardio_entries || []).map(function (c) { return '<li class="jr-hcardio"><b>' + esc(c.activity) + '</b><div class="jr-chips"><span>' + cardioText(c) + '</span></div></li>'; }).join('') + '</ul>' +
         (w.notes ? '<p class="jr-w-notes">' + esc(w.notes) + '</p>' : '') +
         '<div class="jr-w-actions"><button type="button" data-del="' + w.id + '">Șterge</button></div></div>';
     }).join('');
@@ -1823,16 +1895,35 @@
     });
   }
 
+  function chart(pts, fmt, label, color) {
+    color = color || '#4FD18B';
+    if (pts.length < 2) return '<p class="jr-empty">Mai adaugă încă o înregistrare ca să apară graficul.</p>';
+    var W = Math.round(Math.max(300, Math.min(640, ($('jrApp').clientWidth || 680) - 60))), H = W < 480 ? 200 : 240, P = 40, vals = pts.map(function (p) { return p.v; });
+    var mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals); if (mx === mn) { mx += 1; mn = Math.max(0, mn - 1); }
+    var x = function (i) { return P + i * (W - 2 * P) / (pts.length - 1); }, y = function (v) { return H - P - (v - mn) * (H - 2 * P) / (mx - mn); };
+    var path = pts.map(function (p, i) { return (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(p.v).toFixed(1); }).join(' ');
+    var dots = pts.map(function (p, i) { return '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(p.v).toFixed(1) + '" r="4.5" fill="' + color + '"><title>' + fmtDate(p.d) + ': ' + fmt(p.v) + '</title></circle>'; }).join('');
+    var grid = [mn, (mn + mx) / 2, mx].map(function (v) { return '<line x1="' + P + '" x2="' + (W - P) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="rgba(255,255,255,0.08)"/><text x="' + (P - 8) + '" y="' + (y(v) + 4) + '" fill="#96A3A8" font-size="12" text-anchor="end">' + kg(Math.round(v * 10) / 10) + '</text>'; }).join('');
+    var labels = '<text x="' + x(0) + '" y="' + (H - 10) + '" fill="#96A3A8" font-size="12" text-anchor="start">' + fmtDate(pts[0].d) + '</text><text x="' + x(pts.length - 1) + '" y="' + (H - 10) + '" fill="#96A3A8" font-size="12" text-anchor="end">' + fmtDate(pts[pts.length - 1].d) + '</text>';
+    return '<svg class="jr-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(label) + '">' + grid + '<path d="' + path + '" fill="none" stroke="' + color + '" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>' + dots + labels + '</svg>';
+  }
+  function stats(items) { return '<div class="jr-stats">' + items.map(function (it) { return '<div class="jr-stat"><b>' + it[0] + '</b><span>' + it[1] + '</span></div>'; }).join('') + '</div>'; }
   function renderProgressSelect() {
-    var sel = $('prEx'), list = exercises(), cur = sel.value;
-    if (!list.length) { sel.innerHTML = '<option>—</option>'; $('prOut').innerHTML = '<p class="jr-empty">Notează câteva antrenamente și aici o să vezi progresul pentru fiecare exercițiu.</p>'; return; }
-    sel.innerHTML = list.map(function (n) { return '<option value="' + esc(n) + '">' + esc(n) + '</option>'; }).join('');
-    if (list.indexOf(cur) > -1) sel.value = cur;
+    var sel = $('prEx'), list = exercises(), cl = cardioTypes(), cur = sel.value;
+    if (!list.length && !cl.length) { sel.innerHTML = '<option>—</option>'; $('prOut').innerHTML = '<p class="jr-empty">Notează câteva antrenamente și aici o să vezi progresul pentru fiecare exercițiu și pentru cardio.</p>'; return; }
+    var h = '';
+    if (list.length) h += '<optgroup label="Forță">' + list.map(function (n) { return '<option value="s:' + esc(n) + '">' + esc(n) + '</option>'; }).join('') + '</optgroup>';
+    if (cl.length) h += '<optgroup label="Cardio"><option value="c*">Tot cardio-ul (minute pe săptămână)</option>' + cl.map(function (n) { return '<option value="c:' + esc(n) + '">' + esc(n) + '</option>'; }).join('') + '</optgroup>';
+    sel.innerHTML = h;
+    if (Array.prototype.some.call(sel.options, function (o) { return o.value === cur; })) sel.value = cur;
     renderProgress();
   }
   $('prEx').addEventListener('change', renderProgress);
   function renderProgress() {
-    var ex = $('prEx').value, pts = [];
+    var v = $('prEx').value || '';
+    if (v === 'c*') return renderCardioWeekly();
+    if (v.indexOf('c:') === 0) return renderCardio(v.slice(2));
+    var ex = v.slice(2), pts = [];
     workouts.slice().reverse().forEach(function (w) {
       var gs = groups(w).filter(function (g) { return g.exercise === ex; }); if (!gs.length) return;
       var es = [].concat.apply([], gs.map(function (g) { return g.sets; }));
@@ -1840,27 +1931,77 @@
       var maxR = Math.max.apply(null, es.map(function (e) { return e.reps; }));
       pts.push({ d: w.workout_date, w: maxW, r: maxR, txt: gs.map(function (g) { return setsText(g.sets); }).join(' · ') });
     });
-    var useW = pts.some(function (p) { return p.w > 0; });
-    var key = useW ? 'w' : 'r', unit = useW ? 'kg' : 'rep.';
-    var best = pts.reduce(function (b, p) { return p[key] > b[key] ? p : b; }, pts[0]);
-    var first = pts[0], last = pts[pts.length - 1], diff = last[key] - first[key];
-    var html = '<div class="jr-stats"><div class="jr-stat"><b>' + (useW ? kg(best.w) : best.r) + ' ' + unit + '</b><span>Record personal</span></div>' +
-      '<div class="jr-stat"><b>' + (diff >= 0 ? '+' : '') + (useW ? kg(diff) : diff) + ' ' + unit + '</b><span>Față de prima dată</span></div>' +
-      '<div class="jr-stat"><b>' + pts.length + '</b><span>Antrenamente</span></div></div>';
-    if (pts.length > 1) {
-      var W = Math.round(Math.max(300, Math.min(640, $('prOut').clientWidth || 640))), H = W < 480 ? 200 : 240, P = 36, vals = pts.map(function (p) { return p[key]; });
-      var mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals); if (mx === mn) { mx += 1; mn = Math.max(0, mn - 1); }
-      var x = function (i) { return P + i * (W - 2 * P) / (pts.length - 1); }, y = function (v) { return H - P - (v - mn) * (H - 2 * P) / (mx - mn); };
-      var path = pts.map(function (p, i) { return (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(p[key]).toFixed(1); }).join(' ');
-      var dots = pts.map(function (p, i) { return '<circle cx="' + x(i).toFixed(1) + '" cy="' + y(p[key]).toFixed(1) + '" r="4.5" fill="#4FD18B"><title>' + fmtDate(p.d) + ': ' + (useW ? kg(p.w) : p.r) + ' ' + unit + '</title></circle>'; }).join('');
-      var grid = [mn, (mn + mx) / 2, mx].map(function (v) { return '<line x1="' + P + '" x2="' + (W - P) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="rgba(255,255,255,0.08)"/><text x="' + (P - 8) + '" y="' + (y(v) + 4) + '" fill="#96A3A8" font-size="12" text-anchor="end">' + (useW ? kg(Math.round(v * 2) / 2) : Math.round(v)) + '</text>'; }).join('');
-      var labels = '<text x="' + x(0) + '" y="' + (H - 10) + '" fill="#96A3A8" font-size="12" text-anchor="start">' + fmtDate(first.d) + '</text><text x="' + x(pts.length - 1) + '" y="' + (H - 10) + '" fill="#96A3A8" font-size="12" text-anchor="end">' + fmtDate(last.d) + '</text>';
-      html += '<svg class="jr-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Progres la ' + esc(ex) + '">' + grid + '<path d="' + path + '" fill="none" stroke="#4FD18B" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>' + dots + labels + '</svg>';
-    } else { html += '<p class="jr-empty">Mai notează exercițiul încă o dată ca să apară graficul.</p>'; }
+    var useW = pts.some(function (p) { return p.w > 0; }), key = useW ? 'w' : 'r', unit = useW ? 'kg' : 'rep.';
+    var f = function (n) { return (useW ? kg(n) : n) + ' ' + unit; };
+    var best = pts.reduce(function (b, p) { return p[key] > b[key] ? p : b; }, pts[0]), diff = pts[pts.length - 1][key] - pts[0][key];
+    var html = stats([[f(best[key]), 'Record personal'], [(diff >= 0 ? '+' : '') + f(diff), 'Față de prima dată'], [pts.length, 'Antrenamente']]);
+    html += chart(pts.map(function (p) { return { d: p.d, v: p[key] }; }), f, 'Progres la ' + ex);
     html += '<table class="jr-ptable"><thead><tr><th>Data</th><th>Serii (rep. × kg)</th></tr></thead><tbody>' +
       pts.slice().reverse().map(function (p) { return '<tr><td>' + fmtDate(p.d) + '</td><td>' + esc(p.txt) + '</td></tr>'; }).join('') + '</tbody></table>';
     $('prOut').innerHTML = html;
   }
+  function renderCardio(act) {
+    var pts = [];
+    workouts.slice().reverse().forEach(function (w) {
+      var cs = (w.cardio_entries || []).filter(function (c) { return c.activity === act; }); if (!cs.length) return;
+      var mins = cs.reduce(function (s, c) { return s + (+c.minutes); }, 0), km = cs.reduce(function (s, c) { return s + (+c.distance_km || 0); }, 0), kc = cs.reduce(function (s, c) { return s + (c.calories || 0); }, 0);
+      pts.push({ d: w.workout_date, m: mins, km: km, kc: kc, txt: cs.map(cardioText).join(' + ') });
+    });
+    var totM = pts.reduce(function (s, p) { return s + p.m; }, 0), totK = pts.reduce(function (s, p) { return s + p.km; }, 0);
+    var useKm = pts.filter(function (p) { return p.km > 0; }).length >= 2;
+    var html = stats([[fmtMin(totM), 'Timp total'], [totK ? kg(Math.round(totK * 10) / 10) + ' km' : pts.length, totK ? 'Distanță totală' : 'Sesiuni'], [fmtMin(Math.max.apply(null, pts.map(function (p) { return p.m; }))), 'Cea mai lungă']]);
+    html += '<p class="jr-ptitle">Minute pe sesiune</p>' + chart(pts.map(function (p) { return { d: p.d, v: p.m }; }), function (n) { return kg(n) + ' min'; }, 'Minute la ' + act, '#7CC4FF');
+    if (useKm) html += '<p class="jr-ptitle">Distanță pe sesiune</p>' + chart(pts.filter(function (p) { return p.km > 0; }).map(function (p) { return { d: p.d, v: p.km }; }), function (n) { return kg(n) + ' km'; }, 'Distanță la ' + act, '#7CC4FF');
+    html += '<table class="jr-ptable"><thead><tr><th>Data</th><th>Cardio</th></tr></thead><tbody>' + pts.slice().reverse().map(function (p) { return '<tr><td>' + fmtDate(p.d) + '</td><td>' + esc(p.txt) + '</td></tr>'; }).join('') + '</tbody></table>';
+    $('prOut').innerHTML = html;
+  }
+  function weekStart(ds) { var d = new Date(ds + 'T12:00:00'); var k = (d.getDay() + 6) % 7; d.setDate(d.getDate() - k); return d.toISOString().slice(0, 10); }
+  function renderCardioWeekly() {
+    var wk = {};
+    workouts.forEach(function (w) { (w.cardio_entries || []).forEach(function (c) { var k = weekStart(w.workout_date); wk[k] = (wk[k] || 0) + (+c.minutes); }); });
+    var keys = Object.keys(wk).sort(); if (!keys.length) { $('prOut').innerHTML = ''; return; }
+    var all = [], d = new Date(keys[0] + 'T12:00:00'), end = new Date(keys[keys.length - 1] + 'T12:00:00');
+    while (d <= end) { var k = d.toISOString().slice(0, 10); all.push({ d: k, v: wk[k] || 0 }); d.setDate(d.getDate() + 7); }
+    var avg = all.reduce(function (s, p) { return s + p.v; }, 0) / all.length;
+    var html = stats([[fmtMin(all[all.length - 1].v), 'Săptămâna asta'], [fmtMin(Math.round(avg)), 'Medie pe săptămână'], [fmtMin(Math.max.apply(null, all.map(function (p) { return p.v; }))), 'Cea mai bună']]);
+    html += '<p class="jr-ptitle">Minute de cardio pe săptămână</p>' + chart(all, function (n) { return Math.round(n) + ' min'; }, 'Minute de cardio pe săptămână', '#7CC4FF');
+    html += '<table class="jr-ptable"><thead><tr><th>Săptămâna din</th><th>Minute</th></tr></thead><tbody>' + all.slice().reverse().map(function (p) { return '<tr><td>' + fmtDate(p.d) + '</td><td>' + fmtMin(p.v) + '</td></tr>'; }).join('') + '</tbody></table>';
+    $('prOut').innerHTML = html;
+  }
+
+  // ---------- body weight ----------
+  function renderWeight() {
+    var box = $('bwOut');
+    if (!weights.length) { box.innerHTML = '<p class="jr-empty">Încă nu ai notat greutatea. Adaug-o mai sus, de preferat o dată pe săptămână, în aceeași zi și la aceeași oră.</p>'; return; }
+    var pts = weights.map(function (b) { return { d: b.measured_on, v: +b.weight_kg }; }), first = pts[0], last = pts[pts.length - 1], diff = Math.round((last.v - first.v) * 10) / 10;
+    var html = stats([[kg(last.v) + ' kg', 'Acum'], [(diff > 0 ? '+' : '') + kg(diff) + ' kg', 'Față de început'], [kg(Math.min.apply(null, pts.map(function (p) { return p.v; }))) + ' kg', 'Cea mai mică']]);
+    html += chart(pts, function (n) { return kg(n) + ' kg'; }, 'Evoluția greutății', '#F2C46B');
+    html += '<ul class="jr-bwlist">' + weights.slice().reverse().map(function (b, i, arr) {
+      var prev = arr[i + 1], d = prev ? Math.round((b.weight_kg - prev.weight_kg) * 10) / 10 : null;
+      return '<li><span>' + fmtDate(b.measured_on) + '</span><span><b>' + kg(+b.weight_kg) + ' kg</b>' + (d != null ? '<small>' + (d > 0 ? '+' : '') + kg(d) + '</small>' : '') + '</span><button type="button" data-bwdel="' + b.id + '">Șterge</button></li>';
+    }).join('') + '</ul>';
+    box.innerHTML = html;
+    box.querySelectorAll('[data-bwdel]').forEach(function (b) {
+      b.addEventListener('click', async function () {
+        if (!b.classList.contains('is-armed')) { b.classList.add('is-armed'); b.textContent = 'Sigur?'; setTimeout(function () { b.classList.remove('is-armed'); b.textContent = 'Șterge'; }, 4000); return; }
+        b.disabled = true; var r = await sb.from('body_weights').delete().eq('id', b.getAttribute('data-bwdel'));
+        if (!r.error) { weights = weights.filter(function (x) { return String(x.id) !== b.getAttribute('data-bwdel'); }); renderWeight(); }
+      });
+    });
+  }
+  $('jrBw').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var m = $('bwMsg'), kgv = num($('bwKg').value), d = $('bwDate').value;
+    if (($('bwKg').validity && $('bwKg').validity.badInput) || !kgv || kgv < 20 || kgv > 400) return msg(m, 'Scrie greutatea în kilograme (ex. 78,4).');
+    if (!d) return msg(m, 'Alege data.');
+    var btn = this.querySelector('button[type=submit]'); btn.disabled = true; msg(m, '');
+    var r = await sb.from('body_weights').upsert({ measured_on: d, weight_kg: Math.round(kgv * 10) / 10 }, { onConflict: 'user_id,measured_on' }).select('id,measured_on,weight_kg').single();
+    btn.disabled = false;
+    if (r.error) return msg(m, errText(r.error));
+    weights = weights.filter(function (x) { return x.measured_on !== d; }).concat([r.data]).sort(function (a, b) { return a.measured_on < b.measured_on ? -1 : 1; });
+    $('bwKg').value = ''; msg(m, 'Greutate salvată!', true, 3000);
+    renderWeight();
+  });
 
   // ---------- session ----------
   var started = false;
