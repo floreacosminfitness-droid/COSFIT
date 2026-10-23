@@ -1401,12 +1401,20 @@
   .jr-top p { margin: 0; color: var(--ink-soft); }
   .jr-link { background: none; border: 0; color: var(--slate); font: inherit; font-size: 14px; text-decoration: underline; cursor: pointer; }
   .jr-row2 { display: grid; grid-template-columns: 1fr 1.4fr; gap: 12px; }
-  .jr-ex-head, .jr-ex { display: grid; grid-template-columns: 1fr 64px 64px 76px 34px; gap: 8px; align-items: center; }
-  .jr-ex-head { margin: 4px 0 6px; font-size: 12.5px; font-weight: 700; color: var(--slate); text-transform: uppercase; letter-spacing: .05em; }
-  .jr-ex { margin-bottom: 8px; }
-  .jr-ex .af-input { padding: 12px 10px; font-size: 15.5px; }
-  .jr-ex input[type=number] { text-align: center; -moz-appearance: textfield; }
-  .jr-ex input::-webkit-outer-spin-button, .jr-ex input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .jr-exc { border: 1px solid var(--line); border-radius: 16px; padding: 14px; margin: 0 0 12px; background: var(--surface-alt); }
+  .jr-exc-top { display: grid; grid-template-columns: 1fr 34px; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .jr-exc-top .af-input { background: var(--surface); font-weight: 600; }
+  .jr-set-head, .jr-set { display: grid; grid-template-columns: 58px 1fr 1fr 34px; gap: 8px; align-items: center; }
+  .jr-set-head { font-size: 12px; font-weight: 700; color: var(--slate); text-transform: uppercase; letter-spacing: .05em; margin: 0 0 6px; }
+  .jr-set { margin-bottom: 8px; }
+  .jr-set-n { font-size: 14px; font-weight: 700; color: var(--ink-soft); }
+  .jr-set .af-input { padding: 11px 10px; text-align: center; font-size: 16px; background: var(--surface); }
+  .jr-set input::placeholder { color: rgba(150,163,168,0.45); }
+  .jr-set input { -moz-appearance: textfield; }
+  .jr-set input::-webkit-outer-spin-button, .jr-set input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .jr-addset { background: none; border: 0; color: var(--teal-ink); font: inherit; font-weight: 700; font-size: 14px; padding: 6px 0 0; cursor: pointer; }
+  .jr-repeat { display: block; width: 100%; margin: 0 0 14px; padding: 11px; border: 1px solid var(--line); border-radius: 12px; background: none; color: var(--ink-soft); font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer; }
+  .jr-repeat:hover { border-color: var(--teal); color: var(--ink); }
   .jr-del { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: none; color: var(--slate); cursor: pointer; font-size: 14px; }
   .jr-del:hover { border-color: #FF7A7A; color: #FF7A7A; }
   .jr-add { display: block; width: 100%; margin: 4px 0 18px; padding: 12px; border: 1px dashed var(--line); border-radius: 12px; background: none; color: var(--teal-ink); font: inherit; font-weight: 700; cursor: pointer; }
@@ -1418,6 +1426,10 @@
   .jr-w ul { list-style: none; margin: 0; padding: 0; }
   .jr-w li { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-soft); }
   .jr-w li b { color: var(--ink); font-weight: 600; }
+  .jr-w li { display: block; }
+  .jr-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+  .jr-chips span { padding: 5px 10px; border-radius: 999px; background: var(--surface-alt); border: 1px solid var(--line); font-size: 13.5px; color: var(--ink-soft); white-space: nowrap; }
+  .jr-chips i { font-style: normal; color: var(--slate); font-size: 11.5px; margin-right: 6px; }
   .jr-w-notes { margin: 10px 0 0; font-size: 14px; color: var(--slate); font-style: italic; }
   .jr-w-actions { margin-top: 10px; text-align: right; }
   .jr-w-actions button { background: none; border: 0; color: var(--slate); font: inherit; font-size: 13.5px; cursor: pointer; text-decoration: underline; }
@@ -1435,7 +1447,7 @@
   .jr-cta p { margin: 0 0 16px; color: var(--ink-soft); }
   .jr-cta .jr-cta-t { font-family: 'Exo 2', sans-serif; font-weight: 800; font-size: 21px; color: var(--ink); margin-bottom: 8px; }
   @media (max-width: 760px) { .jr-guest { grid-template-columns: 1fr; } .jr-guest .jr-auth { order: -1; } .jr-row2 { grid-template-columns: 1fr; } }
-  @media (max-width: 480px) { .jr-card { padding: 20px 16px; } .jr-ex-head, .jr-ex { grid-template-columns: 1fr 48px 48px 60px 30px; gap: 6px; } .jr-ex .af-input { padding: 11px 6px; font-size: 15px; } .jr-del { width: 30px; height: 30px; } .jr-tabs button { font-size: 13.5px; padding: 10px 4px; } .jr-stat b { font-size: 17px; } .jr-stat { padding: 12px 6px; } }
+  @media (max-width: 480px) { .jr-card { padding: 20px 16px; } .jr-exc { padding: 12px; } .jr-set-head, .jr-set { grid-template-columns: 52px 1fr 1fr 32px; gap: 6px; } .jr-del { width: 32px; height: 32px; } .jr-tabs button { font-size: 13.5px; padding: 10px 4px; } .jr-stat b { font-size: 17px; } .jr-stat { padding: 12px 6px; } }
 </style>
 </head>
 <body>
@@ -1521,10 +1533,10 @@
           <label class="jr-l">Data<input class="af-input" id="nwDate" type="date"></label>
           <label class="jr-l">Ce ai lucrat? <em>(opțional)</em><input class="af-input" id="nwTitle" type="text" maxlength="60" placeholder="ex. Picioare, Push, Full body"></label>
         </div>
-        <div class="jr-ex-head"><span>Exercițiu</span><span>Serii</span><span>Rep.</span><span>Kg</span><span></span></div>
+        <button type="button" class="jr-repeat" id="nwRepeat" hidden>↻ Pornește de la ultimul antrenament</button>
         <div id="nwRows"></div>
         <button type="button" class="jr-add" id="nwAdd">+ Adaugă exercițiu</button>
-        <label class="jr-l">Observații <em>(opțional)</em><textarea class="af-input" id="nwNotes" rows="2" maxlength="500" placeholder="ex. m-am simțit obosit, am crescut la genuflexiuni"></textarea></label>
+        <label class="jr-l">Observații <em>(opțional)</em><textarea class="af-input" id="nwNotes" rows="2" maxlength="500" placeholder="ex. superset îndreptări + fandări, m-am simțit obosit"></textarea></label>
         <p class="jr-msg" id="nwMsg" role="alert"></p>
         <button class="btn-primary jr-submit" type="submit">Salvează antrenamentul</button>
       </form>
@@ -1658,32 +1670,69 @@
   document.querySelectorAll('[data-view]').forEach(function (b) { b.addEventListener('click', function () { setView(b.getAttribute('data-view')); }); });
 
   // ---------- new workout ----------
+  function addSet(card, v) {
+    v = v || {}; var box = card.querySelector('.jr-sets');
+    var d = document.createElement('div'); d.className = 'jr-set';
+    d.innerHTML = '<span class="jr-set-n"></span>' +
+      '<input class="af-input" type="number" inputmode="numeric" min="1" max="500" placeholder="ex. 10" aria-label="Repetări" value="' + esc(v.reps || '') + '">' +
+      '<input class="af-input" type="number" inputmode="decimal" min="0" step="0.25" placeholder="kg" aria-label="Kilograme" value="' + esc(v.weight == null ? '' : v.weight) + '">' +
+      '<button type="button" class="jr-del" aria-label="Șterge seria">✕</button>';
+    d.querySelector('.jr-del').addEventListener('click', function () { if (box.children.length > 1) { d.remove(); numberSets(card); } else d.querySelectorAll('input').forEach(function (i) { i.value = ''; }); });
+    box.appendChild(d); numberSets(card); return d;
+  }
+  function numberSets(card) { Array.prototype.forEach.call(card.querySelectorAll('.jr-set-n'), function (n, i) { n.textContent = 'Seria ' + (i + 1); }); }
   function addRow(v) {
     v = v || {};
-    var d = document.createElement('div'); d.className = 'jr-ex';
-    d.innerHTML = '<input class="af-input" list="jrExList" maxlength="60" placeholder="ex. Genuflexiuni" value="' + esc(v.exercise || '') + '">' +
-      '<input class="af-input" type="number" inputmode="numeric" min="1" max="50" placeholder="3" value="' + esc(v.sets || '') + '">' +
-      '<input class="af-input" type="number" inputmode="numeric" min="1" max="500" placeholder="10" value="' + esc(v.reps || '') + '">' +
-      '<input class="af-input" type="number" inputmode="decimal" min="0" step="0.5" placeholder="kg" value="' + esc(v.weight == null ? '' : v.weight) + '">' +
-      '<button type="button" class="jr-del" aria-label="Șterge exercițiul">✕</button>';
-    d.querySelector('.jr-del').addEventListener('click', function () { if ($('nwRows').children.length > 1) d.remove(); else d.querySelectorAll('input').forEach(function (i) { i.value = ''; }); });
-    $('nwRows').appendChild(d);
-    return d;
+    var c = document.createElement('div'); c.className = 'jr-exc';
+    c.innerHTML = '<div class="jr-exc-top"><input class="af-input" list="jrExList" maxlength="60" placeholder="Exercițiu (ex. Îndreptări românești cu bara)" aria-label="Exercițiu" value="' + esc(v.exercise || '') + '">' +
+      '<button type="button" class="jr-del" aria-label="Șterge exercițiul">✕</button></div>' +
+      '<div class="jr-set-head"><span></span><span>Repetări</span><span>Kg</span><span></span></div><div class="jr-sets"></div>' +
+      '<button type="button" class="jr-addset">+ Adaugă serie</button>';
+    c.querySelector('.jr-exc-top .jr-del').addEventListener('click', function () { if ($('nwRows').children.length > 1) c.remove(); else { $('nwRows').innerHTML = ''; addRow(); } });
+    c.querySelector('.jr-addset').addEventListener('click', function () {
+      var sets = c.querySelectorAll('.jr-set'), last = sets[sets.length - 1], f = last.querySelectorAll('input');
+      addSet(c, { reps: f[0].value, weight: f[1].value === '' ? null : f[1].value }).querySelector('input').focus();
+    });
+    (v.sets && v.sets.length ? v.sets : [{}]).forEach(function (st) { addSet(c, st); });
+    $('nwRows').appendChild(c);
+    return c;
   }
-  function resetNew() { $('nwDate').value = today(); $('nwTitle').value = ''; $('nwNotes').value = ''; $('nwRows').innerHTML = ''; addRow(); addRow(); addRow(); }
+  function groups(w) {
+    var out = [], cur = null;
+    (w.workout_entries || []).forEach(function (e) {
+      var k = e.exercise + '|' + Math.floor((e.position || 0) / 100);
+      if (!cur || cur.k !== k) { cur = { k: k, exercise: e.exercise, sets: [] }; out.push(cur); }
+      for (var i = 0; i < (e.sets || 1); i++) cur.sets.push({ reps: e.reps, weight: e.weight == null ? null : +e.weight });
+    });
+    return out;
+  }
+  function resetNew() { $('nwDate').value = today(); $('nwTitle').value = ''; $('nwNotes').value = ''; $('nwRows').innerHTML = ''; addRow(); $('nwRepeat').hidden = !workouts.length; }
   $('nwAdd').addEventListener('click', function () { addRow().querySelector('input').focus(); });
+  $('nwRepeat').addEventListener('click', function () {
+    var w = workouts[0]; if (!w) return;
+    $('nwTitle').value = w.title || ''; $('nwRows').innerHTML = '';
+    groups(w).forEach(function (g) { addRow(g); });
+    msg($('nwMsg'), 'Am completat cu antrenamentul din ' + fmtDate(w.workout_date) + '. Modifică ce e diferit azi.', true);
+  });
   $('jrNew').addEventListener('submit', async function (e) {
     e.preventDefault();
     var m = $('nwMsg'), rows = [];
     var bad = false;
-    Array.prototype.forEach.call($('nwRows').children, function (r, i) {
-      var f = r.querySelectorAll('input'); var ex = f[0].value.trim();
-      if (!ex && !f[1].value && !f[2].value && !f[3].value) return;
-      var sets = num(f[1].value), reps = num(f[2].value), w = num(f[3].value);
-      if (!ex || !sets || !reps || sets > 50 || reps > 500 || (w != null && (w < 0 || w >= 2000))) { bad = true; return; }
-      rows.push({ exercise: ex.charAt(0).toUpperCase() + ex.slice(1), sets: Math.round(sets), reps: Math.round(reps), weight: w, position: i });
+    Array.prototype.forEach.call($('nwRows').children, function (c, ci) {
+      var ex = c.querySelector('.jr-exc-top input').value.trim(), sets = [];
+      Array.prototype.forEach.call(c.querySelectorAll('.jr-set'), function (r) {
+        var f = r.querySelectorAll('input'); if ((f[0].validity && f[0].validity.badInput) || (f[1].validity && f[1].validity.badInput)) { bad = 'Scrie la fiecare serie câte repetări ai făcut (un singur număr, ex. 12), nu un interval. Pentru serii diferite, apasă „+ Adaugă serie”.'; return; }
+        if (!f[0].value && !f[1].value) return;
+        var reps = num(f[0].value), w = num(f[1].value);
+        if (!reps || reps > 500 || (w != null && (w < 0 || w >= 2000))) { bad = 'Scrie la fiecare serie câte repetări ai făcut (un singur număr, ex. 12). Kilogramele sunt opționale.'; return; }
+        sets.push({ reps: Math.round(reps), weight: w });
+      });
+      if (!ex && !sets.length) return;
+      if (!ex) { bad = 'Scrie numele exercițiului.'; return; }
+      if (!sets.length) { bad = 'Adaugă cel puțin o serie la „' + ex + '”.'; return; }
+      sets.forEach(function (st, si) { rows.push({ exercise: ex.charAt(0).toUpperCase() + ex.slice(1), sets: 1, reps: st.reps, weight: st.weight, position: ci * 100 + si }); });
     });
-    if (bad) return msg(m, 'Completează pentru fiecare exercițiu numele, seriile și repetările (greutatea e opțională).');
+    if (bad) return msg(m, bad);
     if (!rows.length) return msg(m, 'Adaugă cel puțin un exercițiu.');
     if (!$('nwDate').value) return msg(m, 'Alege data antrenamentului.');
     var btn = this.querySelector('button[type=submit]'); btn.disabled = true; msg(m, '');
@@ -1707,14 +1756,19 @@
     $('jrExList').innerHTML = Object.keys(names).sort(function (a, b) { return a.localeCompare(b, 'ro'); }).map(function (n) { return '<option value="' + esc(n) + '">'; }).join('');
   }
   function exercises() { var s = {}; workouts.forEach(function (w) { (w.workout_entries || []).forEach(function (e) { s[e.exercise] = (s[e.exercise] || 0) + 1; }); }); return Object.keys(s).sort(function (a, b) { return s[b] - s[a] || a.localeCompare(b, 'ro'); }); }
-  function line(e) { return e.sets + ' × ' + e.reps + (e.weight != null && e.weight !== '' ? ' × ' + kg(+e.weight) + ' kg' : ''); }
+  function setsText(sets) {
+    var same = sets.every(function (x) { return x.reps === sets[0].reps && x.weight === sets[0].weight; });
+    var one = function (x) { return x.reps + (x.weight ? ' × ' + kg(x.weight) + ' kg' : ' rep.'); };
+    if (same && sets.length > 1) return sets.length + ' serii × ' + one(sets[0]);
+    return sets.map(one).join(' · ');
+  }
 
   function renderHistory() {
     var box = $('jrHistory');
-    if (!workouts.length) { box.innerHTML = '<div class="jr-card jr-empty">Încă nu ai niciun antrenament notat.<br>Adaugă primul la „Antrenament nou”.</div>'; return; }
+    if (!workouts.length) { box.innerHTML = '<div class="jr-card jr-empty">Încă nu ai niciun antrenament notat.<br>Adaugă primul la „+ Antrenament”.</div>'; return; }
     box.innerHTML = workouts.map(function (w) {
       return '<div class="jr-card jr-w"><div class="jr-w-head"><h3>' + esc(w.title || 'Antrenament') + '</h3><span>' + fmtDate(w.workout_date) + '</span></div><ul>' +
-        (w.workout_entries || []).map(function (e) { return '<li><b>' + esc(e.exercise) + '</b><span>' + line(e) + '</span></li>'; }).join('') + '</ul>' +
+        groups(w).map(function (g) { return '<li><b>' + esc(g.exercise) + '</b><div class="jr-chips">' + g.sets.map(function (x, i) { return '<span><i>' + (i + 1) + '</i>' + x.reps + (x.weight ? ' × ' + kg(x.weight) + ' kg' : ' rep.') + '</span>'; }).join('') + '</div></li>'; }).join('') + '</ul>' +
         (w.notes ? '<p class="jr-w-notes">' + esc(w.notes) + '</p>' : '') +
         '<div class="jr-w-actions"><button type="button" data-del="' + w.id + '">Șterge</button></div></div>';
     }).join('');
@@ -1738,11 +1792,11 @@
   function renderProgress() {
     var ex = $('prEx').value, pts = [];
     workouts.slice().reverse().forEach(function (w) {
-      var es = (w.workout_entries || []).filter(function (e) { return e.exercise === ex; }); if (!es.length) return;
-      var maxW = Math.max.apply(null, es.map(function (e) { return e.weight == null ? 0 : +e.weight; }));
+      var gs = groups(w).filter(function (g) { return g.exercise === ex; }); if (!gs.length) return;
+      var es = [].concat.apply([], gs.map(function (g) { return g.sets; }));
+      var maxW = Math.max.apply(null, es.map(function (e) { return e.weight || 0; }));
       var maxR = Math.max.apply(null, es.map(function (e) { return e.reps; }));
-      var vol = es.reduce(function (s, e) { return s + e.sets * e.reps * (e.weight == null ? 0 : +e.weight); }, 0);
-      pts.push({ d: w.workout_date, w: maxW, r: maxR, v: vol, txt: es.map(line).join(', ') });
+      pts.push({ d: w.workout_date, w: maxW, r: maxR, txt: gs.map(function (g) { return setsText(g.sets); }).join(' · ') });
     });
     var useW = pts.some(function (p) { return p.w > 0; });
     var key = useW ? 'w' : 'r', unit = useW ? 'kg' : 'rep.';
@@ -1761,7 +1815,7 @@
       var labels = '<text x="' + x(0) + '" y="' + (H - 10) + '" fill="#96A3A8" font-size="12" text-anchor="start">' + fmtDate(first.d) + '</text><text x="' + x(pts.length - 1) + '" y="' + (H - 10) + '" fill="#96A3A8" font-size="12" text-anchor="end">' + fmtDate(last.d) + '</text>';
       html += '<svg class="jr-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Progres la ' + esc(ex) + '">' + grid + '<path d="' + path + '" fill="none" stroke="#4FD18B" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>' + dots + labels + '</svg>';
     } else { html += '<p class="jr-empty">Mai notează exercițiul încă o dată ca să apară graficul.</p>'; }
-    html += '<table class="jr-ptable"><thead><tr><th>Data</th><th>Serii × rep. × kg</th></tr></thead><tbody>' +
+    html += '<table class="jr-ptable"><thead><tr><th>Data</th><th>Serii (rep. × kg)</th></tr></thead><tbody>' +
       pts.slice().reverse().map(function (p) { return '<tr><td>' + fmtDate(p.d) + '</td><td>' + esc(p.txt) + '</td></tr>'; }).join('') + '</tbody></table>';
     $('prOut').innerHTML = html;
   }
@@ -1774,7 +1828,7 @@
     guest.hidden = true; app.hidden = false;
     var meta = session.user.user_metadata || {};
     $('jrHello').textContent = meta.name || (session.user.email || '').split('@')[0];
-    if (!started) { started = true; resetNew(); await load(); setView('new'); }
+    if (!started) { started = true; await load(); resetNew(); setView('new'); }
   }
   sb.auth.onAuthStateChange(function (_e, session) { setTimeout(function () { onSession(session); }, 0); });
   sb.auth.getSession().then(function (r) { onSession(r.data.session); });
