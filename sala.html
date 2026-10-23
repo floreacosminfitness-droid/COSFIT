@@ -1529,7 +1529,7 @@
 
 <script>
 (function () { var h = document.querySelector('header'); if (!h) return;
-  function f() { h.classList.toggle('scrolled', window.scrollY > 10); } window.addEventListener('scroll', f, { passive: true }); f(); })();
+  var on = false; function f() { var y = window.scrollY; if (!on && y > 40) { on = true; h.classList.add('scrolled'); } else if (on && y < 4) { on = false; h.classList.remove('scrolled'); } } window.addEventListener('scroll', f, { passive: true }); f(); })();
 </script>
 </body>
 </html>

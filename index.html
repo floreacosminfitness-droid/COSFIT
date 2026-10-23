@@ -2133,9 +2133,11 @@ try {
 
   /* ---- header shadow on scroll ---- */
   var header = document.querySelector('header');
+  var hdrOn = false;
   function onScroll() {
-    if (window.scrollY > 10) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
+    var y = window.scrollY;
+    if (!hdrOn && y > 40) { hdrOn = true; header.classList.add('scrolled'); }
+    else if (hdrOn && y < 4) { hdrOn = false; header.classList.remove('scrolled'); }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
