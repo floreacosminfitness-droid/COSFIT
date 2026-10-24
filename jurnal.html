@@ -1472,6 +1472,36 @@
   .jr-install-btn[hidden] { display: none; }
   .jr-install-x { flex: none; width: 30px; height: 30px; border: 0; background: none; color: var(--slate); font-size: 14px; cursor: pointer; }
   @media (display-mode: standalone) { .jr-hero { padding: 22px 0 14px; } .jr-hero p, .jr-hero .eyebrow-num { display: none; } }
+  .jr-cons { margin: 0 0 14px; }
+  .jr-cons-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+  .jr-cons-top b { font-size: 17px; color: var(--ink); }
+  .jr-cons-top span { font-size: 13.5px; color: var(--slate); }
+  .jr-heat { display: grid; grid-template-rows: repeat(7, 1fr); grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; }
+  .jr-heat i { display: block; aspect-ratio: 1; border-radius: 4px; background: var(--surface-alt); border: 1px solid var(--line); }
+  .jr-heat i.on { background: var(--teal); border-color: var(--teal); }
+  .jr-heat i.c { background: #7CC4FF; border-color: #7CC4FF; }
+  .jr-heat i.today { outline: 2px solid var(--ink-soft); outline-offset: 1px; }
+  .jr-heat i.fut { visibility: hidden; }
+  .jr-cons-legend { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: var(--slate); }
+  .jr-cons-msg { margin: 12px 0 0; font-size: 14.5px; color: var(--ink-soft); }
+  .jr-stats.jr-stats4 { grid-template-columns: repeat(4, 1fr); }
+  .jr-ptitle em { font-style: normal; font-weight: 500; font-size: 13px; color: var(--slate); }
+  .jr-ms-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 12px; }
+  .jr-ms-grid label { font-size: 12px; font-weight: 700; color: var(--slate); text-transform: uppercase; letter-spacing: .05em; }
+  .jr-ms-grid .af-input { margin-top: 5px; padding: 11px 6px; text-align: center; }
+  .jr-mstabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+  .jr-mstabs button { padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: none; color: var(--slate); font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer; }
+  .jr-mstabs button.is-on { background: #B79CFF; border-color: #B79CFF; color: var(--bg); }
+  .jr-timer { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 60; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+  .jr-timer[hidden], .jr-timer-menu[hidden] { display: none; }
+  .jr-timer-btn { padding: 13px 18px; border-radius: 999px; border: 1px solid rgba(79,209,139,0.5); background: var(--surface); color: var(--ink); font: inherit; font-weight: 800; font-size: 15px; box-shadow: 0 6px 24px rgba(0,0,0,0.45); cursor: pointer; font-variant-numeric: tabular-nums; }
+  .jr-timer-btn.run { background: var(--teal); color: var(--bg); border-color: var(--teal); min-width: 110px; }
+  .jr-timer-btn.done { background: #F2C46B; color: var(--bg); border-color: #F2C46B; }
+  .jr-timer-menu { display: flex; align-items: center; gap: 6px; padding: 8px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 6px 24px rgba(0,0,0,0.45); }
+  .jr-timer-menu span { font-size: 13px; color: var(--slate); padding: 0 4px; }
+  .jr-timer-menu button { padding: 9px 11px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-alt); color: var(--ink); font: inherit; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .jr-pr { margin: 10px 0 0; padding: 12px 14px; border-radius: 12px; background: rgba(242,196,107,0.12); border: 1px solid rgba(242,196,107,0.45); color: #F2C46B; font-size: 14.5px; font-weight: 700; }
+  @media (max-width: 480px) { .jr-stats.jr-stats4 { grid-template-columns: repeat(2, 1fr); } .jr-ms-grid { grid-template-columns: repeat(3, 1fr); } }
   .jr-addset { background: none; border: 0; color: var(--teal-ink); font: inherit; font-weight: 700; font-size: 14px; padding: 6px 0 0; cursor: pointer; }
   .jr-repeat { display: block; width: 100%; margin: 0 0 14px; padding: 11px; border: 1px solid var(--line); border-radius: 12px; background: none; color: var(--ink-soft); font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer; }
   .jr-repeat:hover { border-color: var(--teal); color: var(--ink); }
@@ -1636,6 +1666,26 @@
         <button class="btn-primary jr-submit" type="submit">Salvează greutatea</button>
       </form>
       <div class="jr-card jr-mt" id="bwOut"></div>
+      <form class="jr-card jr-mt" id="jrMs" novalidate>
+        <p class="jr-ptitle">Măsurători corporale <em>(cm, completezi doar ce vrei)</em></p>
+        <label class="jr-l">Data<input class="af-input" id="msDate" type="date"></label>
+        <div class="jr-ms-grid">
+          <label>Talie<input class="af-input" data-ms="waist" type="number" inputmode="decimal" min="10" max="300" step="0.1" placeholder="–"></label>
+          <label>Șold<input class="af-input" data-ms="hips" type="number" inputmode="decimal" min="10" max="300" step="0.1" placeholder="–"></label>
+          <label>Piept<input class="af-input" data-ms="chest" type="number" inputmode="decimal" min="10" max="300" step="0.1" placeholder="–"></label>
+          <label>Braț<input class="af-input" data-ms="arm" type="number" inputmode="decimal" min="10" max="300" step="0.1" placeholder="–"></label>
+          <label>Coapsă<input class="af-input" data-ms="thigh" type="number" inputmode="decimal" min="10" max="300" step="0.1" placeholder="–"></label>
+        </div>
+        <p class="jr-hint">Măsoară dimineața, cu banda lipită de piele dar nestrânsă. Talia: la nivelul buricului.</p>
+        <p class="jr-msg" id="msMsg" role="alert"></p>
+        <button class="btn-primary jr-submit" type="submit">Salvează măsurătorile</button>
+      </form>
+      <div class="jr-card jr-mt" id="msOut" hidden></div>
+    </div>
+
+    <div class="jr-timer" id="jrTimer" hidden>
+      <div class="jr-timer-menu" id="jrTimerMenu" hidden><span>Pauză:</span><button type="button" data-rest="60">1:00</button><button type="button" data-rest="90">1:30</button><button type="button" data-rest="120">2:00</button><button type="button" data-rest="180">3:00</button></div>
+      <button type="button" class="jr-timer-btn" id="jrTimerBtn" aria-label="Cronometru de pauză">⏱ <span id="jrTimerTxt">Pauză</span></button>
     </div>
 
     <aside class="jr-cta">
@@ -1752,7 +1802,8 @@
     document.querySelectorAll('.jr-view').forEach(function (s) { s.hidden = s.getAttribute('data-v') !== v; });
     if (v === 'history') renderHistory();
     if (v === 'progress') renderProgressSelect();
-    if (v === 'weight') { if (!$('bwDate').value) $('bwDate').value = today(); renderWeight(); }
+    if (v === 'weight') { if (!$('bwDate').value) $('bwDate').value = today(); renderWeight(); loadMeasures().then(renderMeasures); }
+    $('jrTimer').hidden = v !== 'new';
   }
   document.querySelectorAll('[data-view]').forEach(function (b) { b.addEventListener('click', function () { setView(b.getAttribute('data-view')); }); });
 
@@ -1903,8 +1954,11 @@
     if (!en.error && cardio.length) en = await sb.from('cardio_entries').insert(cardio.map(function (r) { r.workout_id = w.data.id; return r; }));
     btn.disabled = false;
     if (en.error) { await sb.from('workouts').delete().eq('id', w.data.id); return msg(m, errText(en.error)); }
-    msg(m, 'Antrenament salvat! 💪', true, 3500);
+    var prs = newRecords(rows);
+    msg(m, 'Antrenament salvat! 💪', true, prs.length ? 9000 : 3500);
     await load(); resetNew();
+    document.querySelectorAll('#jrNew .jr-pr').forEach(function (x) { x.remove(); });
+    if (prs.length) { var pr = document.createElement('p'); pr.className = 'jr-pr'; pr.textContent = '🏆 Record nou: ' + prs.join(', ') + '! Bravo!'; m.after(pr); setTimeout(function () { pr.remove(); }, 9000); }
   });
 
   // ---------- data ----------
@@ -1919,6 +1973,13 @@
     weights = bw.error ? [] : (bw.data || []);
     var names = {}; COMMON.forEach(function (n) { names[n] = 1; }); exercises().forEach(function (n) { names[n] = 1; });
     $('jrExList').innerHTML = Object.keys(names).sort(function (a, b) { return a.localeCompare(b, 'ro'); }).map(function (n) { return '<option value="' + esc(n) + '">'; }).join('');
+  }
+  function newRecords(rows) {
+    var best = {}, out = [], seen = {};
+    workouts.forEach(function (w) { (w.workout_entries || []).forEach(function (e) { var v = +e.weight || 0; if (best[e.exercise] == null || v > best[e.exercise]) best[e.exercise] = v; }); });
+    rows.forEach(function (r) { var v = +r.weight || 0; if (v > 0 && best[r.exercise] != null && best[r.exercise] > 0 && v > best[r.exercise] && (!seen[r.exercise] || v > seen[r.exercise])) seen[r.exercise] = v; });
+    Object.keys(seen).forEach(function (k) { out.push(k + ' ' + kg(seen[k]) + ' kg'); });
+    return out;
   }
   function cardioTypes() { var s = {}; workouts.forEach(function (w) { (w.cardio_entries || []).forEach(function (e) { s[e.activity] = (s[e.activity] || 0) + 1; }); }); return Object.keys(s).sort(function (a, b) { return s[b] - s[a] || a.localeCompare(b, 'ro'); }); }
   function cardioText(c) { return fmtMin(c.minutes) + (c.distance_km ? ' · ' + kg(+c.distance_km) + ' km' : '') + (c.calories ? ' · ' + c.calories + ' kcal' : ''); }
@@ -1940,10 +2001,30 @@
       return '<li class="jr-hblk"><span class="jr-hbadge">' + blockName(b.length) + '</span><ul>' + b.map(histItem).join('') + '</ul></li>';
     }).join('');
   }
+  function ymd(d) { var x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0, 10); }
+  function consistency() {
+    var days = {}; workouts.forEach(function (w) { var str = (w.workout_entries || []).length > 0; days[w.workout_date] = days[w.workout_date] === 'on' || str ? 'on' : 'c'; });
+    var now = new Date(); now.setHours(12, 0, 0, 0); var td = ymd(now);
+    var start = new Date(now); start.setDate(start.getDate() - ((start.getDay() + 6) % 7) - 7 * 15);
+    var cells = '', d = new Date(start);
+    for (var i = 0; i < 16 * 7; i++) { var k = ymd(d); cells += '<i class="' + (days[k] || '') + (k === td ? ' today' : '') + (k > td ? ' fut' : '') + '" title="' + fmtDate(k) + '"></i>'; d.setDate(d.getDate() + 1); }
+    var wk = {}; Object.keys(days).forEach(function (k) { wk[weekStart(k)] = 1; });
+    var cur = new Date(now); cur.setDate(cur.getDate() - ((cur.getDay() + 6) % 7)); var streak = 0;
+    if (!wk[ymd(cur)]) cur.setDate(cur.getDate() - 7);
+    while (wk[ymd(cur)]) { streak++; cur.setDate(cur.getDate() - 7); }
+    var month = td.slice(0, 7), inMonth = Object.keys(days).filter(function (k) { return k.slice(0, 7) === month; }).length;
+    var thisWeek = Object.keys(days).filter(function (k) { return weekStart(k) === weekStart(td); }).length;
+    var msgTxt = streak >= 8 ? '🔥 ' + streak + ' săptămâni la rând! Asta e disciplină adevărată.' : streak >= 2 ? '🔥 ' + streak + ' săptămâni la rând cu cel puțin un antrenament. Ține-o tot așa!' : thisWeek ? 'Ai început săptămâna bine. Încă un antrenament săptămâna viitoare și începi o serie.' : 'Fă un antrenament săptămâna asta ca să pornești o serie nouă.';
+    return '<div class="jr-card jr-cons"><div class="jr-cons-top"><b>Consecvența ta</b><span>ultimele 16 săptămâni</span></div>' +
+      stats([[streak, streak === 1 ? 'Săptămână la rând' : 'Săptămâni la rând'], [thisWeek, 'Zile săptămâna asta'], [inMonth, 'Zile luna asta']]) +
+      '<div class="jr-heat" role="img" aria-label="Calendarul antrenamentelor">' + cells + '</div>' +
+      '<div class="jr-cons-legend"><span>' + fmtDate(ymd(start)) + '</span><span><b style="color:#4FD18B">■</b> forță · <b style="color:#7CC4FF">■</b> doar cardio</span><span>azi</span></div>' +
+      '<p class="jr-cons-msg">' + msgTxt + '</p></div>';
+  }
   function renderHistory() {
     var box = $('jrHistory');
     if (!workouts.length) { box.innerHTML = '<div class="jr-card jr-empty">Încă nu ai niciun antrenament notat.<br>Adaugă primul la „+ Antrenament” (pe telefon „+ Nou”).</div>'; return; }
-    box.innerHTML = workouts.map(function (w) {
+    box.innerHTML = consistency() + workouts.map(function (w) {
       return '<div class="jr-card jr-w"><div class="jr-w-head"><h3>' + esc(w.title || 'Antrenament') + '</h3><span>' + fmtDate(w.workout_date) + '</span></div><ul>' +
         histItems(groups(w)) + (w.cardio_entries || []).map(function (c) { return '<li class="jr-hcardio"><b>' + esc(c.activity) + '</b><div class="jr-chips"><span>' + cardioText(c) + '</span></div></li>'; }).join('') + '</ul>' +
         (w.notes ? '<p class="jr-w-notes">' + esc(w.notes) + '</p>' : '') +
@@ -1971,7 +2052,8 @@
     var labels = '<text x="' + x(0) + '" y="' + (H - 10) + '" fill="#96A3A8" font-size="12" text-anchor="start">' + fmtDate(pts[0].d) + '</text><text x="' + x(pts.length - 1) + '" y="' + (H - 10) + '" fill="#96A3A8" font-size="12" text-anchor="end">' + fmtDate(pts[pts.length - 1].d) + '</text>';
     return '<svg class="jr-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(label) + '">' + grid + '<path d="' + path + '" fill="none" stroke="' + color + '" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>' + dots + labels + '</svg>';
   }
-  function stats(items) { return '<div class="jr-stats">' + items.map(function (it) { return '<div class="jr-stat"><b>' + it[0] + '</b><span>' + it[1] + '</span></div>'; }).join('') + '</div>'; }
+  function e1rm(w, r) { w = +w || 0; r = +r || 0; if (!w || !r) return 0; return r === 1 ? w : w * (1 + r / 30); }
+  function stats(items) { return '<div class="jr-stats' + (items.length === 4 ? ' jr-stats4' : '') + '">' + items.map(function (it) { return '<div class="jr-stat"><b>' + it[0] + '</b><span>' + it[1] + '</span></div>'; }).join('') + '</div>'; }
   function renderProgressSelect() {
     var sel = $('prEx'), list = exercises(), cl = cardioTypes(), cur = sel.value;
     if (!list.length && !cl.length) { sel.innerHTML = '<option>—</option>'; $('prOut').innerHTML = '<p class="jr-empty">Notează câteva antrenamente și aici o să vezi progresul pentru fiecare exercițiu și pentru cardio.</p>'; return; }
@@ -1993,12 +2075,17 @@
       var es = [].concat.apply([], gs.map(function (g) { return g.sets; }));
       var maxW = Math.max.apply(null, es.map(function (e) { return e.weight || 0; }));
       var maxR = Math.max.apply(null, es.map(function (e) { return e.reps; }));
-      pts.push({ d: w.workout_date, w: maxW, r: maxR, txt: gs.map(function (g) { return setsText(g.sets); }).join(' · ') });
+      var e1 = Math.max.apply(null, es.map(function (e) { return e1rm(e.weight, e.reps); }));
+      pts.push({ d: w.workout_date, w: maxW, r: maxR, e: e1, txt: gs.map(function (g) { return setsText(g.sets); }).join(' · ') });
     });
     var useW = pts.some(function (p) { return p.w > 0; }), key = useW ? 'w' : 'r', unit = useW ? 'kg' : 'rep.';
     var f = function (n) { return (useW ? kg(n) : n) + ' ' + unit; };
     var best = pts.reduce(function (b, p) { return p[key] > b[key] ? p : b; }, pts[0]), diff = pts[pts.length - 1][key] - pts[0][key];
-    var html = stats([[f(best[key]), 'Record personal'], [(diff >= 0 ? '+' : '') + f(diff), 'Față de prima dată'], [pts.length, 'Antrenamente']]);
+    var bestE = Math.max.apply(null, pts.map(function (p) { return p.e; }));
+    var items = [[f(best[key]), 'Record personal'], [(diff >= 0 ? '+' : '') + f(diff), 'Față de prima dată'], [pts.length, 'Antrenamente']];
+    if (useW && bestE > 0) items.splice(1, 0, [kg(Math.round(bestE * 2) / 2) + ' kg', '1RM estimat']);
+    var html = stats(items);
+    if (useW && bestE > 0) html += '<p class="jr-hint">1RM estimat = greutatea pe care ai putea-o ridica o singură dată, calculată din cea mai bună serie (formula Epley). E orientativ, nu o încerca fără încălzire și asistență.</p>';
     html += chart(pts.map(function (p) { return { d: p.d, v: p[key] }; }), f, 'Progres la ' + ex);
     html += '<table class="jr-ptable"><thead><tr><th>Data</th><th>Serii (rep. × kg)</th></tr></thead><tbody>' +
       pts.slice().reverse().map(function (p) { return '<tr><td>' + fmtDate(p.d) + '</td><td>' + esc(p.txt) + '</td></tr>'; }).join('') + '</tbody></table>';
@@ -2066,6 +2153,75 @@
     $('bwKg').value = ''; msg(m, 'Greutate salvată!', true, 3000);
     renderWeight();
   });
+
+  // ---------- body measurements ----------
+  var MS = { waist: 'Talie', hips: 'Șold', chest: 'Piept', arm: 'Braț', thigh: 'Coapsă' }, measures = [], msKey = 'waist';
+  async function loadMeasures() { var r = await sb.from('body_measurements').select('id,measured_on,waist,hips,chest,arm,thigh').order('measured_on', { ascending: true }).limit(2000); measures = r.error ? [] : (r.data || []); }
+  function renderMeasures() {
+    var box = $('msOut'); if (!$('msDate').value) $('msDate').value = today();
+    if (!measures.length) { box.hidden = true; return; }
+    box.hidden = false;
+    var keys = Object.keys(MS).filter(function (k) { return measures.some(function (m) { return m[k] != null; }); });
+    if (keys.indexOf(msKey) < 0) msKey = keys[0];
+    var pts = measures.filter(function (m) { return m[msKey] != null; }).map(function (m) { return { d: m.measured_on, v: +m[msKey] }; });
+    var diff = Math.round((pts[pts.length - 1].v - pts[0].v) * 10) / 10;
+    var html = '<div class="jr-mstabs">' + keys.map(function (k) { return '<button type="button" data-msk="' + k + '" class="' + (k === msKey ? 'is-on' : '') + '">' + MS[k] + '</button>'; }).join('') + '</div>';
+    html += stats([[kg(pts[pts.length - 1].v) + ' cm', 'Acum'], [(diff > 0 ? '+' : '') + kg(diff) + ' cm', 'Față de început'], [pts.length, 'Măsurători']]);
+    html += chart(pts, function (n) { return kg(n) + ' cm'; }, MS[msKey], '#B79CFF');
+    html += '<ul class="jr-bwlist">' + measures.slice().reverse().map(function (m) {
+      var parts = Object.keys(MS).filter(function (k) { return m[k] != null; }).map(function (k) { return MS[k] + ' ' + kg(+m[k]); });
+      return '<li><span>' + fmtDate(m.measured_on) + '</span><span style="flex:1;text-align:right;font-size:13.5px">' + parts.join(' · ') + '</span><button type="button" data-msdel="' + m.id + '">Șterge</button></li>';
+    }).join('') + '</ul>';
+    box.innerHTML = html;
+    box.querySelectorAll('[data-msk]').forEach(function (b) { b.addEventListener('click', function () { msKey = b.getAttribute('data-msk'); renderMeasures(); }); });
+    box.querySelectorAll('[data-msdel]').forEach(function (b) {
+      b.addEventListener('click', async function () {
+        if (!b.classList.contains('is-armed')) { b.classList.add('is-armed'); b.textContent = 'Sigur?'; setTimeout(function () { b.classList.remove('is-armed'); b.textContent = 'Șterge'; }, 4000); return; }
+        b.disabled = true; var r = await sb.from('body_measurements').delete().eq('id', b.getAttribute('data-msdel'));
+        if (!r.error) { measures = measures.filter(function (x) { return String(x.id) !== b.getAttribute('data-msdel'); }); renderMeasures(); }
+      });
+    });
+  }
+  $('jrMs').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var m = $('msMsg'), d = $('msDate').value, row = { measured_on: d }, any = false, bad = false;
+    this.querySelectorAll('[data-ms]').forEach(function (i) {
+      if (i.validity && i.validity.badInput) bad = true;
+      var v = num(i.value); if (i.value === '') { row[i.getAttribute('data-ms')] = null; return; }
+      if (v == null || v < 10 || v > 300) bad = true; else { row[i.getAttribute('data-ms')] = Math.round(v * 10) / 10; any = true; }
+    });
+    if (bad) return msg(m, 'Scrie măsurătorile în centimetri (ex. 82,5).');
+    if (!any) return msg(m, 'Completează cel puțin o măsurătoare.');
+    if (!d) return msg(m, 'Alege data.');
+    var btn = this.querySelector('button[type=submit]'); btn.disabled = true; msg(m, '');
+    var r = await sb.from('body_measurements').upsert(row, { onConflict: 'user_id,measured_on' }).select('id,measured_on,waist,hips,chest,arm,thigh').single();
+    btn.disabled = false;
+    if (r.error) return msg(m, errText(r.error));
+    measures = measures.filter(function (x) { return x.measured_on !== d; }).concat([r.data]).sort(function (a, b) { return a.measured_on < b.measured_on ? -1 : 1; });
+    this.querySelectorAll('[data-ms]').forEach(function (i) { i.value = ''; });
+    msg(m, 'Măsurători salvate!', true, 3000); renderMeasures();
+  });
+
+  // ---------- rest timer ----------
+  (function () {
+    var btn = $('jrTimerBtn'), menu = $('jrTimerMenu'), txt = $('jrTimerTxt'), end = 0, tick = null, ac = null;
+    function fmt(sec) { return Math.floor(sec / 60) + ':' + ('0' + (sec % 60)).slice(-2); }
+    function beep() { try { if (!ac) return; [0, 0.35, 0.7].forEach(function (t) { var o = ac.createOscillator(), g = ac.createGain(); o.frequency.value = 880; o.connect(g); g.connect(ac.destination); g.gain.setValueAtTime(0.25, ac.currentTime + t); g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + t + 0.25); o.start(ac.currentTime + t); o.stop(ac.currentTime + t + 0.26); }); } catch (e) {} }
+    function stop(done) {
+      clearInterval(tick); tick = null; end = 0; btn.classList.remove('run');
+      if (done) { btn.classList.add('done'); txt.textContent = 'Gata pauza!'; if (navigator.vibrate) navigator.vibrate([250, 120, 250, 120, 250]); beep(); setTimeout(function () { btn.classList.remove('done'); if (!end) txt.textContent = 'Pauză'; }, 4000); }
+      else txt.textContent = 'Pauză';
+    }
+    function upd() { var left = Math.max(0, Math.round((end - Date.now()) / 1000)); txt.textContent = fmt(left); if (left <= 0) stop(true); }
+    btn.addEventListener('click', function () { if (end) { stop(false); return; } menu.hidden = !menu.hidden; });
+    menu.querySelectorAll('[data-rest]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); if (ac.state === 'suspended') ac.resume(); } catch (e) {}
+        menu.hidden = true; btn.classList.remove('done'); btn.classList.add('run'); end = Date.now() + (+b.getAttribute('data-rest')) * 1000; upd(); clearInterval(tick); tick = setInterval(upd, 250);
+      });
+    });
+    document.addEventListener('visibilitychange', function () { if (end) upd(); });
+  })();
 
   // ---------- app install (PWA) ----------
   (function () {
