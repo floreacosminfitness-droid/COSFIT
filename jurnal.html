@@ -1601,6 +1601,25 @@
   .mp-hist { list-style: none; margin: 0; padding: 0; }
   .mp-hist li { padding: 9px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-soft); }
   .mp-hist li b { color: var(--ink); }
+  #mpOut { --n-kcal: #FF9F5A; --n-p: #4FD18B; --n-c: #FFC857; --n-f: #C49AD4; --n-fib: #6CC4F0; }
+  .mp-nut { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin: 4px 0 6px; }
+  .mp-nut .n { position: relative; padding: 8px 6px 7px; border-radius: 12px; text-align: center; background: color-mix(in srgb, var(--nc) 13%, var(--surface-alt)); border: 1px solid color-mix(in srgb, var(--nc) 38%, transparent); min-width: 0; }
+  .mp-nut .n b { display: block; font-size: 16px; line-height: 1.15; color: var(--nc); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .mp-nut .n span { display: block; font-size: 11.5px; color: var(--ink-soft); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mp-nut .kcal { --nc: var(--n-kcal); } .mp-nut .p { --nc: var(--n-p); } .mp-nut .c { --nc: var(--n-c); } .mp-nut .f { --nc: var(--n-f); } .mp-nut .fib { --nc: var(--n-fib); }
+  .mp-split { display: flex; height: 6px; border-radius: 99px; overflow: hidden; background: var(--line); margin: 2px 0 4px; }
+  .mp-split i { display: block; height: 100%; }
+  .mp-split .p { background: var(--n-p); } .mp-split .c { background: var(--n-c); } .mp-split .f { background: var(--n-f); }
+  .mp-splitlbl { display: flex; flex-wrap: wrap; gap: 2px 12px; font-size: 12px; color: var(--slate); margin-bottom: 4px; }
+  .mp-splitlbl span::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 5px; background: var(--d); vertical-align: 0; }
+  .mp-opt small .p { color: var(--n-p); } .mp-opt small .c { color: var(--n-c); } .mp-opt small .f { color: var(--n-f); } .mp-opt small .k { color: var(--n-kcal); }
+  .mp-tile { border-top: 3px solid var(--nc, var(--line)); }
+  .mp-tile b { color: var(--nc, var(--ink)) !important; }
+  .mp-tile.t-kcal { --nc: var(--n-kcal); border-color: color-mix(in srgb, var(--n-kcal) 45%, var(--line)); border-top-color: var(--n-kcal); } .mp-tile.t-p { --nc: var(--n-p); } .mp-tile.t-c { --nc: var(--n-c); } .mp-tile.t-f { --nc: var(--n-f); }
+  .mp-meter.m-kcal { --nc: var(--n-kcal); } .mp-meter.m-p { --nc: var(--n-p); } .mp-meter.m-c { --nc: var(--n-c); } .mp-meter.m-f { --nc: var(--n-f); }
+  .mp-meter .k { color: var(--nc, var(--slate)) !important; }
+  .mp-meter .mp-bar .e { background: var(--nc, var(--teal)); } .mp-meter .mp-bar .r { background: var(--nc, var(--teal)); opacity: .3; }
+  @media (max-width: 420px) { .mp-nut { gap: 4px; } .mp-nut .n { padding: 7px 3px 6px; } .mp-nut .n b { font-size: 14.5px; } .mp-nut .n span { font-size: 10.5px; } }
   .mp-today { margin: 0 0 12px; padding: 16px 18px; }
   .mp-meters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 10px; }
   .mp-meter { min-width: 0; }
@@ -3275,7 +3294,7 @@
     if (op.t === 'meal') {
       MP.alts = G.mealAlternatives(MP.content, MP.plan, MP.day, mi, mpQ(''), { prepared: MP.db });
       return '<div class="mp-box"><p>Alege altă rețetă (cam ' + R(m.macros.kcal) + ' kcal):</p><div class="mp-opts mp-opts--col">' +
-        MP.alts.map(function (a, k) { return '<button type="button" class="mp-opt" data-alt="' + k + '"><span>' + esc(a.recipe.name) + '</span><small>' + R(a.macros.kcal) + ' kcal · ' + R(a.macros.p) + ' g P · ' + a.recipe.min + ' min</small></button>'; }).join('') +
+        MP.alts.map(function (a, k) { return '<button type="button" class="mp-opt" data-alt="' + k + '"><span>' + esc(a.recipe.name) + '</span><small><span class="k">' + R(a.macros.kcal) + ' kcal</span> · <span class="p">' + R(a.macros.p) + ' P</span> · <span class="c">' + R(a.macros.c) + ' C</span> · <span class="f">' + R(a.macros.f) + ' G</span> · ' + a.recipe.min + ' min</small></button>'; }).join('') +
         '</div><div class="mp-tools"><button type="button" class="muted" data-mp="close">Renunță</button></div></div>';
     }
     return '';
@@ -3289,15 +3308,27 @@
     return '<div class="jr-card mp-today"><p class="jr-ptitle" style="margin:0">Azi</p><div class="mp-meters">' + rows.map(function (r) {
       var tg = T[r[1]], e = t.eaten[r[1]], pl = t.planned[r[1]], lf = tg - e;
       var ew = Math.min(100, e / tg * 100), rw = Math.max(0, Math.min(100 - ew, pl / tg * 100)), ow = e > tg ? Math.min(100, (e - tg) / tg * 100) : 0;
-      return '<div class="mp-meter"><div class="k">' + r[0] + '</div><div class="v"><b>' + R(e) + '</b> / ' + R(tg) + r[2] + '</div><div class="mp-bar" role="img" aria-label="' + r[0] + ': ' + R(e) + ' din ' + R(tg) + r[2] + ' mâncate"><i class="e" style="width:' + ew + '%"></i><i class="r" style="width:' + rw + '%"></i>' + (ow ? '<i class="o" style="width:' + ow + '%"></i>' : '') + '</div><div class="left' + (lf < 0 ? ' over' : '') + '">' + (lf >= 0 ? 'mai ai ' + R(lf) + r[2] : 'peste cu ' + R(-lf) + r[2]) + '</div></div>';
+      return '<div class="mp-meter m-' + r[1] + '"><div class="k">' + r[0] + '</div><div class="v"><b>' + R(e) + '</b> / ' + R(tg) + r[2] + '</div><div class="mp-bar" role="img" aria-label="' + r[0] + ': ' + R(e) + ' din ' + R(tg) + r[2] + ' mâncate"><i class="e" style="width:' + ew + '%"></i><i class="r" style="width:' + rw + '%"></i>' + (ow ? '<i class="o" style="width:' + ow + '%"></i>' : '') + '</div><div class="left' + (lf < 0 ? ' over' : '') + '">' + (lf >= 0 ? 'mai ai ' + R(lf) + r[2] : 'peste cu ' + R(-lf) + r[2]) + '</div></div>';
     }).join('') + '</div><div class="mp-legend"><span>mâncat</span><span class="r">mesele rămase din plan</span></div></div>';
   }
-  function entriesTotal(list) { return list.reduce(function (a, e) { return { kcal: a.kcal + e.kcal, p: a.p + e.p, c: a.c + e.c, f: a.f + e.f }; }, { kcal: 0, p: 0, c: 0, f: 0 }); }
+  // toti nutrientii unei mese, colorati: kcal, proteine, carbohidrati, grasimi, fibre + impartirea caloriilor
+  function nutHtml(m) {
+    var pk = m.p * 4, ck = m.c * 4, fk = m.f * 9, tot = pk + ck + fk || 1;
+    var pp = R(pk / tot * 100), cp = R(ck / tot * 100), fp = Math.max(0, 100 - pp - cp);
+    return '<div class="mp-nut"><div class="n kcal"><b>' + R(m.kcal) + '</b><span>kcal</span></div>' +
+      '<div class="n p"><b>' + R(m.p) + ' g</b><span>proteine</span></div>' +
+      '<div class="n c"><b>' + R(m.c) + ' g</b><span>carbo</span></div>' +
+      '<div class="n f"><b>' + R(m.f) + ' g</b><span>grăsimi</span></div>' +
+      '<div class="n fib"><b>' + R(m.fib || 0) + ' g</b><span>fibre</span></div></div>' +
+      '<div class="mp-split" role="img" aria-label="Calorii din proteine ' + pp + '%, carbohidrați ' + cp + '%, grăsimi ' + fp + '%"><i class="p" style="width:' + pp + '%"></i><i class="c" style="width:' + cp + '%"></i><i class="f" style="width:' + fp + '%"></i></div>' +
+      '<div class="mp-splitlbl"><span style="--d:var(--n-p)">proteine ' + pp + '%</span><span style="--d:var(--n-c)">carbo ' + cp + '%</span><span style="--d:var(--n-f)">grăsimi ' + fp + '%</span></div>';
+  }
+  function entriesTotal(list) { return list.reduce(function (a, e) { return { kcal: a.kcal + e.kcal, p: a.p + e.p, c: a.c + e.c, f: a.f + e.f, fib: a.fib + (e.fib || 0) }; }, { kcal: 0, p: 0, c: 0, f: 0, fib: 0 }); }
   function doneMealHtml(m, mi) {
     var st = m.status, at = st === 'other' ? entriesTotal(m.actual || []) : m.macros;
     return '<article class="jr-card mp-meal is-done"><div class="mp-mhead"><div><div class="mp-slot">' + esc(m.slot) + '</div><h3>' + esc(m.name || m.recipe.name) + '</h3></div><span class="mp-badge' + (st === 'skipped' ? ' skip' : st === 'other' ? ' oth' : '') + '">' + (st === 'eaten' ? 'Mâncat ✓' : st === 'skipped' ? 'Sărit' : 'Am mâncat altceva') + '</span></div>' +
       (st === 'other' ? '<ul class="mp-list">' + (m.actual || []).map(function (e) { return '<li><span>' + esc(e.name) + (e.g ? ' · ' + R(e.g) + ' g' : '') + '</span><span>' + R(e.kcal) + ' kcal</span></li>'; }).join('') + '</ul>' : '') +
-      (st !== 'skipped' ? '<div class="mp-sum" style="margin:8px 0 0"><span><b>' + R(at.kcal) + '</b> kcal</span><span>' + R(at.p) + ' g P · ' + R(at.c) + ' g C · ' + R(at.f) + ' g G</span></div>' : '') +
+      (st !== 'skipped' ? '<div style="margin-top:8px">' + nutHtml(at) + '</div>' : '') +
       '<div class="mp-tools"><button type="button" data-undo="' + mi + '">Anulează</button></div></article>';
   }
   function dayFlash(t, T) {
@@ -3429,7 +3460,7 @@
   function planHtml() {
     var p = MP.plan, T = p.targets, prof = MP.profile, t = today();
     var since = prof.last_adjust || prof.plan_start, next = addDays(since, G.CONFIG.adjustEveryDays), left = daysBetween(t, next);
-    var h = '<div class="mp-tiles"><div class="mp-tile kcal"><b>' + T.kcal + '</b><span>kcal pe zi</span></div><div class="mp-tile"><b>' + T.p + ' g</b><span>proteine</span></div><div class="mp-tile"><b>' + T.c + ' g</b><span>carbohidrați</span></div><div class="mp-tile"><b>' + T.f + ' g</b><span>grăsimi</span></div></div>';
+    var h = '<div class="mp-tiles"><div class="mp-tile t-kcal"><b>' + T.kcal + '</b><span>kcal pe zi</span></div><div class="mp-tile t-p"><b>' + T.p + ' g</b><span>proteine</span></div><div class="mp-tile t-c"><b>' + T.c + ' g</b><span>carbohidrați</span></div><div class="mp-tile t-f"><b>' + T.f + ' g</b><span>grăsimi</span></div></div>';
     h += '<p class="jr-hint">' + (left > 0 ? 'Următoarea ajustare: ' + fmtDate(next) + ' (peste ' + left + (left === 1 ? ' zi' : ' zile') + ').' : 'Ajustarea se face când ai destule cântăriri.') + ' Cântărește-te de 2–3 ori pe săptămână, în fila Greutate.</p>';
     if (MP.banner) h += '<div class="mp-banner">' + esc(MP.banner) + '</div>';
     (p.warnings || []).forEach(function (w) { h += '<div class="mp-warn">' + esc(w) + '</div>'; });
@@ -3448,7 +3479,7 @@
       d.meals.forEach(function (m, mi) {
         var op = MP.open;
         if (m.status) { h += doneMealHtml(m, mi); return; }
-        h += '<article class="jr-card mp-meal"><div class="mp-mhead"><div><div class="mp-slot">' + esc(m.slot) + ' · ' + m.recipe.min + ' min</div><h3>' + esc(m.name || m.recipe.name) + '</h3>' + (m.changed ? '<div class="mp-recalc">Recalculată: ' + (m.changed > 0 ? '+' : '−') + R(Math.abs(m.changed)) + ' kcal față de plan</div>' : '') + '</div><div class="mp-kc"><b>' + R(m.macros.kcal) + '</b>kcal · ' + R(m.macros.p) + ' g P</div></div>' +
+        h += '<article class="jr-card mp-meal"><div class="mp-mhead"><div><div class="mp-slot">' + esc(m.slot) + ' · ' + m.recipe.min + ' min</div><h3>' + esc(m.name || m.recipe.name) + '</h3>' + (m.changed ? '<div class="mp-recalc">Recalculată: ' + (m.changed > 0 ? '+' : '−') + R(Math.abs(m.changed)) + ' kcal față de plan</div>' : '') + '</div></div>' + nutHtml(m.macros) +
           '<ul class="mp-ing">' + m.items.map(function (it, ii) { var on = op && op.t === 'ing' && op.mi === mi && op.ii === ii; return '<li><button type="button" data-ing="' + mi + ':' + ii + '" class="' + (on ? 'is-on' : '') + '" aria-expanded="' + !!on + '"><span>' + esc(it.name) + '</span><span>' + (it.label ? esc(it.label) + ' · ' : '') + it.g + ' g</span></button></li>'; }).join('') + '</ul>' +
           (m.swaps ? '<p class="mp-swapped">Înlocuit: ' + m.swaps.map(esc).join(', ') + '</p>' : '') +
           boxHtml(m, mi) +
@@ -3456,7 +3487,7 @@
           '<div class="mp-tools"><button type="button" data-alts="' + mi + '">' + (op && op.t === 'meal' && op.mi === mi ? 'Închide' : 'Schimbă masa') + '</button></div>' +
           '<details><summary>Cum se prepară</summary><ol>' + stepsOf(m).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol>' + (m.recipe.cond ? '<p class="mp-cond">Condimente: ' + esc(m.recipe.cond) + '</p>' : '') + '</details></article>';
       });
-      (d.extra || []).forEach(function (e, k) { h += '<div class="jr-card mp-meal is-done"><div class="mp-mhead"><div><div class="mp-slot">În plus</div><h3>' + esc(e.name) + (e.g ? ' · ' + R(e.g) + ' g' : '') + '</h3></div><div class="mp-kc"><b>' + R(e.kcal) + '</b>kcal</div></div><div class="mp-tools"><button type="button" class="danger" data-xdel="' + k + '">Scoate</button></div></div>'; });
+      (d.extra || []).forEach(function (e, k) { h += '<div class="jr-card mp-meal is-done"><div class="mp-mhead"><div><div class="mp-slot">În plus</div><h3>' + esc(e.name) + (e.g ? ' · ' + R(e.g) + ' g' : '') + '</h3></div></div>' + nutHtml(e) + '<div class="mp-tools"><button type="button" class="danger" data-xdel="' + k + '">Scoate</button></div></div>'; });
       h += MP.open && MP.open.t === 'extra' ? '<div class="jr-card mp-meal">' + logHtml('extra') + '</div>' : '<div class="mp-extra"><div class="mp-eat"><button type="button" data-extra="1">+ Am mâncat ceva în plus</button></div></div>';
       h += '<p class="jr-hint">Apasă pe un ingredient ca să-l înlocuiești. Bifează mesele pe măsură ce le mănânci: dacă mănânci altceva, mesele rămase se recalculează pe ce mai ai de mâncat. Gramajele sunt pentru alimentele crude, dacă nu scrie altfel.</p>';
     }
