@@ -1555,6 +1555,7 @@
   .mp-tag { position: absolute; top: -11px; left: 16px; background: #34d399; color: #062b1d; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
   .mp-note { margin: 0; font-size: 13px; color: var(--ink-soft); }
   .mp-err { margin: 10px 0 0; color: #f87171; font-size: 14px; }
+  .mp-guest { margin-bottom: 18px; border-color: rgba(52, 211, 153, .45); } .mp-guest p { margin: 0 0 6px; color: var(--ink-soft); line-height: 1.55; } .mp-guest b { color: var(--ink); }
   @media (max-width: 560px) { .mp-prices { grid-template-columns: 1fr; } }
   .mp-seg { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
   .mp-seg button, .mp-chip { padding: 9px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-alt); color: var(--ink-soft); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
@@ -3314,12 +3315,36 @@
   var PAY = { m: 'https://buy.stripe.com/5kQ4gyeTLeFb8nQc8mcMM1g', q: 'https://buy.stripe.com/5kQcN4h1T40xbA26O2cMM1f' };
   window.__cfPay = (function () {
     try {
-      var u = new URL(location.href), v = u.searchParams.get('plata');
-      if (v) { u.searchParams.delete('plata'); history.replaceState(null, '', u.pathname + u.search + u.hash); }
+      var u = new URL(location.href), v = u.searchParams.get('plata'), g = u.searchParams.get('plan');
+      if (g) { try { localStorage.setItem('cfGoPlan', String(Date.now())); } catch (e1) {} u.searchParams.delete('plan'); }
+      if (v) u.searchParams.delete('plata');
+      if (v || g) history.replaceState(null, '', u.pathname + u.search + u.hash);
       return v;
     } catch (e) { return null; }
   })();
   var payTries = 0;
+  window.__cfGoPlan = function (keep) {
+    try {
+      var t = Number(localStorage.getItem('cfGoPlan') || 0);
+      if (!keep) localStorage.removeItem('cfGoPlan');
+      return t > 0 && Date.now() - t < 86400000;
+    } catch (e) { return false; }
+  };
+  function cfCalc() {
+    try {
+      var c = JSON.parse(localStorage.getItem('cfCalc') || 'null');
+      if (!c || !c.age || Date.now() - (c.t || 0) > 30 * 86400000) return null;
+      return { sex: c.sex, age: c.age, height: c.height, weight: c.weight, activity: c.act, goal: c.goal };
+    } catch (e) { return null; }
+  }
+  (function () {
+    var g = document.getElementById('jrGuest');
+    if (!g || !window.__cfGoPlan(true)) return;
+    var n = document.createElement('div');
+    n.className = 'jr-card mp-guest';
+    n.innerHTML = '<p class="jr-badge">Planul meu</p><p><b>Mai e un pas până la planul tău alimentar.</b> Fă-ți un cont gratuit (durează 30 de secunde) sau intră în cont. Imediat după, alegi abonamentul și îți fac meniul pe cifrele tale.</p>';
+    g.insertBefore(n, g.firstChild);
+  })();
   function mpReset() { MP = { loaded: false, loading: false, access: null, content: null, db: null, food: {}, recipe: {}, profile: null, row: null, plan: null, day: 0, open: null, flash: '', banner: '', edit: false, alts: [] }; }
   mpReset();
   var DAYS = ['Duminică', 'Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'];
@@ -3495,7 +3520,7 @@
     return '<div class="mp-seg" data-seg="' + name + '">' + opts.map(function (o) { return '<button type="button" data-v="' + o[0] + '" class="' + (String(o[0]) === String(val) ? 'is-on' : '') + '">' + o[1] + '</button>'; }).join('') + '</div>';
   }
   function formHtml() {
-    var a = (MP.profile && MP.profile.answers) || {};
+    var a = (MP.profile && MP.profile.answers) || cfCalc() || {};
     var lastW = weights.length ? weights[weights.length - 1].weight_kg : '';
     var exSet = {}; (a.exclude || []).forEach(function (id) { exSet[id] = 1; });
     var exOn = EXCL.map(function (e) { var ids = MP.content.foods.filter(e[1]).map(function (f) { return f.id; }); return ids.length && ids.every(function (id) { return exSet[id]; }); });
@@ -4394,7 +4419,7 @@
     guest.hidden = true; app.hidden = false;
     var meta = session.user.user_metadata || {};
     $('jrHello').textContent = meta.name || (session.user.email || '').split('@')[0];
-    if (!started) { started = true; await load(); resetNew(); setView(window.__cfPay ? 'plan' : 'azi'); dyLoad(); }
+    if (!started) { started = true; await load(); resetNew(); setView((window.__cfPay || (window.__cfGoPlan && window.__cfGoPlan())) ? 'plan' : 'azi'); dyLoad(); }
   }
   sb.auth.onAuthStateChange(function (_e, session) { setTimeout(function () { onSession(session); }, 0); });
   sb.auth.getSession().then(function (r) { onSession(r.data.session); });

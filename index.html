@@ -1481,7 +1481,7 @@
           <div class="calc-macro"><b id="cFat">–</b><span>Grăsimi</span></div>
         </div>
         <p class="calc-note" id="cNote"></p>
-        <a class="btn-primary calc-cta" href="#plan-alimentar" data-meal role="button">Vreau un plan alimentar pe cifrele mele</a>
+        <a class="btn-primary calc-cta" href="jurnal?plan=1" data-meal>Vreau un plan alimentar pe cifrele mele</a>
         <p class="calc-disclaimer">Rezultatul e o estimare (formula Mifflin-St Jeor) și nu înlocuiește un sfat medical. În coaching ajustăm cifrele săptămânal, după progresul tău real.</p>
       </div>
     </div>
@@ -2413,8 +2413,18 @@ try {
     ov.querySelector('[data-det="mfMedicalDet"]').hidden = $('mfMedical').value !== 'Da';
     ov.querySelector('[data-det="mfEvitDet"]').hidden = picked('mfEvit').indexOf('Altele') < 0;
   }
-  if (location.hash === '#plan-alimentar') setTimeout(open, 300);
-  document.addEventListener('click', function (e) { var t = e.target.closest ? e.target.closest('[data-meal]') : null; if (t) { e.preventDefault(); open(); } });
+  function goPlan() {
+    try {
+      var sex = document.querySelector('input[name="sex"]:checked'), goal = document.querySelector('input[name="goal"]:checked');
+      var d = { sex: sex && sex.value === 'f' ? 'f' : 'm', age: Number($('cAge').value) || '', height: Number($('cHeight').value) || '', weight: Number($('cWeight').value) || '',
+        act: { '1.2': 'sedentar', '1.375': 'usor', '1.55': 'moderat', '1.725': 'activ', '1.9': 'foarte_activ' }[$('cActivity').value] || 'usor',
+        goal: { cut: 'slabire', maintain: 'mentinere', bulk: 'masa' }[goal ? goal.value : 'cut'] || 'slabire', t: Date.now() };
+      if (d.age) localStorage.setItem('cfCalc', JSON.stringify(d));
+    } catch (e) {}
+    location.href = 'jurnal?plan=1';
+  }
+  if (location.hash === '#plan-alimentar') setTimeout(goPlan, 100);
+  document.addEventListener('click', function (e) { var t = e.target.closest ? e.target.closest('[data-meal]') : null; if (t) { e.preventDefault(); goPlan(); } });
   $('mfClose').addEventListener('click', close);
   ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !ov.hidden) close(); });
