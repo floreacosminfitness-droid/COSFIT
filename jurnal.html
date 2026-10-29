@@ -1725,6 +1725,118 @@
     .ex-sheet { padding: 20px 16px; } .ex-modal { padding: 10px; }
     .ex-week { grid-template-columns: 1fr; gap: 10px; padding: 16px; } .ex-week > .mm { max-width: 220px; margin: 0 auto; }
   }
+  /* ---------- navigatie noua + Azi + nutritie ---------- */
+  .jr-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 5px; margin: 0 0 12px; border-radius: 14px; background: var(--surface-alt); border: 1px solid var(--line); }
+  .jr-nav button { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 6px; border: 0; border-radius: 10px; background: none; color: var(--slate); font: inherit; font-weight: 700; font-size: 14.5px; cursor: pointer; }
+  .jr-nav button svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
+  .jr-nav button.is-on { background: var(--teal); color: var(--bg); }
+  .jr-sub { display: flex; gap: 8px; margin: 0 0 18px; overflow-x: auto; scrollbar-width: none; }
+  .jr-sub::-webkit-scrollbar { display: none; }
+  .jr-sub:empty { display: none; }
+  .jr-sub button { flex: none; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-soft); font: inherit; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .jr-sub button.is-on { border-color: var(--teal); color: var(--teal-ink); background: rgba(52, 211, 153, .08); }
+  @media (max-width: 700px) {
+    .jr-nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; margin: 0; border-radius: 0; border: 0; border-top: 1px solid var(--line); background: rgba(14, 18, 21, .97); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 6px 8px calc(6px + env(safe-area-inset-bottom)); gap: 2px; }
+    .jr-nav button { flex-direction: column; gap: 3px; font-size: 11.5px; padding: 7px 2px; border-radius: 12px; }
+    .jr-nav button svg { width: 23px; height: 23px; }
+    .jr-nav button.is-on { background: rgba(52, 211, 153, .12); color: var(--teal-ink); }
+    #jrApp { padding-bottom: 96px; }
+    .jr:has(#jrApp:not([hidden])) .jr-hero { display: none; }
+    .jr:has(#jrApp:not([hidden])) .jr-wrap { padding-top: 14px; }
+    .jr-timer { bottom: calc(86px + env(safe-area-inset-bottom)); }
+  }
+  .dy-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 20px; margin-bottom: 14px; }
+  .dy-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+  .dy-head h3 { margin: 0; font-size: 17px; color: var(--ink); display: flex; align-items: center; gap: 10px; }
+  .dy-head h3 svg { width: 22px; height: 22px; fill: var(--teal-ink); }
+  .dy-chip { padding: 5px 12px; border-radius: 999px; background: rgba(255, 159, 90, .14); color: #FFB37A; font-weight: 800; font-size: 13.5px; white-space: nowrap; }
+  .dy-plan { display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 16px; background: var(--surface-alt); border: 1px solid var(--line); }
+  .dy-plan p { margin: 0; flex: 1; color: var(--ink-soft); font-size: 14.5px; line-height: 1.45; }
+  .dy-plan p b { color: var(--ink); }
+  .dy-btn { flex: none; padding: 10px 16px; border-radius: 999px; border: 0; background: rgba(52, 211, 153, .14); color: var(--teal-ink); font: inherit; font-weight: 800; font-size: 14px; cursor: pointer; }
+  .dy-btn.solid { background: var(--teal); color: var(--bg); }
+  .dy-btn.ghost { background: none; border: 1px solid var(--line); color: var(--ink-soft); }
+  .dy-week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 18px 0 12px; text-align: center; }
+  .dy-week span { display: grid; place-items: center; width: 100%; max-width: 44px; aspect-ratio: 1; margin: 0 auto 6px; border-radius: 50%; background: var(--surface-alt); border: 1px solid var(--line); color: var(--bg); font-weight: 900; font-size: 16px; }
+  .dy-week .done span { background: var(--teal); border-color: var(--teal); }
+  .dy-week .today span { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--teal); }
+  .dy-week small { font-size: 13px; color: var(--slate); font-weight: 700; }
+  .dy-week .today small { color: var(--teal-ink); }
+  .dy-prog { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--ink-soft); font-weight: 700; }
+  .dy-bar { flex: 1; height: 7px; border-radius: 99px; background: var(--surface-alt); overflow: hidden; }
+  .dy-bar i { display: block; height: 100%; border-radius: 99px; background: var(--teal); }
+  .dy-stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); text-align: center; }
+  .dy-stats div + div { border-left: 1px solid var(--line); }
+  .dy-stats b { display: block; font-size: 24px; color: var(--ink); }
+  .dy-stats span { font-size: 13px; color: var(--slate); }
+  .dy-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+  .dy-row + .dy-row { border-top: 1px solid var(--line); }
+  .dy-row .lbl { flex: 1; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 10px; }
+  .dy-row .lbl em { font-style: normal; font-weight: 500; color: var(--slate); font-size: 13px; }
+  .dy-row .val { min-width: 74px; text-align: center; font-weight: 800; font-size: 17px; color: var(--ink); }
+  .dy-pm { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface-alt); color: var(--ink); font-size: 20px; font-weight: 700; cursor: pointer; line-height: 1; }
+  .dy-pm.add { background: rgba(108, 196, 240, .16); border-color: transparent; color: #6CC4F0; }
+  .dy-ico { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--surface-alt); font-size: 19px; }
+  .dy-water { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
+  .dy-kg { display: flex; align-items: baseline; gap: 6px; margin: 0 0 12px; }
+  .dy-kg b { font-size: 40px; color: var(--ink); line-height: 1; }
+  .dy-kg span { color: var(--slate); }
+  .dy-in { display: flex; gap: 10px; }
+  .dy-in .af-input { flex: 1; }
+  .dy-note { margin: 10px 0 0; font-size: 13.5px; color: var(--slate); }
+  .dy-note.ok { color: var(--teal-ink); } .dy-note.err { color: #FF8A80; }
+  .dy-days { display: grid; gap: 8px; margin: 12px 0; }
+  .dy-days label { display: grid; grid-template-columns: 70px 1fr; align-items: center; gap: 10px; font-weight: 700; color: var(--ink-soft); font-size: 14px; }
+  .dy-goal { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 4px; }
+  .dy-goal button { width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface-alt); color: var(--ink-soft); font: inherit; font-weight: 800; cursor: pointer; }
+  .dy-goal button.is-on { background: var(--teal); border-color: var(--teal); color: var(--bg); }
+  .dy-sum { display: grid; grid-template-columns: 150px 1fr; gap: 22px; align-items: center; }
+  .dy-ring { position: relative; width: 150px; height: 150px; }
+  .dy-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .dy-ring div { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+  .dy-ring b { font-size: 28px; color: var(--ink); line-height: 1.1; }
+  .dy-ring span { font-size: 13px; color: var(--slate); }
+  .dy-kv { display: grid; grid-template-columns: auto auto; gap: 10px 18px; align-content: center; font-size: 15px; color: var(--slate); }
+  .dy-kv b { color: var(--ink); text-align: right; font-size: 17px; }
+  .dy-kv b.blue { color: #6CB6FF; }
+  .dy-mac { margin-top: 18px; display: grid; gap: 12px; }
+  .dy-mac div { display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; font-size: 14.5px; font-weight: 700; }
+  .dy-mac span:last-of-type { color: var(--slate); font-weight: 600; }
+  .dy-mac i { grid-column: 1 / -1; height: 7px; border-radius: 99px; background: var(--surface-alt); overflow: hidden; }
+  .dy-mac i u { display: block; height: 100%; border-radius: 99px; }
+  .dy-acts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .dy-act { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 18px 10px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }
+  .dy-act svg { width: 30px; height: 30px; fill: none; stroke: #4FD1C5; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .dy-dnav { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .dy-dnav b { color: var(--ink); }
+  .dy-dnav button { width: 44px; height: 40px; border-radius: 12px; border: 0; background: rgba(108, 182, 255, .12); color: #6CB6FF; font-size: 20px; font-weight: 800; cursor: pointer; }
+  .dy-dnav button[disabled] { opacity: .3; cursor: default; }
+  .dy-meal { padding: 12px 0; border-top: 1px solid var(--line); }
+  .dy-mh { display: flex; align-items: center; gap: 10px; }
+  .dy-mh b { flex: 1; font-size: 16px; color: var(--ink); }
+  .dy-mh span { color: var(--slate); font-size: 13.5px; font-weight: 700; }
+  .dy-plus { width: 36px; height: 36px; border-radius: 50%; border: 0; background: #3B82F6; color: #fff; font-size: 22px; font-weight: 700; line-height: 1; cursor: pointer; }
+  .dy-it { display: flex; align-items: center; gap: 10px; padding: 8px 0 0 4px; font-size: 14.5px; color: var(--ink-soft); }
+  .dy-it span { flex: 1; } .dy-it em { font-style: normal; color: var(--slate); font-size: 13px; }
+  .dy-it b { color: var(--ink); font-weight: 700; white-space: nowrap; }
+  .dy-del { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); background: none; color: var(--slate); cursor: pointer; flex: none; }
+  .dy-empty { color: var(--slate); font-size: 14.5px; margin: 4px 0 6px; }
+  .dy-seg { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0 14px; }
+  .dy-seg button { padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-alt); color: var(--ink-soft); font: inherit; font-weight: 700; font-size: 14px; cursor: pointer; }
+  .dy-seg button.is-on { background: var(--teal); border-color: var(--teal); color: var(--bg); }
+  .dy-res { display: grid; gap: 6px; margin-top: 10px; max-height: 46vh; overflow-y: auto; }
+  .dy-res button { display: flex; justify-content: space-between; gap: 10px; text-align: left; padding: 11px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface-alt); color: var(--ink); font: inherit; font-size: 14.5px; cursor: pointer; }
+  .dy-res button em { font-style: normal; color: var(--slate); font-size: 13px; white-space: nowrap; }
+  .dy-res h4 { margin: 6px 2px 2px; font-size: 12.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--slate); }
+  .dy-pick { margin-top: 12px; padding: 14px; border-radius: 16px; border: 1px solid var(--teal); background: rgba(52, 211, 153, .06); }
+  .dy-pick b { color: var(--ink); }
+  .dy-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .dy-up { display: flex; align-items: center; gap: 16px; border-color: rgba(52, 211, 153, .35); background: linear-gradient(135deg, rgba(52, 211, 153, .10), rgba(108, 182, 255, .06)); }
+  .dy-up b { color: var(--ink); font-size: 16px; } .dy-up p { margin: 6px 0 0; color: var(--ink-soft); font-size: 14px; line-height: 1.5; }
+  @media (max-width: 480px) { .dy-up { flex-direction: column; align-items: stretch; } }
+  .dy-sheet h2 { font-family: 'Exo 2', sans-serif; font-size: 22px; margin: 0 44px 12px 0; color: var(--ink); }
+  .dy-sheet .jr-l { margin-bottom: 10px; }
+  @media (max-width: 480px) { .dy-sum { grid-template-columns: 120px 1fr; gap: 14px; } .dy-ring { width: 120px; height: 120px; } .dy-ring b { font-size: 23px; } .dy-card { padding: 16px; } .dy-grid { grid-template-columns: 1fr 1fr; } .dy-week span { font-size: 14px; } }
 </style>
 </head>
 <body>
@@ -1807,14 +1919,11 @@
       <p>Salut, <b id="jrHello">sportivule</b>!</p>
       <button type="button" class="jr-link" id="jrLogout">Ieși din cont</button>
     </div>
-    <div class="jr-tabs jr-tabs--app" role="tablist">
-      <button type="button" class="is-on" data-view="new" role="tab"><span class="jr-lg">+ Antrenament</span><span class="jr-sm">+ Nou</span></button>
-      <button type="button" data-view="history" role="tab">Istoric</button>
-      <button type="button" data-view="progress" role="tab">Progres</button>
-      <button type="button" data-view="ex" role="tab">Exerciții</button>
-      <button type="button" data-view="weight" role="tab">Greutate</button>
-      <button type="button" data-view="plan" role="tab"><span class="jr-lg">Planul meu</span><span class="jr-sm">Plan</span></button>
-    </div>
+    <nav class="jr-nav" id="jrNav" aria-label="Secțiuni jurnal"><button type="button" data-group="azi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Azi</span></button><button type="button" data-group="antr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10h2V8h3v8H4v-2H2zM20 10h2v4h-2v2h-3V8h3zM8 11h8v2H8z"/></svg><span>Antrenamente</span></button><button type="button" data-group="nutr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h1.5v7a1.5 1.5 0 0 0 1 1.4V22H7V10.4A1.5 1.5 0 0 0 6 9zM4 2h1v6H4zM8.5 2h1v6h-1zM16.5 2C19 2 20 5 20 8.5c0 2.3-1 3.8-2.5 4.3V22H15V2.6c.4-.4 1-.6 1.5-.6z"/></svg><span>Nutriție</span></button><button type="button" data-group="prog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18v1.5H3zM4 16.5l5-5.5 3.5 3 6-7 1.2 1-7 8.2-3.5-3-4 4.4z"/></svg><span>Progres</span></button></nav>
+    <div class="jr-sub" id="jrSub" role="tablist"></div>
+
+    <div class="jr-view" data-v="azi" hidden><div id="dyAzi"></div></div>
+    <div class="jr-view" data-v="nut" hidden><div id="dyNut"></div></div>
 
     <div class="jr-view" data-v="new">
       <form class="jr-card" id="jrNew" novalidate>
@@ -1891,6 +2000,13 @@
       <div class="ex-sheet" role="dialog" aria-modal="true" aria-labelledby="exMTitle">
         <button type="button" class="ex-x" id="exClose" aria-label="Închide">✕</button>
         <div id="exMBody"></div>
+      </div>
+    </div>
+
+    <div class="ex-modal" id="dyModal" hidden>
+      <div class="ex-sheet dy-sheet" role="dialog" aria-modal="true" aria-label="Adaugă aliment">
+        <button type="button" class="ex-x" id="dyClose" aria-label="Închide">✕</button>
+        <div id="dyMBody"></div>
       </div>
     </div>
 
@@ -3870,15 +3986,359 @@
       (unk ? '<p style="margin-top:8px;font-size:12.5px;color:var(--slate)">' + unk + ' serii sunt la exerciții care nu apar în enciclopedie, așa că nu sunt numărate.</p>' : '') + '</div>';
   }
 
+
+  // ---------- Azi + nutritie gratuita ----------
+  var DY_FOODS = [["piept_pui","Piept de pui",120.0,22.5,0.0,2.6,0.0],["pulpa_pui","Pulpă de pui dezosată, fără piele",121.0,19.7,0.0,4.1,0.0],["aripi_pui","Aripi de pui cu piele",191.0,17.5,0.0,12.8,0.0],["ficat_pui","Ficat de pui",119.0,16.9,0.7,4.8,0.0],["piept_pui_gatit","Piept de pui gătit (la grătar)",165.0,31.0,0.0,3.6,0.0],["piept_curcan","Piept de curcan",114.0,23.7,0.0,1.5,0.0],["pulpa_curcan","Pulpă de curcan fără piele",112.0,20.0,0.0,3.5,0.0],["curcan_tocat","Carne tocată de curcan",150.0,20.0,0.0,7.5,0.0],["muschi_porc","Mușchiuleț de porc",143.0,21.0,0.0,6.0,0.0],["cotlet_porc","Cotlet de porc",172.0,20.0,0.0,10.0,0.0],["ceafa_porc","Ceafă de porc",220.0,17.0,0.0,17.0,0.0],["porc_tocat","Carne tocată de porc",263.0,17.0,0.0,21.0,0.0],["costita_porc","Costiță de porc",290.0,16.0,0.0,25.0,0.0],["vita_slaba","Carne de vită slabă (pulpă)",150.0,22.0,0.0,6.5,0.0],["muschi_vita","Mușchi de vită",155.0,21.5,0.0,7.5,0.0],["vita_tocata","Carne tocată de vită (5% grăsime)",137.0,21.0,0.0,5.0,0.0],["vita_tocata_15","Carne tocată de vită (15% grăsime)",215.0,18.6,0.0,15.0,0.0],["antricot_vita","Antricot de vită",230.0,19.0,0.0,17.0,0.0],["miel_pulpa","Pulpă de miel",180.0,20.0,0.0,11.0,0.0],["iepure","Carne de iepure",136.0,20.0,0.0,5.5,0.0],["piept_rata","Piept de rață fără piele",123.0,19.9,0.0,4.3,0.0],["rata_piele","Rață cu piele",337.0,11.5,0.0,32.0,0.0],["sunca_curcan","Șuncă de curcan",105.0,17.0,2.0,3.0,0.0],["sunca_presata","Șuncă presată de porc",120.0,18.0,1.5,4.5,0.0],["parizer","Parizer",250.0,12.0,3.0,21.0,0.0],["crenvursti","Crenvurști",270.0,12.0,2.0,24.0,0.0],["carnati_proaspeti","Cârnați proaspeți",300.0,14.0,2.0,26.0,0.0],["salam_uscat","Salam crud-uscat (tip Sibiu)",480.0,25.0,1.0,42.0,0.0],["bacon","Bacon / kaizer",417.0,12.0,1.4,40.0,0.0],["slanina","Slănină",670.0,7.0,0.0,70.0,0.0],["pate_ficat","Pateu de ficat",300.0,11.0,3.0,27.0,0.5],["somon","File de somon",208.0,20.0,0.0,13.0,0.0],["somon_afumat","Somon afumat",117.0,18.0,0.0,4.3,0.0],["ton_apa","Ton în apă (scurs)",116.0,26.0,0.0,1.0,0.0],["ton_ulei","Ton în ulei (scurs)",198.0,29.0,0.0,8.0,0.0],["ton_proaspat","Ton proaspăt",109.0,24.4,0.0,0.5,0.0],["cod","File de cod / merluciu",82.0,18.0,0.0,0.7,0.0],["pastrav","Păstrăv",141.0,20.0,0.0,6.6,0.0],["sardine","Sardine în ulei (scurse)",208.0,25.0,0.0,11.5,0.0],["macrou","Macrou",205.0,18.6,0.0,13.9,0.0],["macrou_afumat","Macrou afumat",305.0,18.5,0.0,25.0,0.0],["hering","Hering",158.0,18.0,0.0,9.0,0.0],["dorada","Doradă",115.0,20.0,0.0,4.0,0.0],["lavraki","Biban de mare (lavraki)",97.0,18.4,0.0,2.0,0.0],["pangasius","File de pangasius",90.0,15.0,0.0,3.0,0.0],["tilapia","File de tilapia",96.0,20.0,0.0,1.7,0.0],["crap","Crap",127.0,17.8,0.0,5.6,0.0],["salau","Șalău",84.0,19.2,0.0,0.7,0.0],["creveti","Creveți decorticați",85.0,20.0,0.0,0.5,0.0],["calamar","Calamar",92.0,15.6,3.1,1.4,0.0],["caracatita","Caracatiță",82.0,14.9,2.2,1.0,0.0],["midii","Midii (carne)",86.0,11.9,3.7,2.2,0.0],["salata_icre","Salată de icre",520.0,5.0,4.0,54.0,0.0],["peste_pane","Pește pané (degete de pește)",220.0,12.0,18.0,11.0,1.0],["ou","Ouă (1 ou ≈ 55 g)",143.0,12.6,0.7,9.5,0.0],["albus","Albuș de ou",52.0,11.0,0.7,0.2,0.0],["galbenus","Gălbenuș de ou",322.0,15.9,3.6,26.5,0.0],["ou_prepelita","Ouă de prepeliță",158.0,13.0,0.4,11.0,0.0],["lapte_35","Lapte 3,5%",64.0,3.3,4.7,3.5,0.0],["lapte","Lapte 1,5%",47.0,3.4,4.8,1.5,0.0],["lapte_degresat","Lapte degresat 0,1%",34.0,3.4,4.9,0.1,0.0],["iaurt_natural","Iaurt natural 3,5%",61.0,3.5,4.7,3.3,0.0],["iaurt_gr","Iaurt grecesc 2%",73.0,9.9,3.9,2.0,0.0],["iaurt_gr_10","Iaurt grecesc 10%",133.0,6.5,3.6,10.0,0.0],["skyr","Skyr",63.0,11.0,4.0,0.2,0.0],["kefir","Chefir",50.0,3.3,4.5,2.0,0.0],["sana","Sana",62.0,3.2,4.5,3.6,0.0],["lapte_batut","Lapte bătut",40.0,3.3,4.6,1.0,0.0],["branza_vaci","Brânză de vaci slabă",90.0,12.5,3.5,2.5,0.0],["cottage","Cottage cheese 4%",98.0,11.0,3.4,4.3,0.0],["ricotta","Ricotta",150.0,10.0,3.5,10.0,0.0],["telemea","Telemea de vaci",240.0,17.0,1.0,19.0,0.0],["telemea_oaie","Telemea de oaie",280.0,17.0,0.5,23.0,0.0],["feta","Feta",264.0,14.0,4.0,21.0,0.0],["cascaval","Cașcaval",360.0,25.0,1.5,28.0,0.0],["mozzarella_l","Mozzarella light",165.0,19.0,1.5,9.0,0.0],["mozzarella","Mozzarella clasică",250.0,18.0,1.0,19.0,0.0],["parmezan","Parmezan",392.0,35.8,3.2,25.8,0.0],["branza_burduf","Brânză de burduf",350.0,22.0,1.0,29.0,0.0],["branza_topita","Brânză topită",250.0,11.0,6.0,20.0,0.0],["smantana_12","Smântână 12%",135.0,2.9,3.7,12.0,0.0],["smantana_20","Smântână 20%",205.0,2.6,3.4,20.0,0.0],["mascarpone","Mascarpone",430.0,4.5,4.0,44.0,0.0],["frisca","Frișcă 35%",340.0,2.2,3.0,35.0,0.0],["unt","Unt",717.0,0.9,0.1,81.0,0.0],["whey","Proteină din zer (whey)",380.0,78.0,6.0,6.0,0.0],["lapte_fl","Lapte fără lactoză 1,5%",47.0,3.4,4.8,1.5,0.0],["lapte_fl_35","Lapte fără lactoză 3,5%",64.0,3.3,4.7,3.5,0.0],["iaurt_gr_fl","Iaurt grecesc fără lactoză 2%",73.0,9.9,3.9,2.0,0.0],["iaurt_fl","Iaurt natural fără lactoză 1,5%",50.0,4.0,5.0,1.5,0.0],["branza_vaci_fl","Brânză de vaci fără lactoză",95.0,12.0,3.5,3.0,0.0],["mozzarella_fl","Mozzarella fără lactoză",240.0,18.0,1.0,18.0,0.0],["bautura_ovaz","Băutură de ovăz",45.0,0.5,6.5,1.5,0.8],["bautura_soia","Băutură de soia neîndulcită",33.0,3.3,0.6,1.8,0.5],["bautura_migdale","Băutură de migdale neîndulcită",13.0,0.4,0.3,1.1,0.3],["bautura_cocos","Băutură de cocos",20.0,0.1,2.0,1.0,0.0],["bautura_orez","Băutură de orez",47.0,0.3,9.4,1.0,0.0],["lapte_cocos","Lapte de cocos (conservă)",197.0,2.0,3.0,20.0,0.0],["iaurt_soia","Iaurt de soia natur",50.0,4.0,2.0,2.3,0.6],["tofu","Tofu natur",144.0,17.3,0.5,8.7,2.3],["tofu_afumat","Tofu afumat",160.0,17.0,2.0,9.5,2.0],["tofu_matase","Tofu mătase",55.0,4.8,2.0,2.7,0.2],["tempeh","Tempeh",192.0,20.0,7.6,10.8,1.4],["seitan","Seitan",120.0,25.0,4.0,1.9,0.6],["soia_texturata","Proteină de soia texturată (uscată)",330.0,52.0,14.0,1.0,18.0],["proteina_vegetala","Proteină vegetală pudră (mazăre/orez)",380.0,75.0,5.0,6.0,2.0],["naut","Năut fiert / conservă (scurs)",139.0,7.0,17.0,2.6,6.0],["naut_uscat","Năut uscat",338.0,20.0,45.0,6.0,12.0],["fasole_rosie","Fasole roșie fiartă / conservă (scursă)",120.0,8.0,16.0,0.5,6.4],["fasole_alba","Fasole albă fiartă / conservă (scursă)",115.0,7.5,16.0,0.5,6.0],["fasole_neagra","Fasole neagră fiartă",132.0,8.9,15.1,0.5,8.7],["fasole_uscata","Fasole boabe uscată",300.0,21.0,40.0,1.5,16.0],["linte_rosie","Linte roșie uscată",358.0,24.0,60.0,2.2,10.8],["linte_verde","Linte verde uscată",325.0,25.0,45.0,1.5,11.0],["linte_fiarta","Linte fiartă / conservă (scursă)",116.0,9.0,12.2,0.4,7.9],["mazare","Mazăre congelată",77.0,5.2,8.6,0.4,5.0],["edamame","Edamame congelat (boabe)",121.0,12.0,3.7,5.0,5.2],["soia_boabe","Soia boabe uscată",446.0,36.0,21.0,20.0,9.0],["hummus","Hummus",230.0,7.0,14.0,16.0,6.0],["ovaz","Fulgi de ovăz",372.0,13.5,58.7,7.0,10.0],["tarate_ovaz","Tărâțe de ovăz",360.0,17.0,50.0,7.0,15.0],["muesli","Musli fără zahăr adăugat",360.0,10.0,60.0,6.0,8.0],["granola","Granola (cu zahăr / miere)",450.0,10.0,60.0,18.0,7.0],["fulgi_porumb","Fulgi de porumb simpli",378.0,7.0,84.0,0.9,3.0],["orez_alb","Orez alb (uscat)",360.0,7.0,79.0,0.6,1.0],["orez_basmati","Orez basmati (uscat)",350.0,8.0,77.0,0.6,1.5],["orez_brun","Orez brun (uscat)",360.0,7.5,74.0,2.7,3.5],["orez_salbatic","Orez sălbatic (uscat)",357.0,14.7,68.0,1.1,6.0],["orez_fiert","Orez alb fiert",130.0,2.7,28.0,0.3,0.4],["orez_brun_fiert","Orez brun fiert",112.0,2.3,22.5,0.9,1.8],["paste_int","Paste integrale (uscate)",350.0,13.0,64.0,2.5,8.0],["paste_dur","Paste din grâu dur (uscate)",355.0,12.5,71.0,1.5,3.0],["paste_fierte","Paste din grâu dur fierte",158.0,5.8,30.6,0.9,1.8],["paste_int_fierte","Paste integrale fierte",149.0,6.0,26.0,1.7,3.9],["quinoa","Quinoa (uscată)",368.0,14.0,57.0,6.0,7.0],["quinoa_fiarta","Quinoa fiartă",120.0,4.4,18.5,1.9,2.8],["cuscus","Cuscus integral (uscat)",355.0,12.0,68.0,1.8,5.0],["bulgur","Bulgur (uscat)",345.0,12.3,63.0,1.3,12.0],["mei","Mei (uscat)",378.0,11.0,73.0,4.2,8.5],["hrisca","Hrișcă (uscată)",343.0,13.0,62.0,3.4,10.0],["malai","Mălai",362.0,8.1,74.0,3.6,7.0],["mamaliga","Mămăligă fiartă",75.0,1.7,16.0,0.4,1.0],["gris","Griș",360.0,10.5,72.0,1.0,3.9],["faina_int","Făină integrală",340.0,13.0,61.0,2.5,11.0],["faina_alba","Făină albă",364.0,10.0,76.0,1.0,2.7],["paine_int","Pâine integrală (1 felie ≈ 35 g)",240.0,10.0,40.0,3.5,7.0],["paine_secara","Pâine de secară",250.0,8.5,46.0,3.3,6.0],["paine_seminte","Pâine cu semințe / multicereale",270.0,11.0,40.0,7.0,7.0],["paine_alba","Pâine albă",265.0,9.0,49.0,3.2,2.7],["lipie_int","Lipie integrală (1 buc ≈ 60 g)",300.0,9.0,48.0,7.0,6.0],["chifla_int","Chiflă integrală (1 buc ≈ 60 g)",250.0,10.5,40.0,3.5,6.0],["lipie_alba","Lipie albă",310.0,8.5,52.0,7.0,2.0],["pita_int","Pita integrală",260.0,10.0,50.0,1.7,7.0],["wasa","Pâine crocantă integrală tip Wasa (1 buc ≈ 11 g)",340.0,10.0,62.0,2.0,14.0],["rondele_orez","Rondele de orez (1 buc ≈ 8 g)",387.0,8.0,81.0,3.0,3.0],["rondele_porumb","Rondele de porumb",380.0,8.0,80.0,2.5,4.0],["crackers_int","Crackers integrali",420.0,10.0,65.0,12.0,8.0],["covrig","Covrig",330.0,10.0,65.0,3.0,3.0],["bagheta","Baghetă albă",270.0,9.0,54.0,1.5,2.5],["croissant","Croissant / corn cu unt",406.0,8.0,45.0,21.0,2.5],["cozonac","Cozonac cu nucă",380.0,8.0,55.0,14.0,2.0],["cartofi","Cartofi",77.0,2.0,17.0,0.1,2.2],["cartofi_fierti","Cartofi fierți",87.0,1.9,18.0,0.1,1.8],["cartofi_dulci","Cartofi dulci",86.0,1.6,20.0,0.1,3.0],["piure","Piure de cartofi cu lapte și unt",105.0,2.0,14.0,4.5,1.5],["cartofi_prajiti","Cartofi prăjiți",312.0,3.4,38.0,15.0,3.8],["chipsuri","Chipsuri",536.0,7.0,50.0,35.0,4.0],["broccoli","Broccoli",34.0,2.8,4.5,0.4,2.6],["spanac","Spanac (proaspăt sau congelat)",23.0,2.9,1.4,0.4,2.2],["rosii","Roșii",18.0,0.9,3.0,0.2,1.2],["rosii_cherry","Roșii cherry",18.0,0.9,3.0,0.2,1.2],["castravete","Castravete",15.0,0.7,2.6,0.1,0.5],["ardei","Ardei gras",30.0,1.0,5.0,0.3,1.7],["ardei_iute","Ardei iute",40.0,1.9,7.0,0.4,1.5],["ceapa","Ceapă",40.0,1.1,8.0,0.1,1.7],["ceapa_verde","Ceapă verde",32.0,1.8,4.7,0.2,2.6],["praz","Praz",61.0,1.5,12.0,0.3,1.8],["usturoi","Usturoi",149.0,6.4,30.0,0.5,2.1],["morcov","Morcov",41.0,0.9,8.0,0.2,2.8],["sfecla","Sfeclă roșie",43.0,1.6,7.0,0.2,2.8],["telina","Țelină rădăcină",42.0,1.5,7.0,0.3,1.8],["pastarnac","Păstârnac",75.0,1.2,13.0,0.3,4.9],["gulie","Gulie",27.0,1.7,2.6,0.1,3.6],["ridichi","Ridichi",16.0,0.7,1.8,0.1,1.6],["dovlecel","Dovlecel",17.0,1.2,2.5,0.3,1.0],["dovleac","Dovleac plăcintar",26.0,1.0,6.0,0.1,0.5],["vinete","Vinete",25.0,1.0,3.0,0.2,3.0],["ciuperci","Ciuperci champignon",22.0,3.1,1.5,0.3,1.0],["pleurotus","Ciuperci pleurotus",33.0,3.3,4.0,0.4,2.3],["salata","Salată verde / mix de salată",15.0,1.4,1.8,0.2,1.3],["rucola","Rucola",25.0,2.6,2.0,0.7,1.6],["varza","Varză albă",25.0,1.3,4.5,0.1,2.5],["varza_rosie","Varză roșie",31.0,1.4,5.3,0.2,2.1],["varza_bruxelles","Varză de Bruxelles",43.0,3.4,5.0,0.3,3.8],["kale","Kale",49.0,4.3,4.4,0.9,4.1],["conopida","Conopidă",25.0,1.9,3.0,0.3,2.0],["sparanghel","Sparanghel",20.0,2.2,1.9,0.1,2.1],["fasole_verde","Fasole verde congelată",31.0,1.8,4.3,0.2,2.7],["porumb","Porumb boabe (conservă, scurs)",80.0,2.5,15.0,1.2,2.0],["mix_legume","Mix de legume congelate",65.0,3.3,11.0,0.5,3.0],["patrunjel","Pătrunjel verde",36.0,3.0,3.1,0.8,3.3],["marar","Mărar",43.0,3.5,5.0,1.1,2.1],["passata","Passata de roșii",30.0,1.3,5.0,0.2,1.0],["rosii_cuburi","Roșii cuburi (conservă)",22.0,1.1,3.5,0.2,1.0],["bulion","Bulion / pastă de roșii",82.0,4.3,15.0,0.5,4.1],["zacusca","Zacuscă",110.0,1.6,8.0,8.0,2.5],["masline","Măsline",115.0,0.8,3.0,11.0,3.2],["castraveti_murati","Castraveți murați",12.0,0.5,1.5,0.2,1.0],["varza_murata","Varză murată",19.0,0.9,1.5,0.1,2.9],["pesto","Pesto",430.0,5.0,6.0,43.0,1.5],["mustar","Muștar",66.0,4.0,5.0,3.0,3.0],["sos_soia","Sos de soia",60.0,10.0,5.0,0.0,0.0],["ketchup","Ketchup",100.0,1.2,24.0,0.1,0.3],["maioneza","Maioneză",680.0,1.0,1.0,75.0,0.0],["banana","Banană (1 medie ≈ 120 g)",89.0,1.1,20.0,0.3,2.6],["mar","Măr (1 mediu ≈ 180 g)",52.0,0.3,12.0,0.2,2.4],["para","Pară",57.0,0.4,12.0,0.1,3.1],["portocala","Portocală",47.0,0.9,10.0,0.1,2.4],["mandarina","Mandarină",53.0,0.8,12.0,0.3,1.8],["grapefruit","Grepfrut",42.0,0.8,9.0,0.1,1.6],["lamaie","Suc de lămâie",22.0,0.4,7.0,0.2,0.3],["kiwi","Kiwi",61.0,1.1,12.0,0.5,3.0],["capsuni","Căpșuni",32.0,0.7,5.7,0.3,2.0],["afine","Afine",57.0,0.7,12.0,0.3,2.4],["zmeura","Zmeură",52.0,1.2,5.4,0.7,6.5],["mure","Mure",43.0,1.4,4.3,0.5,5.3],["fructe_padure","Fructe de pădure congelate",50.0,0.8,9.5,0.3,3.0],["cirese","Cireșe",63.0,1.1,14.0,0.2,2.1],["visine","Vișine",50.0,1.0,11.0,0.3,1.6],["struguri","Struguri",69.0,0.7,17.0,0.2,0.9],["pepene_rosu","Pepene roșu",30.0,0.6,7.2,0.2,0.4],["pepene_galben","Pepene galben",34.0,0.8,7.9,0.2,0.9],["piersica","Piersică",39.0,0.9,8.5,0.3,1.5],["nectarina","Nectarină",44.0,1.1,8.9,0.3,1.7],["caise","Caise",48.0,1.4,9.6,0.4,2.0],["prune","Prune",46.0,0.7,10.0,0.3,1.4],["ananas","Ananas",50.0,0.5,12.0,0.1,1.4],["mango","Mango",60.0,0.8,13.4,0.4,1.6],["papaya","Papaya",43.0,0.5,9.1,0.3,1.7],["rodie","Rodie",83.0,1.7,14.7,1.2,4.0],["gutui","Gutui",57.0,0.4,13.6,0.1,1.9],["smochine","Smochine proaspete",74.0,0.8,16.0,0.3,2.9],["avocado","Avocado",160.0,2.0,1.8,14.7,6.7],["curmale","Curmale",280.0,2.5,66.0,0.4,7.0],["stafide","Stafide",299.0,3.1,76.0,0.5,3.7],["caise_uscate","Caise uscate",241.0,3.4,55.0,0.5,7.3],["prune_uscate","Prune uscate",240.0,2.2,57.0,0.4,7.0],["nuci","Miez de nucă",654.0,15.0,7.0,65.0,6.7],["migdale","Migdale",579.0,21.0,9.5,50.0,12.5],["alune_padure","Alune de pădure",628.0,15.0,7.0,61.0,9.7],["caju","Caju",553.0,18.0,30.0,44.0,3.3],["fistic","Fistic",562.0,20.0,18.0,45.0,10.0],["arahide","Arahide",567.0,26.0,7.6,49.0,8.5],["nuci_pecan","Nuci pecan",691.0,9.2,4.3,72.0,9.6],["nuci_braziliene","Nuci braziliene",659.0,14.0,4.2,67.0,7.5],["seminte_floarea","Semințe de floarea-soarelui decojite",584.0,21.0,11.0,51.0,8.6],["seminte_dovleac","Semințe de dovleac",559.0,30.0,5.0,49.0,6.0],["chia","Semințe de chia",486.0,17.0,8.0,31.0,34.0],["seminte_in","Semințe de in",534.0,18.0,1.6,42.0,27.0],["susan","Semințe de susan",573.0,18.0,11.6,50.0,11.8],["canepa","Semințe de cânepă decojite",553.0,31.6,1.0,48.8,4.0],["cocos_ras","Nucă de cocos rasă",660.0,6.9,7.4,64.0,16.3],["unt_arahide","Unt de arahide 100%",588.0,25.0,13.0,50.0,6.0],["unt_migdale","Unt de migdale",614.0,21.0,9.0,56.0,10.0],["tahini","Tahini",595.0,17.0,10.0,54.0,9.0],["ulei_masline","Ulei de măsline",884.0,0.0,0.0,100.0,0.0],["ulei_floarea","Ulei de floarea-soarelui",884.0,0.0,0.0,100.0,0.0],["ulei_rapita","Ulei de rapiță",884.0,0.0,0.0,100.0,0.0],["ulei_cocos","Ulei de cocos",862.0,0.0,0.0,99.0,0.0],["untura","Untură",900.0,0.0,0.0,100.0,0.0],["miere","Miere",304.0,0.3,82.0,0.0,0.2],["cacao","Cacao neîndulcită",360.0,20.0,11.0,21.0,30.0],["ciocolata_neagra","Ciocolată neagră 85%",580.0,10.0,22.0,46.0,11.0],["ciocolata_lapte","Ciocolată cu lapte",535.0,7.6,58.0,30.0,2.0],["sirop_artar","Sirop de arțar",260.0,0.0,67.0,0.1,0.0],["zahar","Zahăr",400.0,0.0,100.0,0.0,0.0],["gem","Gem / dulceață",250.0,0.4,60.0,0.1,1.0],["halva","Halva",520.0,12.0,50.0,30.0,4.0],["biscuiti","Biscuiți",480.0,7.0,68.0,20.0,2.0],["napolitane","Napolitane",520.0,6.0,62.0,28.0,2.0],["inghetata","Înghețată",207.0,3.5,24.0,11.0,0.7],["suc_portocale","Suc de portocale",45.0,0.7,10.0,0.2,0.2],["suc_carbogazos","Suc carbogazos cu zahăr",42.0,0.0,10.6,0.0,0.0],["sarmale","Sarmale în foi de varză (porc)",160.0,8.0,8.0,10.5,1.5],["mici","Mici la grătar",280.0,16.0,1.5,23.0,0.0],["ciorba_perisoare","Ciorbă de perișoare",50.0,3.5,4.0,2.3,0.5],["ciorba_legume","Ciorbă de legume",30.0,1.0,4.5,1.0,1.0],["ciorba_burta","Ciorbă de burtă",75.0,5.0,2.5,5.0,0.0],["ciorba_fasole","Ciorbă de fasole cu afumătură",90.0,5.0,8.0,4.0,3.0],["supa_pui_taitei","Supă de pui cu tăiței",45.0,3.5,4.0,1.5,0.3],["fasole_batuta","Fasole bătută",150.0,6.0,13.0,8.0,6.0],["iahnie_fasole","Iahnie de fasole",110.0,5.0,12.0,4.0,5.0],["tocanita_pui","Tocăniță de pui",120.0,11.0,5.0,6.0,1.0],["ostropel_pui","Ostropel de pui",130.0,12.0,4.0,7.0,0.5],["ciulama_pui","Ciulama de pui",140.0,12.0,4.0,8.0,0.2],["pilaf_pui","Pilaf cu pui",150.0,9.0,18.0,4.5,0.5],["ardei_umpluti","Ardei umpluți",120.0,6.0,9.0,6.5,1.5],["varza_calita","Varză călită",70.0,1.5,7.0,4.0,2.5],["mancare_mazare","Mâncare de mazăre",90.0,4.0,10.0,3.0,4.0],["mancare_cartofi","Mâncare de cartofi",95.0,2.0,13.0,4.0,1.6],["salata_orientala","Salată orientală",120.0,3.0,12.0,6.5,1.8],["salata_vinete","Salată de vinete",140.0,1.3,6.0,12.0,3.0],["salata_boeuf","Salată de boeuf",190.0,6.0,10.0,14.0,2.0],["musaca","Musaca de cartofi",170.0,9.0,10.0,10.0,1.5],["tochitura","Tochitură",220.0,12.0,3.0,18.0,0.0],["friptura_porc","Friptură de porc",240.0,26.0,0.0,15.0,0.0],["snitel_pui","Șnițel de pui pané",240.0,18.0,14.0,12.0,0.8],["parjoale","Pârjoale",230.0,15.0,9.0,15.0,0.5],["mamaliga_branza","Mămăligă cu brânză și smântână",180.0,7.0,15.0,10.0,0.8],["papanasi","Papanași cu smântână și dulceață",300.0,8.0,40.0,12.0,0.8],["placinta_branza","Plăcintă cu brânză",300.0,8.0,32.0,15.0,1.0],["gogosi","Gogoși",380.0,6.0,48.0,18.0,1.5],["clatite_dulceata","Clătite cu dulceață",230.0,6.0,35.0,7.0,0.8],["pizza","Pizza (din comerț)",266.0,11.0,33.0,10.0,2.3],["shaorma","Shaorma",230.0,11.0,20.0,12.0,2.0],["burger_fastfood","Burger fast-food",260.0,13.0,25.0,12.0,1.5]];
+  var DY_ICON = {"azi": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z\"/></svg>", "antr": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M2 10h2V8h3v8H4v-2H2zM20 10h2v4h-2v2h-3V8h3zM8 11h8v2H8z\"/></svg>", "nutr": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 2h1.5v7a1.5 1.5 0 0 0 1 1.4V22H7V10.4A1.5 1.5 0 0 0 6 9zM4 2h1v6H4zM8.5 2h1v6h-1zM16.5 2C19 2 20 5 20 8.5c0 2.3-1 3.8-2.5 4.3V22H15V2.6c.4-.4 1-.6 1.5-.6z\"/></svg>", "prog": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M3 20h18v1.5H3zM4 16.5l5-5.5 3.5 3 6-7 1.2 1-7 8.2-3.5-3-4 4.4z\"/></svg>"};
+  var GROUPS = [['azi', ['azi']], ['antr', ['new', 'history', 'ex']], ['nutr', ['nut', 'plan']], ['prog', ['progress', 'weight']]];
+  var SUBL = { new: '+ Antrenament', history: 'Istoric', ex: 'Exerciții', nut: 'Jurnal alimentar', plan: 'Planul meu', progress: 'Progres exerciții', weight: 'Greutate' };
+  var MEALS = [['md', 'Mic dejun', '🌅'], ['pr', 'Prânz', '☀️'], ['ci', 'Cină', '🌙'], ['gu', 'Gustări', '🍎']];
+  var WD = ['L', 'M', 'M', 'J', 'V', 'S', 'D'], WDL = ['Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă', 'Duminică'];
+  var DY;
+  function dyReset() { DY = { set: null, stats: {}, food: {}, recent: null, day: null, loaded: false, last: {}, editPlan: false, editNut: false, add: null, timer: null }; }
+  dyReset();
+  function dyGroup(v) { for (var i = 0; i < GROUPS.length; i++) if (GROUPS[i][1].indexOf(v) >= 0) return GROUPS[i][0]; return 'antr'; }
+  var _setView = setView;
+  setView = function (v) {
+    var g = dyGroup(v), list = GROUPS.filter(function (x) { return x[0] === g; })[0][1];
+    DY.last[g] = v;
+    document.querySelectorAll('[data-group]').forEach(function (b) { b.classList.toggle('is-on', b.getAttribute('data-group') === g); });
+    $('jrSub').innerHTML = list.length > 1 ? list.map(function (x) { return '<button type="button" data-view="' + x + '">' + SUBL[x] + '</button>'; }).join('') : '';
+    _setView(v);
+    if (v === 'azi') dyAzi();
+    if (v === 'nut') dyNut();
+    if (window.innerWidth <= 700) window.scrollTo(0, Math.min(window.scrollY, $('jrApp').offsetTop - 10));
+  };
+  $('jrNav').addEventListener('click', function (e) { var b = e.target.closest('[data-group]'); if (!b) return; var g = b.getAttribute('data-group'); setView(DY.last[g] || GROUPS.filter(function (x) { return x[0] === g; })[0][1][0]); });
+  $('jrSub').addEventListener('click', function (e) { var b = e.target.closest('[data-view]'); if (b) setView(b.getAttribute('data-view')); });
+
+  function dIso(d) { var x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0, 10); }
+  function dAdd(s, n) { return new Date(Date.parse(s + 'T12:00:00Z') + n * 864e5).toISOString().slice(0, 10); }
+  function dMon(s) { var wd = (new Date(s + 'T12:00:00Z').getUTCDay() + 6) % 7; return dAdd(s, -wd); }
+  function dWd(s) { return (new Date(s + 'T12:00:00Z').getUTCDay() + 6) % 7; }
+  function r1(n) { return String(Math.round(n * 10) / 10).replace('.', ','); }
+  function lastKg() { return weights.length ? +weights[weights.length - 1].weight_kg : null; }
+
+  async function dyLoad() {
+    try {
+      var s = await sb.from('jr_settings').select('week_goal,plan,nut').maybeSingle();
+      DY.set = s.data || { week_goal: 3, plan: {}, nut: null };
+      try { var ma = await sb.from('meal_access').select('access_until').maybeSingle(); DY.paid = !!(ma.data && Date.parse(ma.data.access_until) > Date.now()); } catch (e2) { DY.paid = false; }
+      var t = today(), st = await sb.from('daily_stats').select('day,sleep_h,water_ml').gte('day', dAdd(t, -13));
+      (st.data || []).forEach(function (r) { DY.stats[r.day] = r; });
+      await dyFoodDay(t);
+    } catch (e) { DY.set = DY.set || { week_goal: 3, plan: {}, nut: null }; }
+    DY.loaded = true;
+    if (!$('dyAzi').closest('.jr-view').hidden) dyAzi();
+    if (!$('dyNut').closest('.jr-view').hidden) dyNut();
+  }
+  async function dyFoodDay(d) {
+    if (DY.food[d]) return DY.food[d];
+    var r = await sb.from('food_log').select('id,day,meal,name,grams,kcal,p,c,f,fib,source,ref,created_at').eq('day', d).order('created_at', { ascending: true });
+    if (r.error) throw r.error;
+    DY.food[d] = r.data || [];
+    return DY.food[d];
+  }
+  async function dySaveSet(patch) {
+    Object.assign(DY.set, patch);
+    var r = await sb.from('jr_settings').upsert({ week_goal: DY.set.week_goal, plan: DY.set.plan || {}, nut: DY.set.nut || null, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
+    return r.error;
+  }
+  function dyStat(d) { return DY.stats[d] || (DY.stats[d] = { day: d, sleep_h: null, water_ml: 0 }); }
+  function dySaveStat(d) {
+    clearTimeout(DY.timer);
+    DY.timer = setTimeout(function () { var s = dyStat(d); sb.from('daily_stats').upsert({ day: d, sleep_h: s.sleep_h, water_ml: s.water_ml || 0, updated_at: new Date().toISOString() }, { onConflict: 'user_id,day' }).then(function (r) { if (r.error) { var n = $('dyStatMsg'); if (n) { n.textContent = 'Nu am putut salva. Verifică internetul.'; n.className = 'dy-note err'; } } }); }, 600);
+  }
+  function dyTotals(list) { return list.reduce(function (a, e) { a.kcal += +e.kcal; a.p += +e.p; a.c += +e.c; a.f += +e.f; a.fib += +e.fib || 0; return a; }, { kcal: 0, p: 0, c: 0, f: 0, fib: 0 }); }
+  function dyWaterGoal() { var k = lastKg(); return k ? Math.round(k * 35 / 100) * 100 : 2500; }
+
+  // ---------- ecranul Azi ----------
+  function dyAzi() {
+    var el = $('dyAzi');
+    if (!DY.loaded) { el.innerHTML = '<p class="jr-empty">Se încarcă…</p>'; return; }
+    var t = today(), mon = dMon(t), goal = DY.set.week_goal || 3, plan = DY.set.plan || {};
+    var byDay = {}; workouts.forEach(function (w) { byDay[w.workout_date] = (byDay[w.workout_date] || 0) + 1; });
+    var weekDates = []; for (var i = 0; i < 7; i++) weekDates.push(dAdd(mon, i));
+    var active = weekDates.filter(function (d) { return byDay[d]; }).length;
+    var wCount = weekDates.reduce(function (a, d) { return a + (byDay[d] || 0); }, 0);
+    var streak = 0, wk = active >= goal ? mon : dAdd(mon, -7);
+    for (var k = 0; k < 520; k++) { var n = 0; for (var j = 0; j < 7; j++) if (byDay[dAdd(wk, j)]) n++; if (n >= goal) { streak++; wk = dAdd(wk, -7); } else break; }
+    var title = plan[dWd(t)] || '', doneToday = !!byDay[t];
+    var planRow = doneToday ? '<div class="dy-plan"><span class="dy-ico">✅</span><p><b>Antrenament notat azi.</b> Bravo! Odihnește-te bine.</p><button type="button" class="dy-btn ghost" data-dy="hist">Vezi</button></div>'
+      : title ? '<div class="dy-plan"><span class="dy-ico">🏋️</span><p>Azi ai planificat:<br><b>' + esc(title) + '</b></p><button type="button" class="dy-btn solid" data-dy="start">Începe</button></div>'
+      : '<div class="dy-plan"><span class="dy-ico">📅</span><p>Niciun antrenament planificat azi. Apasă ca să îți planifici săptămâna.</p><button type="button" class="dy-btn" data-dy="plan">+ Plan</button></div>';
+    var h = '<div class="dy-card"><div class="dy-head"><h3>' + DY_ICON.antr + 'Antrenament</h3>' + (streak ? '<span class="dy-chip">🔥 ' + streak + (streak === 1 ? ' săptămână' : ' săptămâni') + '</span>' : '') + '</div>' +
+      (DY.editPlan ? dyPlanForm() : planRow) +
+      '<div class="dy-week">' + weekDates.map(function (d, i) { return '<div class="' + (byDay[d] ? 'done' : '') + (d === t ? ' today' : '') + '" title="' + WDL[i] + (plan[i] ? ': ' + esc(plan[i]) : '') + '"><span>' + (byDay[d] ? '✓' : '') + '</span><small>' + WD[i] + '</small></div>'; }).join('') + '</div>' +
+      '<div class="dy-prog"><div class="dy-bar"><i style="width:' + Math.min(100, active / goal * 100) + '%"></i></div><span>' + active + '/' + goal + ' săptămâna asta</span></div>' +
+      '<div class="dy-stats"><div><b>' + wCount + '</b><span>Antrenamente</span></div><div><b>' + active + '/7</b><span>Zile active</span></div><div><b>' + workouts.length + '</b><span>Total</span></div></div></div>';
+    var st = dyStat(t), wg = dyWaterGoal(), wpct = Math.min(1, (st.water_ml || 0) / wg);
+    h += '<div class="dy-card"><div class="dy-row"><span class="dy-ico">🛏️</span><span class="lbl">Somn<em>azi-noapte</em></span><button type="button" class="dy-pm" data-sleep="-1" aria-label="Mai puțin somn">−</button><span class="val">' + (st.sleep_h == null ? '–' : r1(st.sleep_h) + ' h') + '</span><button type="button" class="dy-pm add" data-sleep="1" aria-label="Mai mult somn">+</button></div>' +
+      '<div class="dy-row"><span class="dy-ico" style="background:conic-gradient(#6CC4F0 ' + (wpct * 360) + 'deg, var(--surface-alt) 0)"><span style="display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--surface)">💧</span></span><span class="lbl">Hidratare<em>' + r1(wg / 1000) + ' L recomandat</em></span><span class="val">' + (st.water_ml || 0) + ' ml</span></div>' +
+      '<div class="dy-water"><button type="button" class="dy-btn" data-water="250">+ 250 ml</button><button type="button" class="dy-btn" data-water="500">+ 500 ml</button><button type="button" class="dy-btn ghost" data-water="-250">− 250 ml</button></div><p class="dy-note" id="dyStatMsg"></p></div>';
+    var kg = lastKg(), lastW = weights.length ? weights[weights.length - 1] : null, wk7 = weights.filter(function (x) { return x.measured_on >= dAdd(t, -6); }).length;
+    h += '<div class="dy-card"><div class="dy-head"><h3>Greutate</h3>' + (lastW ? '<span class="dy-note" style="margin:0">' + (lastW.measured_on === t ? 'azi' : lastW.measured_on.split('-').reverse().join('.')) + '</span>' : '') + '</div>' +
+      (kg ? '<p class="dy-kg"><b>' + r1(kg) + '</b><span>kg</span></p>' : '') +
+      '<div class="dy-in"><input class="af-input" id="dyKg" type="number" inputmode="decimal" min="20" max="400" step="0.1" placeholder="Greutatea de azi (kg)"><button type="button" class="dy-btn solid" data-dy="kg">Salvează</button></div>' +
+      '<p class="dy-note" id="dyKgMsg">' + (wk7 ? (wk7 === 1 ? 'O cântărire' : wk7 + ' cântăriri') + ' în ultimele 7 zile. Ține-o tot așa.' : 'Cântărește-te dimineața, înainte de micul dejun.') + '</p></div>';
+    var nut = DY.set.nut, ft = dyTotals(DY.food[t] || []);
+    h += '<div class="dy-card"><div class="dy-head"><h3>' + DY_ICON.nutr + 'Nutriție azi</h3><button type="button" class="dy-btn" data-dy="nut">' + (nut ? 'Deschide' : 'Începe') + '</button></div>' +
+      (nut ? '<div class="dy-prog"><div class="dy-bar"><i style="width:' + Math.min(100, ft.kcal / nut.kcal * 100) + '%;background:#6CB6FF"></i></div><span>' + Math.round(ft.kcal) + ' / ' + nut.kcal + ' kcal</span></div>' : '<p class="dy-empty">Află câte calorii și proteine ai nevoie zilnic și notează ce mănânci.</p>') + '</div>';
+    el.innerHTML = h;
+  }
+  function dyPlanForm() {
+    var plan = DY.set.plan || {}, goal = DY.set.week_goal || 3;
+    return '<div class="dy-plan" style="display:block"><p><b>Câte zile pe săptămână vrei să te antrenezi?</b></p><div class="dy-goal" data-goalsel="1">' + [1, 2, 3, 4, 5, 6, 7].map(function (n) { return '<button type="button" data-goal="' + n + '" class="' + (n === goal ? 'is-on' : '') + '">' + n + '</button>'; }).join('') + '</div>' +
+      '<p style="margin-top:12px"><b>Ce lucrezi în fiecare zi?</b> Lasă gol zilele de pauză.</p><div class="dy-days">' + WDL.map(function (n, i) { return '<label>' + n + '<input class="af-input" data-pday="' + i + '" maxlength="40" placeholder="pauză" value="' + esc(plan[i] || '') + '"></label>'; }).join('') + '</div>' +
+      '<div class="dy-in"><button type="button" class="dy-btn solid" data-dy="plansave">Salvează planul</button><button type="button" class="dy-btn ghost" data-dy="plancancel">Renunță</button></div><p class="dy-note" id="dyPlanMsg"></p></div>';
+  }
+  $('dyAzi').addEventListener('click', async function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var t = today(), a = b.getAttribute('data-dy');
+    if (b.hasAttribute('data-sleep')) { var s = dyStat(t); s.sleep_h = s.sleep_h == null ? 7 : Math.max(0, Math.min(16, s.sleep_h + 0.5 * +b.getAttribute('data-sleep'))); dyAzi(); dySaveStat(t); return; }
+    if (b.hasAttribute('data-water')) { var s2 = dyStat(t); s2.water_ml = Math.max(0, (s2.water_ml || 0) + +b.getAttribute('data-water')); dyAzi(); dySaveStat(t); return; }
+    if (b.hasAttribute('data-goal')) { b.parentNode.querySelectorAll('button').forEach(function (x) { x.classList.toggle('is-on', x === b); }); return; }
+    if (a === 'plan') { DY.editPlan = true; return dyAzi(); }
+    if (a === 'plancancel') { DY.editPlan = false; return dyAzi(); }
+    if (a === 'plansave') {
+      var plan = {}; document.querySelectorAll('[data-pday]').forEach(function (i) { var v = i.value.trim(); if (v) plan[i.getAttribute('data-pday')] = v; });
+      var g = document.querySelector('[data-goal].is-on'); b.disabled = true;
+      var err = await dySaveSet({ plan: plan, week_goal: g ? +g.getAttribute('data-goal') : 3 });
+      if (err) { b.disabled = false; return msg($('dyPlanMsg'), errText(err)); }
+      DY.editPlan = false; return dyAzi();
+    }
+    if (a === 'start') { setView('new'); if (!$('nwTitle').value) $('nwTitle').value = (DY.set.plan || {})[dWd(t)] || ''; return; }
+    if (a === 'hist') return setView('history');
+    if (a === 'nut') return setView('nut');
+    if (a === 'kg') {
+      var v = num($('dyKg').value), m = $('dyKgMsg');
+      if (!v || v < 20 || v > 400) { m.textContent = 'Scrie greutatea în kilograme (ex. 78,4).'; m.className = 'dy-note err'; return; }
+      b.disabled = true;
+      var r = await sb.from('body_weights').upsert({ measured_on: t, weight_kg: Math.round(v * 10) / 10 }, { onConflict: 'user_id,measured_on' }).select('id,measured_on,weight_kg').single();
+      b.disabled = false;
+      if (r.error) { m.textContent = errText(r.error); m.className = 'dy-note err'; return; }
+      weights = weights.filter(function (x) { return x.measured_on !== t; }).concat([r.data]).sort(function (x, y) { return x.measured_on < y.measured_on ? -1 : 1; });
+      dyAzi(); var m2 = $('dyKgMsg'); if (m2) { m2.textContent = 'Greutate salvată!'; m2.className = 'dy-note ok'; }
+    }
+  });
+
+  // ---------- nutritie ----------
+  var ACTS = [['sedentar', 'Sedentar (birou, fără sport)'], ['usor', 'Ușor activ (1–2 antrenamente/săpt.)'], ['moderat', 'Moderat (3–4 antrenamente/săpt.)'], ['activ', 'Activ (5–6 antrenamente/săpt.)'], ['foarte_activ', 'Foarte activ (muncă fizică + sport)']];
+  function dySegH(name, opts, val) { return '<div class="dy-seg" data-dseg="' + name + '">' + opts.map(function (o) { return '<button type="button" data-v="' + o[0] + '" class="' + (String(o[0]) === String(val) ? 'is-on' : '') + '">' + o[1] + '</button>'; }).join('') + '</div>'; }
+  function dySegV(name) { var b = document.querySelector('[data-dseg="' + name + '"] .is-on'); return b ? b.getAttribute('data-v') : ''; }
+  function dyNutForm() {
+    var q = (DY.set.nut && DY.set.nut.q) || {};
+    return '<div class="dy-card"><div class="dy-head"><h3>' + DY_ICON.nutr + 'Obiectivele tale zilnice</h3></div><p class="dy-empty" style="margin-bottom:14px">Calculez caloriile și macronutrienții de care ai nevoie, după datele tale.</p>' +
+      '<p class="jr-l" style="margin-bottom:4px">Sex</p>' + dySegH('sex', [['m', 'Bărbat'], ['f', 'Femeie']], q.sex || 'm') +
+      '<div class="dy-grid" style="grid-template-columns:repeat(3,1fr)"><label class="jr-l">Vârstă<input class="af-input" id="dyAge" type="number" inputmode="numeric" min="14" max="90" value="' + esc(q.age || '') + '"></label><label class="jr-l">Înălțime (cm)<input class="af-input" id="dyH" type="number" inputmode="numeric" min="120" max="230" value="' + esc(q.height || '') + '"></label><label class="jr-l">Greutate (kg)<input class="af-input" id="dyW" type="number" inputmode="decimal" min="30" max="300" step="0.1" value="' + esc(lastKg() || q.weight || '') + '"></label></div>' +
+      '<label class="jr-l">Cât de activ ești?<div class="af-select"><select id="dyAct">' + ACTS.map(function (a) { return '<option value="' + a[0] + '"' + ((q.activity || 'moderat') === a[0] ? ' selected' : '') + '>' + a[1] + '</option>'; }).join('') + '</select></div></label>' +
+      '<p class="jr-l" style="margin-bottom:4px">Obiectiv</p>' + dySegH('goal', [['slabire', 'Slăbire'], ['mentinere', 'Menținere'], ['masa', 'Masă musculară']], q.goal || 'slabire') +
+      '<p class="dy-note" id="dyNutMsg"></p><button type="button" class="btn-primary jr-submit" data-dn="nutsave">Calculează și salvează</button>' + (DY.set.nut ? '<button type="button" class="dy-btn ghost" style="margin-top:10px;width:100%" data-dn="nutcancel">Renunță</button>' : '') + '</div>';
+  }
+  function dyRing(pct, over) { var r = 52, c = 2 * Math.PI * r; return '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="' + r + '" fill="none" stroke="rgba(108,182,255,.14)" stroke-width="11"/><circle cx="60" cy="60" r="' + r + '" fill="none" stroke="' + (over ? '#FF9F5A' : '#6CB6FF') + '" stroke-width="11" stroke-linecap="round" stroke-dasharray="' + c + '" stroke-dashoffset="' + (c * (1 - Math.min(1, pct))) + '"/></svg>'; }
+  function dyMac(lbl, col, v, t) { return '<div><span style="color:' + col + '">' + lbl + '</span><span>' + Math.round(v) + ' / ' + t + ' g</span><i><u style="width:' + Math.min(100, t ? v / t * 100 : 0) + '%;background:' + col + '"></u></i></div>'; }
+  async function dyNut() {
+    var el = $('dyNut');
+    if (!DY.loaded) { el.innerHTML = '<p class="jr-empty">Se încarcă…</p>'; return; }
+    if (!DY.set.nut || DY.editNut) { el.innerHTML = dyNutForm(); return; }
+    var d = DY.day || today();
+    if (!DY.food[d]) { el.innerHTML = '<p class="jr-empty">Se încarcă…</p>'; try { await dyFoodDay(d); } catch (e) { el.innerHTML = '<div class="dy-card"><p class="jr-empty">Nu am putut încărca jurnalul. Verifică internetul.</p><button type="button" class="dy-btn" data-dn="retry">Încearcă din nou</button></div>'; return; } }
+    var T = DY.set.nut, list = DY.food[d], tot = dyTotals(list), left = T.kcal - tot.kcal;
+    var h = '<div class="dy-card"><div class="dy-sum"><div class="dy-ring">' + dyRing(tot.kcal / T.kcal, left < 0) + '<div><b>' + Math.abs(Math.round(left)).toLocaleString('ro-RO') + '</b><span>' + (left < 0 ? 'peste obiectiv' : 'rămase') + '</span></div></div>' +
+      '<div class="dy-kv"><span>Consumat</span><b class="blue">' + Math.round(tot.kcal) + ' kcal</b><span>Obiectiv</span><b>' + T.kcal + ' kcal</b><span>Rămase</span><b class="blue">' + Math.max(0, Math.round(left)) + ' kcal</b></div></div>' +
+      '<div class="dy-mac">' + dyMac('Proteine', '#FF9F5A', tot.p, T.p) + dyMac('Carbohidrați', '#6CB6FF', tot.c, T.c) + dyMac('Grăsimi', '#C77DFF', tot.f, T.f) + dyMac('Fibre', '#5BD47A', tot.fib, T.fib || 30) + '</div>' +
+      '<button type="button" class="dy-btn ghost" style="margin-top:14px" data-dn="nutedit">⚙ Schimbă obiectivele</button></div>';
+    h += '<div class="dy-acts"><button type="button" class="dy-act" data-add="search"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Adaugă aliment</button><button type="button" class="dy-act" data-add="bar"><svg viewBox="0 0 24 24"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2M8 8v8M11 8v8M14 8v8M17 8v8"/></svg>Scanează codul de bare</button></div>';
+    if (!DY.paid) h += '<div class="dy-card dy-up"><div><b>Nu știi ce să mănânci ca să-ți atingi cifrele?</b><p>Planul meu îți face meniul pe 7 zile din rețete simple, calculat exact pe obiectivele tale, cu listă de cumpărături.</p></div><button type="button" class="dy-btn solid" data-dn="up">Vezi Planul meu</button></div>';
+    var lbl = d === today() ? 'Azi' : d === dAdd(today(), -1) ? 'Ieri' : d.split('-').reverse().join('.');
+    h += '<div class="dy-card"><div class="dy-head"><h3>📖 Jurnal alimentar</h3></div><div class="dy-dnav"><button type="button" data-dn="prev" aria-label="Ziua anterioară">‹</button><b>📅 ' + lbl + '</b><button type="button" data-dn="next" aria-label="Ziua următoare"' + (d >= today() ? ' disabled' : '') + '>›</button></div>' +
+      (list.length ? '' : '<p class="dy-empty">Nimic notat. Adaugă un aliment sau scanează un cod de bare.</p>') +
+      MEALS.map(function (m) {
+        var it = list.filter(function (e) { return e.meal === m[0]; }), mt = dyTotals(it);
+        return '<div class="dy-meal"><div class="dy-mh"><span>' + m[2] + '</span><b>' + m[1] + '</b>' + (it.length ? '<span>' + Math.round(mt.kcal) + ' kcal</span>' : '') + '<button type="button" class="dy-plus" data-add="search" data-meal="' + m[0] + '" aria-label="Adaugă la ' + m[1] + '">+</button></div>' +
+          it.map(function (e) { return '<div class="dy-it"><span>' + esc(e.name) + (e.grams ? ' <em>' + r1(e.grams) + ' g</em>' : '') + '</span><b>' + Math.round(e.kcal) + ' kcal</b><button type="button" class="dy-del" data-fdel="' + e.id + '" aria-label="Șterge">✕</button></div>'; }).join('') + '</div>';
+      }).join('') + '</div>';
+    el.innerHTML = h;
+  }
+  $('dyNut').addEventListener('click', async function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var seg = b.closest('[data-dseg]'); if (seg) { seg.querySelectorAll('button').forEach(function (x) { x.classList.toggle('is-on', x === b); }); return; }
+    var a = b.getAttribute('data-dn');
+    if (a === 'retry') return dyNut();
+    if (a === 'up') return setView('plan');
+    if (a === 'nutedit') { DY.editNut = true; return dyNut(); }
+    if (a === 'nutcancel') { DY.editNut = false; return dyNut(); }
+    if (a === 'prev' || a === 'next') { DY.day = dAdd(DY.day || today(), a === 'prev' ? -1 : 1); if (DY.day > today()) DY.day = today(); return dyNut(); }
+    if (a === 'nutsave') {
+      var q = { sex: dySegV('sex'), age: num($('dyAge').value), height: num($('dyH').value), weight: num($('dyW').value), activity: $('dyAct').value, goal: dySegV('goal') }, m = $('dyNutMsg');
+      if (!q.age || q.age < 14 || q.age > 90) return msg(m, 'Scrie vârsta (14–90 de ani).');
+      if (!q.height || q.height < 120 || q.height > 230) return msg(m, 'Scrie înălțimea în centimetri (ex. 178).');
+      if (!q.weight || q.weight < 30 || q.weight > 300) return msg(m, 'Scrie greutatea în kilograme (ex. 82,5).');
+      var T = window.CosfitGen.targets(q);
+      b.disabled = true;
+      var err = await dySaveSet({ nut: { q: q, kcal: T.kcal, p: T.p, c: T.c, f: T.f, fib: q.sex === 'f' ? 25 : 35 } });
+      b.disabled = false;
+      if (err) return msg(m, errText(err));
+      DY.editNut = false; return dyNut();
+    }
+    if (b.hasAttribute('data-fdel')) {
+      var id = b.getAttribute('data-fdel'), d = DY.day || today(); b.disabled = true;
+      var r = await sb.from('food_log').delete().eq('id', id);
+      if (r.error) { b.disabled = false; return; }
+      DY.food[d] = DY.food[d].filter(function (x) { return x.id !== id; }); return dyNut();
+    }
+    if (b.hasAttribute('data-add')) dyAddOpen(b.getAttribute('data-add'), b.getAttribute('data-meal'));
+  });
+
+  // ---------- adaugare aliment ----------
+  function dyGuessMeal() { var hh = new Date().getHours(); return hh < 11 ? 'md' : hh < 16 ? 'pr' : hh < 21 ? 'ci' : 'gu'; }
+  async function dyRecent() {
+    if (DY.recent) return DY.recent;
+    var r = await sb.from('food_log').select('name,grams,kcal,p,c,f,fib,source,ref').order('created_at', { ascending: false }).limit(150);
+    var seen = {}; DY.recent = (r.data || []).filter(function (x) { var k = x.name.toLowerCase(); if (seen[k]) return false; seen[k] = 1; return true; }).slice(0, 25);
+    return DY.recent;
+  }
+  function dyAddOpen(mode, meal) {
+    DY.add = { mode: mode === 'bar' ? 'bar' : 'search', meal: meal || dyGuessMeal(), q: '', pick: null, msg: null, code: '', miss: null };
+    $('dyModal').hidden = false; document.body.style.overflow = 'hidden';
+    dyAddRender();
+    if (DY.add.mode === 'search') dyRecent().then(function () { if (DY.add && DY.add.mode === 'search' && !DY.add.q) dyAddRender(); });
+  }
+  function dyAddClose() { stopCamera(); DY.add = null; $('dyModal').hidden = true; document.body.style.overflow = ''; }
+  $('dyClose').addEventListener('click', dyAddClose);
+  $('dyModal').addEventListener('click', function (e) { if (e.target === this) dyAddClose(); });
+  function dyPer(p, g) { var k = g / 100; return { kcal: p.kcal * k, p: p.p * k, c: p.c * k, f: p.f * k, fib: (p.fib || 0) * k }; }
+  function dyPickHtml() {
+    var P = DY.add.pick;
+    var head = '<div class="dy-pick"><b>' + esc(P.name) + '</b>' + (P.portion ? '<p class="dy-note">O porție: ' + Math.round(P.kcal) + ' kcal</p>' : '<p class="dy-note">La 100 g: ' + Math.round(P.kcal) + ' kcal · ' + r1(P.p) + ' g P · ' + r1(P.c) + ' g C · ' + r1(P.f) + ' g G</p>');
+    var inp = P.portion ? '<label class="jr-l">Porții<input class="af-input" id="dyAmt" type="number" inputmode="decimal" min="0.25" max="20" step="0.25" value="1"></label>' : '<label class="jr-l">Câte grame?<input class="af-input" id="dyAmt" type="number" inputmode="decimal" min="1" max="5000" value="' + (P.g || 100) + '"></label>';
+    return head + inp + '<p class="dy-note" id="dyPrev"></p><button type="button" class="btn-primary jr-submit" data-da="add">Adaugă la ' + MEALS.filter(function (m) { return m[0] === DY.add.meal; })[0][1] + '</button></div>';
+  }
+  function dyPrev() {
+    var P = DY.add && DY.add.pick, el = $('dyPrev'), a = num(($('dyAmt') || {}).value);
+    if (!P || !el) return; if (!a) { el.textContent = ''; return; }
+    var v = P.portion ? { kcal: P.kcal * a, p: P.p * a, c: P.c * a, f: P.f * a } : dyPer(P, a);
+    el.textContent = '= ' + Math.round(v.kcal) + ' kcal · ' + r1(v.p) + ' g proteine · ' + r1(v.c) + ' g carbo · ' + r1(v.f) + ' g grăsimi';
+  }
+  function dyNorm(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+  function dyResults() {
+    var A = DY.add, q = dyNorm(A.q).trim(), words = q ? q.split(/\s+/) : [], h = '';
+    var rec = (DY.recent || []).filter(function (x) { return words.every(function (w) { return dyNorm(x.name).indexOf(w) >= 0; }); });
+    if (rec.length) h += '<h4>' + (q ? 'Din ce ai mai notat' : 'Recente') + '</h4>' + rec.slice(0, q ? 5 : 12).map(function (x, i) { return '<button type="button" data-rec="' + DY.recent.indexOf(x) + '"><span>' + esc(x.name) + '</span><em>' + (x.grams ? r1(x.grams) + ' g · ' : '') + Math.round(x.kcal) + ' kcal</em></button>'; }).join('');
+    if (q) {
+      var res = DY_FOODS.filter(function (f) { var n = dyNorm(f[1]); return words.every(function (w) { return n.indexOf(w) >= 0; }); }).slice(0, 30);
+      h += '<h4>Baza de alimente</h4>' + (res.length ? res.map(function (f) { return '<button type="button" data-food="' + f[0] + '"><span>' + esc(f[1]) + '</span><em>' + Math.round(f[2]) + ' kcal / 100 g</em></button>'; }).join('') : '<p class="dy-empty">Nimic găsit. Încearcă alt cuvânt, scanează codul de bare sau adaugă manual.</p>');
+    } else if (!rec.length) h += '<p class="dy-empty">Scrie ce ai mâncat (ex. ovăz, piept de pui, banană).</p>';
+    return h;
+  }
+  function dyAddRender() {
+    var A = DY.add; if (!A) return;
+    var h = '<h2>Adaugă aliment</h2>' + dySegH('meal', MEALS.map(function (m) { return [m[0], m[1]]; }), A.meal) +
+      dySegH('mode', [['search', 'Caută'], ['bar', 'Cod de bare'], ['man', 'Manual']], A.mode);
+    if (A.pick) h += dyPickHtml() + '<button type="button" class="dy-btn ghost" style="margin-top:10px" data-da="back">← Alt aliment</button>';
+    else if (A.mode === 'search') h += '<input class="af-input" id="dyQ" type="search" autocomplete="off" placeholder="Caută aliment…" value="' + esc(A.q) + '"><div class="dy-res" id="dyRes">' + dyResults() + '</div>';
+    else if (A.mode === 'bar') h += '<div class="dy-in" style="flex-wrap:wrap"><button type="button" class="dy-btn solid" data-da="cam">📷 Scanează cu camera</button><label class="dy-btn ghost" for="dyImg" style="cursor:pointer">Fă o poză la cod<input id="dyImg" type="file" accept="image/*" capture="environment" hidden></label></div><div id="dyScanView"></div>' +
+      '<div class="dy-in" style="margin-top:12px"><input class="af-input" id="dyCode" type="text" inputmode="numeric" maxlength="14" placeholder="sau scrie cifrele de sub bare" value="' + esc(A.code) + '"><button type="button" class="dy-btn" data-da="look">Caută</button></div>' +
+      (A.msg ? '<p class="dy-note' + (A.msg.err ? ' err' : '') + '">' + esc(A.msg.t) + '</p>' : '') +
+      (A.miss ? '<div class="dy-pick"><b>Valorile de pe etichetă, la 100 g</b><label class="jr-l">Numele produsului<input class="af-input" id="dyPn" maxlength="120" value="' + esc(A.miss.name || '') + '"></label><div class="dy-grid"><label class="jr-l">kcal<input class="af-input" id="dyPk" type="number" inputmode="decimal"></label><label class="jr-l">Proteine<input class="af-input" id="dyPp" type="number" inputmode="decimal"></label><label class="jr-l">Carbo<input class="af-input" id="dyPc" type="number" inputmode="decimal"></label><label class="jr-l">Grăsimi<input class="af-input" id="dyPf" type="number" inputmode="decimal"></label></div><button type="button" class="btn-primary jr-submit" data-da="newprod">Salvează produsul</button></div>' : '');
+    else h += '<label class="jr-l">Ce ai mâncat?<input class="af-input" id="dyMn" maxlength="120" placeholder="ex. Ciorbă de la cantină"></label><div class="dy-grid"><label class="jr-l">kcal<input class="af-input" id="dyMk" type="number" inputmode="decimal"></label><label class="jr-l">Proteine (g)<input class="af-input" id="dyMp" type="number" inputmode="decimal"></label><label class="jr-l">Carbo (g)<input class="af-input" id="dyMc" type="number" inputmode="decimal"></label><label class="jr-l">Grăsimi (g)<input class="af-input" id="dyMf" type="number" inputmode="decimal"></label></div><p class="dy-note" id="dyManMsg">Valorile pentru toată porția. Dacă nu le știi, pune măcar caloriile.</p><button type="button" class="btn-primary jr-submit" data-da="man">Adaugă</button>';
+    $('dyMBody').innerHTML = h;
+    if (A.pick) { dyPrev(); var am = $('dyAmt'); if (am) { am.focus(); am.select(); } }
+    else if (A.mode === 'search') { var qi = $('dyQ'); qi.focus(); qi.setSelectionRange(qi.value.length, qi.value.length); }
+  }
+  $('dyMBody').addEventListener('input', function (e) {
+    if (e.target.id === 'dyQ') { DY.add.q = e.target.value; $('dyRes').innerHTML = dyResults(); }
+    if (e.target.id === 'dyAmt') dyPrev();
+    if (e.target.id === 'dyCode') DY.add.code = e.target.value.replace(/\D/g, '');
+  });
+  $('dyMBody').addEventListener('change', function (e) { if (e.target.id === 'dyImg' && e.target.files[0]) dyDecodeFile(e.target.files[0]); });
+  $('dyMBody').addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.id === 'dyAmt') { e.preventDefault(); var b = document.querySelector('[data-da="add"]'); if (b) b.click(); } if (e.key === 'Enter' && e.target.id === 'dyCode') { e.preventDefault(); dyLook(DY.add.code); } });
+  async function dyLook(code) {
+    var A = DY.add; stopCamera(); A.code = code; A.miss = null;
+    if (!validCode(code)) { A.msg = { t: 'Codul ' + code + ' nu pare un cod de bare valid. Verifică cifrele.', err: true }; return dyAddRender(); }
+    A.msg = { t: 'Caut produsul ' + code + '…' }; dyAddRender();
+    var res = await lookupCode(code);
+    if (DY.add !== A) return;
+    if (res.status === 'found') { var p = res.prod; A.msg = null; A.pick = { name: p.name + (p.brand ? ' · ' + p.brand : ''), kcal: +p.kcal, p: +p.p, c: +p.c, f: +p.f, fib: +p.fib || 0, g: p.serving && p.serving < 1000 ? Math.round(p.serving) : 100, source: 'cod', ref: code }; }
+    else { A.miss = { name: res.name ? (res.brand ? res.name + ' ' + res.brand : res.name) : '' }; A.msg = { t: res.status === 'offline' ? 'Nu pot accesa acum baza de produse. Scrie valorile de pe etichetă.' : 'Produsul nu e încă în bază. Scrie valorile de pe etichetă (la 100 g); data viitoare îl găsești direct.', err: res.status === 'offline' }; }
+    dyAddRender();
+  }
+  async function dyDecodeFile(file) {
+    var A = DY.add; A.msg = { t: 'Citesc codul din poză…' }; dyAddRender();
+    var url = URL.createObjectURL(file);
+    try { var Z = await loadZX(); var r = await makeReader(Z, true).decodeFromImageUrl(url); dyLook(r.getText()); }
+    catch (e) { A.msg = { t: 'Nu am găsit un cod de bare în poză. Fă poza mai de aproape, cu lumină bună, sau scrie cifrele.', err: true }; dyAddRender(); }
+    finally { setTimeout(function () { URL.revokeObjectURL(url); }, 2000); }
+  }
+  async function dyCam() {
+    var A = DY.add;
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { A.msg = { t: 'Camera nu e disponibilă. Fă o poză la cod sau scrie cifrele.', err: true }; return dyAddRender(); }
+    try {
+      var Z = await loadZX(); stopCamera(); reader = makeReader(Z);
+      $('dyScanView').innerHTML = '<div class="mp-scan"><video id="dyVid" playsinline muted></video><div class="aim"></div></div><p class="dy-note">Ține codul de bare în chenar, la 10–20 cm de cameră.</p>';
+      await reader.decodeFromConstraints({ video: { facingMode: { ideal: 'environment' } } }, $('dyVid'), function (res) { if (res && reader) dyLook(res.getText()); });
+    } catch (e) { stopCamera(); A.msg = { t: e && e.name === 'NotAllowedError' ? 'Nu ai dat voie la cameră. Permite camera pentru cosfit.ro sau scrie cifrele.' : 'Nu am putut porni camera. Fă o poză la cod sau scrie cifrele.', err: true }; dyAddRender(); }
+  }
+  async function dyInsert(row) {
+    var d = DY.day || today(); row.day = d; row.meal = DY.add.meal;
+    ['kcal', 'p', 'c', 'f', 'fib'].forEach(function (k) { row[k] = Math.round((+row[k] || 0) * 10) / 10; });
+    if (row.grams) row.grams = Math.round(row.grams * 10) / 10;
+    var r = await sb.from('food_log').insert(row).select('id,day,meal,name,grams,kcal,p,c,f,fib,source,ref,created_at').single();
+    if (r.error) return r.error;
+    (DY.food[d] = DY.food[d] || []).push(r.data);
+    if (DY.recent) { DY.recent = DY.recent.filter(function (x) { return x.name.toLowerCase() !== r.data.name.toLowerCase(); }); DY.recent.unshift(r.data); }
+    dyAddClose(); dyNut(); return null;
+  }
+  $('dyMBody').addEventListener('click', async function (e) {
+    var b = e.target.closest('button'); if (!b) return; var A = DY.add;
+    var seg = b.closest('[data-dseg]');
+    if (seg) {
+      var v = b.getAttribute('data-v');
+      if (seg.getAttribute('data-dseg') === 'meal') { A.meal = v; seg.querySelectorAll('button').forEach(function (x) { x.classList.toggle('is-on', x === b); }); var ab = document.querySelector('[data-da="add"]'); if (ab) ab.textContent = 'Adaugă la ' + b.textContent; return; }
+      stopCamera(); A.mode = v; A.pick = null; A.msg = null; A.miss = null; dyAddRender(); if (v === 'search') dyRecent().then(function () { if (DY.add === A && A.mode === 'search' && !A.pick) $('dyRes').innerHTML = dyResults(); }); return;
+    }
+    if (b.hasAttribute('data-food')) { var f = DY_FOODS.filter(function (x) { return x[0] === b.getAttribute('data-food'); })[0]; var gm = /≈\s*(\d+)\s*g/.exec(f[1]); A.pick = { name: f[1].replace(/ \(1 .*?\)$/, ''), kcal: f[2], p: f[3], c: f[4], f: f[5], fib: f[6], g: gm ? +gm[1] : 100, source: 'baza', ref: f[0] }; return dyAddRender(); }
+    if (b.hasAttribute('data-rec')) { var x = DY.recent[+b.getAttribute('data-rec')]; A.pick = x.grams ? { name: x.name, kcal: x.kcal / x.grams * 100, p: x.p / x.grams * 100, c: x.c / x.grams * 100, f: x.f / x.grams * 100, fib: (x.fib || 0) / x.grams * 100, g: +x.grams, source: x.source, ref: x.ref } : { name: x.name, kcal: +x.kcal, p: +x.p, c: +x.c, f: +x.f, fib: +x.fib || 0, portion: true, source: x.source || 'manual' }; return dyAddRender(); }
+    var a = b.getAttribute('data-da');
+    if (a === 'back') { A.pick = null; return dyAddRender(); }
+    if (a === 'cam') return dyCam();
+    if (a === 'look') return dyLook(A.code);
+    if (a === 'add') {
+      var P = A.pick, amt = num($('dyAmt').value);
+      if (!amt || amt <= 0) return;
+      b.disabled = true;
+      var v2 = P.portion ? { kcal: P.kcal * amt, p: P.p * amt, c: P.c * amt, f: P.f * amt, fib: P.fib * amt } : dyPer(P, amt);
+      var err = await dyInsert({ name: (P.portion && amt !== 1 ? r1(amt) + ' × ' : '') + P.name, grams: P.portion ? null : amt, kcal: v2.kcal, p: v2.p, c: v2.c, f: v2.f, fib: v2.fib, source: P.source || null, ref: P.ref || null });
+      if (err) { b.disabled = false; var pv = $('dyPrev'); pv.textContent = errText(err); pv.className = 'dy-note err'; }
+      return;
+    }
+    if (a === 'newprod') {
+      var nm = $('dyPn').value.trim(), pk = num($('dyPk').value), pp = num($('dyPp').value) || 0, pc = num($('dyPc').value) || 0, pf = num($('dyPf').value) || 0;
+      if (!nm || pk == null || pk < 0 || pk > 950) { A.msg = { t: 'Scrie numele și caloriile la 100 g (de pe etichetă).', err: true }; return dyAddRender(); }
+      b.disabled = true;
+      await sb.from('food_products').insert({ code: A.code, name: nm.slice(0, 120), kcal: pk, p: pp, c: pc, f: pf, fib: 0 });
+      A.miss = null; A.msg = null; A.pick = { name: nm, kcal: pk, p: pp, c: pc, f: pf, fib: 0, g: 100, source: 'cod', ref: A.code };
+      return dyAddRender();
+    }
+    if (a === 'man') {
+      var mn = $('dyMn').value.trim(), mk = num($('dyMk').value), mm = $('dyManMsg');
+      if (!mn || mk == null || mk < 0 || mk > 10000) { mm.textContent = 'Scrie ce ai mâncat și câte calorii a avut porția.'; mm.className = 'dy-note err'; return; }
+      b.disabled = true;
+      var er = await dyInsert({ name: mn, grams: null, kcal: mk, p: num($('dyMp').value) || 0, c: num($('dyMc').value) || 0, f: num($('dyMf').value) || 0, fib: 0, source: 'manual', ref: null });
+      if (er) { b.disabled = false; mm.textContent = errText(er); mm.className = 'dy-note err'; }
+    }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && DY.add) dyAddClose(); });
+
   // ---------- session ----------
   var started = false;
   async function onSession(session) {
     loading.hidden = true;
-    if (!session) { app.hidden = true; guest.hidden = false; workouts = []; weights = []; started = false; mpReset(); $('mpOut').innerHTML = ''; return; }
+    if (!session) { app.hidden = true; guest.hidden = false; workouts = []; weights = []; started = false; mpReset(); $('mpOut').innerHTML = ''; dyReset(); return; }
     guest.hidden = true; app.hidden = false;
     var meta = session.user.user_metadata || {};
     $('jrHello').textContent = meta.name || (session.user.email || '').split('@')[0];
-    if (!started) { started = true; await load(); resetNew(); setView('new'); }
+    if (!started) { started = true; await load(); resetNew(); setView('azi'); dyLoad(); }
   }
   sb.auth.onAuthStateChange(function (_e, session) { setTimeout(function () { onSession(session); }, 0); });
   sb.auth.getSession().then(function (r) { onSession(r.data.session); });
