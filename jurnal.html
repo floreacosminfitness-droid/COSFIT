@@ -1543,6 +1543,19 @@
   .mp-lock h3 { font-family: 'Exo 2', sans-serif; font-weight: 800; font-size: 22px; margin: 0 0 12px; color: var(--ink); }
   .mp-lock ul { margin: 0 0 18px; padding-left: 20px; color: var(--ink-soft); line-height: 1.6; }
   .mp-lock .btn-primary { display: inline-block; }
+  .mp-prices { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 4px 0 14px; }
+  .mp-price { position: relative; border: 1px solid var(--line, rgba(255,255,255,.12)); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 4px; }
+  .mp-price.is-best { border-color: rgba(52, 211, 153, .6); background: rgba(52, 211, 153, .07); }
+  .mp-price b { font-size: 16px; color: var(--ink); }
+  .mp-amt { font-family: 'Exo 2', sans-serif; font-weight: 800; font-size: 28px; margin: 2px 0 0; color: var(--ink); }
+  .mp-amt small { font-size: 14px; font-weight: 600; color: var(--ink-soft); }
+  .mp-sub { margin: 0; font-size: 13px; color: var(--ink-soft); }
+  .mp-plus { margin: 8px 0 12px; font-size: 14px; color: var(--ink-soft); line-height: 1.45; flex: 1; }
+  .mp-price button { width: 100%; justify-content: center; }
+  .mp-tag { position: absolute; top: -11px; left: 16px; background: #34d399; color: #062b1d; font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+  .mp-note { margin: 0; font-size: 13px; color: var(--ink-soft); }
+  .mp-err { margin: 10px 0 0; color: #f87171; font-size: 14px; }
+  @media (max-width: 560px) { .mp-prices { grid-template-columns: 1fr; } }
   .mp-seg { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
   .mp-seg button, .mp-chip { padding: 9px 13px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-alt); color: var(--ink-soft); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
   .mp-seg button.is-on, .mp-chip.is-on { background: var(--teal); border-color: var(--teal); color: var(--bg); }
@@ -3298,6 +3311,15 @@
   // ---------- planul meu (plan alimentar) ----------
   var G = window.CosfitGen;
   var MP = {};
+  var PAY = { m: 'https://buy.stripe.com/5kQ4gyeTLeFb8nQc8mcMM1g', q: 'https://buy.stripe.com/5kQcN4h1T40xbA26O2cMM1f' };
+  window.__cfPay = (function () {
+    try {
+      var u = new URL(location.href), v = u.searchParams.get('plata');
+      if (v) { u.searchParams.delete('plata'); history.replaceState(null, '', u.pathname + u.search + u.hash); }
+      return v;
+    } catch (e) { return null; }
+  })();
+  var payTries = 0;
   function mpReset() { MP = { loaded: false, loading: false, access: null, content: null, db: null, food: {}, recipe: {}, profile: null, row: null, plan: null, day: 0, open: null, flash: '', banner: '', edit: false, alts: [] }; }
   mpReset();
   var DAYS = ['Duminică', 'Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'];
@@ -3401,6 +3423,19 @@
       var a = await sb.from('meal_access').select('access_until,plan_type').maybeSingle();
       if (a.error) throw a.error;
       MP.access = a.data && Date.parse(a.data.access_until) > Date.now() ? a.data : null;
+      if (!MP.access && window.__cfPay === 'ok') {
+        MP.loading = false;
+        if (payTries < 20) {
+          payTries++;
+          $('mpOut').innerHTML = '<div class="jr-card"><p class="jr-empty">Confirmăm plata… durează câteva secunde.</p></div>';
+          setTimeout(mpOpen, 3000);
+        } else {
+          window.__cfPay = null;
+          $('mpOut').innerHTML = '<div class="jr-card"><p class="jr-empty">Plata e încă în procesare. Reîncarcă pagina peste un minut. Dacă tot nu ai acces, scrie-mi pe <a href="https://wa.me/40758951104" target="_blank" rel="noopener">WhatsApp</a> și rezolv imediat.</p></div>';
+        }
+        return;
+      }
+      if (MP.access && window.__cfPay === 'ok') { window.__cfPay = null; MP.payOk = true; }
       if (MP.access) {
         var c = await sb.from('meal_content').select('data').eq('id', 1).single();
         if (c.error) throw c.error;
@@ -3426,6 +3461,7 @@
     }
     MP.loading = false;
     mpRender();
+    mpPaidBanner();
   }
 
   function mpRender() {
@@ -3435,15 +3471,24 @@
     if (!MP.profile || MP.edit) { el.innerHTML = formHtml(); return; }
     el.innerHTML = planHtml();
   }
+  function mpPaidBanner() {
+    if (!MP.payOk) return;
+    MP.payOk = false;
+    $('mpOut').insertAdjacentHTML('afterbegin', '<div class="mp-banner">Plata a fost confirmată. Bine ai venit în Planul meu! Completează datele de mai jos și îți fac meniul.</div>');
+  }
 
   function lockHtml() {
     return '<div class="jr-card mp-lock"><p class="jr-badge">Plan alimentar</p><h3>Planul tău alimentar, pe cifrele tale</h3><ul>' +
       '<li>Plan pe 7 zile, calculat pe caloriile și obiectivul tău.</li>' +
-      '<li>158 de rețete simple, gata în 15–30 de minute: clasice, vegetariene și fără lactoză.</li>' +
+      '<li>191 de rețete simple, gata în 15–30 de minute: clasice, vegetariene și fără lactoză.</li>' +
       '<li>Înlocuiești orice aliment sau masă cu o singură apăsare.</li>' +
       '<li>Listă de cumpărături pentru toată săptămâna.</li>' +
       '<li>La 2 săptămâni, planul se ajustează singur după greutatea pe care o notezi aici.</li>' +
-      '</ul><a class="btn-primary" href="./#plan-alimentar">Vreau planul alimentar</a></div>';
+      '</ul><div class="mp-prices">' +
+      '<div class="mp-price is-best"><span class="mp-tag">Cel mai ales</span><b>3 luni</b><p class="mp-amt">349 lei<small> / 3 luni</small></p><p class="mp-sub">la 3 luni · ~116 lei pe lună · îl oprești oricând</p><p class="mp-plus">+ 2 verificări cu mine pe WhatsApp în fiecare perioadă de 3 luni</p><button type="button" class="btn-primary" data-pay="q">Vreau 3 luni</button></div>' +
+      '<div class="mp-price"><b>Lunar</b><p class="mp-amt">149 lei<small> / lună</small></p><p class="mp-sub">abonament, îl oprești oricând</p><p class="mp-plus">Planul complet, fără verificări</p><button type="button" class="btn-outline" data-pay="m">Aleg lunar</button></div>' +
+      '</div><p class="mp-note">Plata se face securizat prin Stripe și se reînnoiește automat. Accesul se activează pe contul cu care ești logat.</p>' +
+      '<p class="mp-err" id="mpPayErr" hidden></p></div>';
   }
 
   function seg(name, opts, val) {
@@ -3694,6 +3739,17 @@
   }
 
   $('mpOut').addEventListener('click', async function (e) {
+    var pb = e.target.closest('[data-pay]');
+    if (pb) {
+      var k = pb.getAttribute('data-pay'), err = $('mpPayErr');
+      if (!/^https:\/\/buy\.stripe\.com\//.test(PAY[k] || '')) { err.hidden = false; err.textContent = 'Plata online nu e încă activă. Scrie-mi pe WhatsApp și îți dau acces.'; return; }
+      pb.disabled = true;
+      var ss = await sb.auth.getSession();
+      var uid = ss.data.session && ss.data.session.user && ss.data.session.user.id;
+      if (!uid) { pb.disabled = false; err.hidden = false; err.textContent = 'Intră din nou în cont și reîncearcă.'; return; }
+      location.href = PAY[k] + '?client_reference_id=' + encodeURIComponent(uid);
+      return;
+    }
     var t = e.target;
     var sg = t.closest('[data-seg]:not([data-seg="logmode"]) button');
     if (sg) { sg.parentNode.querySelectorAll('button').forEach(function (b) { b.classList.toggle('is-on', b === sg); }); return; }
@@ -4338,7 +4394,7 @@
     guest.hidden = true; app.hidden = false;
     var meta = session.user.user_metadata || {};
     $('jrHello').textContent = meta.name || (session.user.email || '').split('@')[0];
-    if (!started) { started = true; await load(); resetNew(); setView('azi'); dyLoad(); }
+    if (!started) { started = true; await load(); resetNew(); setView(window.__cfPay ? 'plan' : 'azi'); dyLoad(); }
   }
   sb.auth.onAuthStateChange(function (_e, session) { setTimeout(function () { onSession(session); }, 0); });
   sb.auth.getSession().then(function (r) { onSession(r.data.session); });
